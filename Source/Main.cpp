@@ -9,6 +9,10 @@
 #include <JuceHeader.h>
 #include "MainForm.h"
 #include "HelpForm.h"
+#include "HabitForm.h"
+#include "ResourcesForm.h"
+#include "DiaryForm.h"
+
 
 
 

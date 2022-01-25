@@ -144,6 +144,12 @@ MainForm::MainForm ()
     newHabitForm.reset(new HabitForm());
     newHabitForm->setBounds(185, 90, 1020 - 185, 620 - 90);
 
+    newResourcesForm.reset(new ResourcesForm());
+    newResourcesForm->setBounds(185, 90, 1020 - 185, 620 - 90);
+
+    newDiaryForm.reset(new DiaryForm());
+    newDiaryForm->setBounds(185, 90, 1020 - 185, 620 - 90);
+
     /*if (juce__textButton5->getToggleState())
     {
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xffa52a2a));
@@ -212,9 +218,13 @@ void MainForm::buttonClicked (juce::Button* buttonThatWasClicked)
         //[UserButtonCode_juce__textButton] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newHabitForm->setVisible(false);
+        newResourcesForm->setVisible(false);
+        newDiaryForm->setVisible(false);
 
         juce__textButton->setColour(juce::TextButton::buttonColourId, juce::Colours::brown);
         juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
 
         //[/UserButtonCode_juce__textButton]
@@ -223,9 +233,15 @@ void MainForm::buttonClicked (juce::Button* buttonThatWasClicked)
     {
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         newHelpWindow->setVisible(false);
+        newResourcesForm->setVisible(false);
+        newDiaryForm->setVisible(false);
+
         addAndMakeVisible(newHabitForm.get());
+
         juce__textButton->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colours::brown);
+        juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
 
         //[/UserButtonCode_juce__textButton2]
@@ -233,20 +249,48 @@ void MainForm::buttonClicked (juce::Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == juce__textButton3.get())
     {
         //[UserButtonCode_juce__textButton3] -- add your button handler code here..
+        newHelpWindow->setVisible(false);
+        newHabitForm->setVisible(false);
+        newDiaryForm->setVisible(false);
+
+        addAndMakeVisible(newResourcesForm.get());
+
+        juce__textButton->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colours::brown);
+        juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         //[/UserButtonCode_juce__textButton3]
     }
     else if (buttonThatWasClicked == juce__textButton4.get())
     {
         //[UserButtonCode_juce__textButton4] -- add your button handler code here..
+        newHelpWindow->setVisible(false);
+        newHabitForm->setVisible(false);
+        newResourcesForm->setVisible(false);
+
+        addAndMakeVisible(newDiaryForm.get());
+
+        juce__textButton->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colours::brown);
+        juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         //[/UserButtonCode_juce__textButton4]
     }
     else if (buttonThatWasClicked == juce__textButton5.get())
     {
         //[UserButtonCode_juce__textButton5] -- add your button handler code here..
         newHabitForm->setVisible(false);
+        newResourcesForm->setVisible(false);
+        newDiaryForm->setVisible(false);
+
         addAndMakeVisible(newHelpWindow.get());
+
         juce__textButton->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+        juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colours::brown);
 
         //[/UserButtonCode_juce__textButton5]
