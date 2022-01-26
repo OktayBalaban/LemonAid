@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="mnrHau" name="LemonAid" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+  <MAINGROUP id="dVbf8P" name="LemonAid">
+    <GROUP id="{EBD676B6-2409-5A14-683B-AF790E5F0CD4}" name="Source">
+      <GROUP id="{EAB43091-1004-A493-E478-3CE8B8C28C0D}" name="HabitsFiles">
+        <FILE id="ziR5iy" name="DailyTrack0.csv" compile="0" resource="1" file="Source/HabitsFiles/DailyTrack0.csv"/>
+        <FILE id="rECkjP" name="DailyTrack1.csv" compile="0" resource="1" file="Source/HabitsFiles/DailyTrack1.csv"/>
+        <FILE id="AhqSko" name="DailyTrack2.csv" compile="0" resource="1" file="Source/HabitsFiles/DailyTrack2.csv"/>
+        <FILE id="ddXkUr" name="DailyTrack4.csv" compile="0" resource="1" file="Source/HabitsFiles/DailyTrack4.csv"/>
+        <FILE id="cttTe4" name="Goals0.csv" compile="0" resource="1" file="Source/HabitsFiles/Goals0.csv"/>
+        <FILE id="x0kz22" name="Goals1.csv" compile="0" resource="1" file="Source/HabitsFiles/Goals1.csv"/>
+        <FILE id="nQ8yG9" name="Goals2.csv" compile="0" resource="1" file="Source/HabitsFiles/Goals2.csv"/>
+        <FILE id="iif6St" name="Goals4.csv" compile="0" resource="1" file="Source/HabitsFiles/Goals4.csv"/>
+        <FILE id="UJyuYi" name="Habits.csv" compile="0" resource="1" file="Source/HabitsFiles/Habits.csv"/>
+      </GROUP>
+      <FILE id="qzFnBK" name="CSVOperator.cpp" compile="1" resource="0" file="Source/CSVOperator.cpp"/>
+      <FILE id="XXoF6S" name="CSVOperator.h" compile="0" resource="0" file="Source/CSVOperator.h"/>
+      <FILE id="CvOKjc" name="DailyTrackerEntry.cpp" compile="1" resource="0"
+            file="Source/DailyTrackerEntry.cpp"/>
+      <FILE id="AxverY" name="DailyTrackerEntry.h" compile="0" resource="0"
+            file="Source/DailyTrackerEntry.h"/>
+      <FILE id="cC1zCe" name="DiaryForm.cpp" compile="1" resource="0" file="Source/DiaryForm.cpp"/>
+      <FILE id="T93JxE" name="DiaryForm.h" compile="0" resource="0" file="Source/DiaryForm.h"/>
+      <FILE id="T24KXG" name="Habits.csv" compile="0" resource="1" file="Source/Habits.csv"/>
+      <FILE id="ICi8XN" name="ResourcesForm.cpp" compile="1" resource="0"
+            file="Source/ResourcesForm.cpp"/>
+      <FILE id="Bdm5cX" name="ResourcesForm.h" compile="0" resource="0" file="Source/ResourcesForm.h"/>
+      <FILE id="aqOhhH" name="HabitEntry.cpp" compile="1" resource="0" file="Source/HabitEntry.cpp"/>
+      <FILE id="FO0UB5" name="HabitEntry.h" compile="0" resource="0" file="Source/HabitEntry.h"/>
+      <FILE id="wq3khK" name="HabitComponent.cpp" compile="1" resource="0"
+            file="Source/HabitComponent.cpp"/>
+      <FILE id="HgBz97" name="HabitComponent.h" compile="0" resource="0"
+            file="Source/HabitComponent.h"/>
+      <FILE id="HPZi0p" name="HabitManager.cpp" compile="1" resource="0"
+            file="Source/HabitManager.cpp"/>
+      <FILE id="tqycSH" name="HabitManager.h" compile="0" resource="0" file="Source/HabitManager.h"/>
+      <FILE id="QVuEDD" name="HabitForm.cpp" compile="1" resource="0" file="Source/HabitForm.cpp"/>
+      <FILE id="x2rG5E" name="HabitForm.h" compile="0" resource="0" file="Source/HabitForm.h"/>
+      <FILE id="XQdKy0" name="HelpForm.cpp" compile="1" resource="0" file="Source/HelpForm.cpp"/>
+      <FILE id="EHmFXZ" name="HelpForm.h" compile="0" resource="0" file="Source/HelpForm.h"/>
+      <FILE id="bH4PY9" name="MainForm.cpp" compile="1" resource="0" file="Source/MainForm.cpp"/>
+      <FILE id="yFBCUy" name="MainForm.h" compile="0" resource="0" file="Source/MainForm.h"/>
+      <FILE id="jzyUvI" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="KPxfj4" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="lf28Sv" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2019 targetFolder="Builds/VisualStudio2019">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="LemonAid"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="LemonAid"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="E:/Computer Science/JUCE/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2019>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="LemonAid"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="LemonAid"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="E:/Computer Science/JUCE/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="E:/Computer Science/JUCE/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>

@@ -1,2 +1,0 @@
-# LemonAid
-Agile Software Project
