@@ -44,11 +44,13 @@ void HabitManager::addHabit(std::string name)
     // Create new habit component in habitComponents Vector
     habitComponents.push_back(HabitComponent(habitID, name));
 
+    // Appending the new habit to the csv file
+    CSVOperator::addNewHabit(habitIdAsString, name);
+
     //Refreshing habitsVector
     habitsVector = CSVOperator::readHabitsCSV();
 
-    // Appending the new habit to the csv file
-    CSVOperator::addNewHabit(habitIdAsString, name);
+
 
 }
 
@@ -104,7 +106,7 @@ void HabitManager::removeHabit(int id)
     for (HabitEntry& h : habitsVector)
     {
         habitID = std::to_string(h.id);
-        entryToBeAdded = habitID + ", " + h.name + "\n";
+        entryToBeAdded = habitID + "," + h.name + "\n";
         habitsFile << entryToBeAdded;
     }
 

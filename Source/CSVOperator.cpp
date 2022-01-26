@@ -40,7 +40,7 @@ std::vector<HabitEntry> CSVOperator::readHabitsCSV()
         {
             juce::String juceline = csvFile.readNextLine();
 
-            // readNextL›ne returns a juce string, so we need to convert it to std::string first
+            // readNextL√ùne returns a juce string, so we need to convert it to std::string first
             std::string line = juceline.toStdString();
 
             try {
@@ -166,7 +166,7 @@ void CSVOperator::addNewHabit(std::string id, std::string name)
 {
   
     // Builds the new entry to add into habits file
-    std::string entryToBeAdded = id + ", " + name + "\n";
+    std::string entryToBeAdded = id + "," + name + "\n";
 
     std::ofstream csvFile(".\\HabitsFiles\\habits.csv", std::ios::app);
 

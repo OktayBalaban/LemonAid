@@ -43,13 +43,10 @@ class HabitManager
         // It is very important to clear selections while hovering between the pages, as otherwise bugs may happen
         void clearHabitSelection();
 
+
+
         std::string selectedHabitId;
-
-
-    private:
         std::vector<HabitEntry> habitsVector;          // Vector created by reading Habits.csv, NOT containing the habits objects but just id and names!
         std::vector<HabitComponent> habitComponents;   // Vector that is containing the whole habit components as objects
-
-
 
 };
