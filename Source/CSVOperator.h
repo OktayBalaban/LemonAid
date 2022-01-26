@@ -16,6 +16,7 @@
 #include <iostream>
 #include "HabitEntry.h"
 #include "DailyTrackerEntry.h"
+#include <JuceHeader.h>
 
 class CSVOperator
 {

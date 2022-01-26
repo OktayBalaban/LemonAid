@@ -27,6 +27,9 @@ void HabitManager::init()
         habitComponents.push_back(HabitComponent(h.id, h.name));
     }
 
+    //There is no selected habit initially
+    std::string selectedHabitId = "";
+
     //HERE, YOU CAN WRITE FUNCTIONS TO OPERATE SUCH AS ADDING AND REMOVING
 
 }
@@ -120,3 +123,43 @@ void HabitManager::removeHabit(int id)
 
 }
 
+//Selects the habitComponent by assigning true to its isSelected property.
+void HabitManager::selectHabit(std::string habitID)
+{
+    int idAsInt = std::stoi(habitID);
+
+    for (HabitComponent& h : habitComponents)
+    {
+        if (h.habitID = idAsInt)
+        {
+            h.isSelected = true;
+            selectedHabitId = std::to_string(h.habitID); 
+            break;
+        }
+    }
+}
+
+// Clears habit selection and sets all isSelected properties of HabitComponents to false
+// It is very important to clear selections while hovering between the pages, as otherwise bugs may happen
+void HabitManager::clearHabitSelection()
+{
+    // If no habit is selected, there is nothing to do
+    if (selectedHabitId == "")
+    {
+        return;
+    }
+
+    int idAsInt = std::stoi(selectedHabitId);
+
+    for (HabitComponent& h : habitComponents)
+    {
+        if (h.habitID = idAsInt)
+        {
+            h.isSelected = false;
+            selectedHabitId = "";
+            break;
+        }
+    }
+
+
+}

@@ -23,13 +23,18 @@ class HabitComponent
         //Returns the ID of the habitComponent as string
         std::string returnID();  
 
-    private:
-
+        //Identities and status of the HabitComponent
         int habitID;
         std::string habitName;
+        bool isSelected; //Selection status
+
+
+    private:
 
         // trackerVector stores all the dailyTracker Entries.
         std::vector<DailyTrackerEntry> trackerVector;
+
+
 
 
 

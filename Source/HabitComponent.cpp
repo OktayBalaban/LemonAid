@@ -44,6 +44,8 @@ HabitComponent::HabitComponent(int _habitId, std::string _habitName)
         std::ofstream goalsFile(".\\HabitsFiles\\" + goalsFileName + ".csv");
     }
     goalsFile.close();
+
+    isSelected = false; // Setting the isSelected false initially.
 }
 
 //Returns the ID of the habitComponent as string
@@ -52,3 +54,9 @@ std::string HabitComponent::returnID()
     std::string stringID = std::to_string(habitID);
     return stringID;
 }
+
+
+
+
+
+

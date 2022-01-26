@@ -7,7 +7,14 @@
 */
 
 #include <JuceHeader.h>
-#include "MainComponent.h"
+#include "MainForm.h"
+#include "HelpForm.h"
+#include "HabitForm.h"
+#include "ResourcesForm.h"
+#include "DiaryForm.h"
+
+
+
 
 //==============================================================================
 class NewProjectApplication  : public juce::JUCEApplication
@@ -65,7 +72,7 @@ public:
                               DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (new MainComponent(), true);
+            setContentOwned (new MainForm(), true);
 
            #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);
