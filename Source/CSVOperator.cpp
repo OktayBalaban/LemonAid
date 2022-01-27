@@ -16,18 +16,33 @@ CSVOperator::CSVOperator()
 
 }
 
-// Function to get lines from habits CSV
+// Function to get lines from habits CSV, first creates the file
 std::vector<HabitEntry> CSVOperator::readHabitsCSV()
 {
     std::vector<HabitEntry> entries;
 
-    std::ifstream csvFile(".\\HabitsFiles\\habits.csv");
-    std::string line;
+    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
 
-    if (csvFile.is_open())
+    juce::File habitsFile(filePath + "\\HabitsFiles\\Habits.csv");
+
+    if (!habitsFile.exists())
     {
-        while (std::getline(csvFile, line))
+        habitsFile.create();
+    }
+    juce::FileInputStream csvFile(habitsFile);
+
+    
+
+    if (csvFile.openedOk())
+    {
+        while (!csvFile.isExhausted())
         {
+            juce::String juceline = csvFile.readNextLine();
+
+            // readNextLÝne returns a juce string, so we need to convert it to std::string first
+            std::string line = juceline.toStdString();
+
             try {
                 HabitEntry habitEntry = vectorOfStringsToHabitEntry(tokeniser(line, ','));
                 entries.push_back(habitEntry);
@@ -39,7 +54,7 @@ std::vector<HabitEntry> CSVOperator::readHabitsCSV()
         }
     }
 
-    csvFile.close();
+    //csvFile.close();
     return entries;
 }
 
@@ -151,7 +166,7 @@ void CSVOperator::addNewHabit(std::string id, std::string name)
 {
   
     // Builds the new entry to add into habits file
-    std::string entryToBeAdded = id + ", " + name + "\n";
+    std::string entryToBeAdded = id + "," + name + "\n";
 
     std::ofstream csvFile(".\\HabitsFiles\\habits.csv", std::ios::app);
 

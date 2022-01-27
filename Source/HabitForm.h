@@ -21,6 +21,7 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include <JuceHeader.h>
+#include "HabitManager.h"
 //[/Headers]
 
 
@@ -33,16 +34,23 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class HabitForm  : public juce::Component,
-                   public juce::Button::Listener
+class HabitForm  :  public juce::Component,
+                    public juce::Button::Listener
+
 {
 public:
     //==============================================================================
+
+
+
     HabitForm ();
     ~HabitForm() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+
+    HabitManager habitManager;
+
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -53,6 +61,14 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+
+    std::unique_ptr<juce::GroupComponent> addHabitGroupComponent;
+    std::unique_ptr<juce::GroupComponent> removeHabitGroupComponent;
+
+    std::unique_ptr<juce::Label> addHabitNameLabel;
+    std::unique_ptr<juce::Label> removeHabitNameLabel;
+    std::unique_ptr<juce::Label> addHabitNameInput;
+
     //[/UserVariables]
 
     //==============================================================================

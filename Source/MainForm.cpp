@@ -137,6 +137,9 @@ MainForm::MainForm ()
 
 
     //[Constructor] You can add your own custom stuff here..
+
+    habitManager.init(); //Initializing the habitManager object
+
     setSize(1020, 620);
     newHelpWindow.reset(new HelpForm());
     newHelpWindow->setBounds(185, 90, 1020-185, 620-90);

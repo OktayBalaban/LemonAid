@@ -4,6 +4,8 @@
 #include "MainForm.h"
 #include "HelpForm.h"
 #include "HabitManager.h"
+#include "DiaryForm.h"
+#include "ResourcesForm.h"
 
 //==============================================================================
 /*

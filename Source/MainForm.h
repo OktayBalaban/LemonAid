@@ -48,6 +48,9 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+ 
+    HabitManager habitManager;
+
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
