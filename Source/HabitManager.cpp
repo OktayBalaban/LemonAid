@@ -114,7 +114,7 @@ void HabitManager::removeHabit(int id)
 
     //------------File Deletions----------------------------------------------------
     std::string dailyTrackerFileToBeDeleted = ".\\HabitsFiles\\DailyTrack" + habitIdAsString + ".csv";
-    std::string goalsFileToBeDeleted = ".\\HabitsFiles\\Goals" + habitIdAsString + ".csv";
+    std::string goalsFileToBeDeleted = ".\\HabitsFiles\\Goals" + habitIdAsString + ".txt";
 
     const char* pathTracks = dailyTrackerFileToBeDeleted.c_str();
     const char* pathGoals = goalsFileToBeDeleted.c_str();
@@ -141,6 +141,8 @@ void HabitManager::selectHabit(std::string habitID)
     }
 }
 
+
+
 // Clears habit selection and sets all isSelected properties of HabitComponents to false
 // It is very important to clear selections while hovering between the pages, as otherwise bugs may happen
 void HabitManager::clearHabitSelection()
@@ -164,4 +166,12 @@ void HabitManager::clearHabitSelection()
     }
 
 
+}
+
+juce::String HabitManager::readAndReturnGoals(int habitID)
+{
+    // Reads the goals file and pushes them in a std::string vector
+    juce::String goals = CSVOperator::readHabitGoals(habitID);
+
+    return goals;
 }

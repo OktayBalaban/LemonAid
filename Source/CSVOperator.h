@@ -36,6 +36,11 @@ class CSVOperator
         static std::vector<DailyTrackerEntry> readDailyTrackerCSV(std::string filepath); //Reads dailyTracker file
         static DailyTrackerEntry vectorOfStringsToDailyTrackerEntry(std::vector<std::string> token); // Converts a vector of strings to dailyTrackerEntry
 
+        //===================== Goals File Functions ===========================================
+        static juce::String readHabitGoals(int habitID);
+        static void updateGoals(int habitID, std::string text);
+
+
     private:
 
         // Tokeniser Function
