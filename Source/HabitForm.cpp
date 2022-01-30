@@ -32,8 +32,7 @@ HabitForm::HabitForm ()
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    juce__label.reset (new juce::Label ("new label",
-                                        TRANS("MY HABITS")));
+    juce__label.reset (new juce::Label ("new label", TRANS("MY HABITS")));
     addAndMakeVisible (juce__label.get());
     juce__label->setFont (juce::Font (20.00f, juce::Font::plain).withTypefaceStyle ("Bold"));
     juce__label->setJustificationType (juce::Justification::centred);
@@ -45,8 +44,7 @@ HabitForm::HabitForm ()
 
     juce__label->setBounds (16, 8, 150, 32);
 
-    juce__label2.reset (new juce::Label ("new label",
-                                         TRANS("Habit placeholder")));
+    juce__label2.reset (new juce::Label ("new label", TRANS("GOALS")));
     addAndMakeVisible (juce__label2.get());
     juce__label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::topLeft);
@@ -54,34 +52,25 @@ HabitForm::HabitForm ()
     juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     juce__label2->setBounds (208, 24, 552, 488);
 
     juce__textButton6.reset (new juce::TextButton ("habit1button"));
-    addAndMakeVisible (juce__textButton6.get());
     juce__textButton6->setClickingTogglesState(true);
     juce__textButton6->setButtonText (TRANS("Habit 1"));
     juce__textButton6->addListener (this);
     juce__textButton6->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
-
     juce__textButton6->setBounds (8, 56, 168, 40);
 
     juce__textButton7.reset (new juce::TextButton ("habbit2button"));
-    addAndMakeVisible (juce__textButton7.get());
     juce__textButton7->setClickingTogglesState(true);
-    juce__textButton7->setButtonText (TRANS("Habit 2"));
     juce__textButton7->addListener (this);
     juce__textButton7->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
-
     juce__textButton7->setBounds (8, 104, 168, 40);
 
     juce__textButton8.reset (new juce::TextButton ("habit3button"));
-    addAndMakeVisible (juce__textButton8.get());
     juce__textButton8->setClickingTogglesState(true);
-    juce__textButton8->setButtonText (TRANS("Habit 3"));
     juce__textButton8->addListener (this);
     juce__textButton8->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
-
     juce__textButton8->setBounds (8, 152, 168, 40);
 
     juce__textButton2.reset (new juce::TextButton ("habit1button"));
@@ -110,6 +99,8 @@ HabitForm::HabitForm ()
     //[Constructor] You can add your own custom stuff here..
     
     habitManager.init(); //Initializing the habitManager object
+    showHabitButtons();
+
 
     // -------------Add Habit Group Container-----------------------------------------------
 
@@ -152,6 +143,23 @@ HabitForm::HabitForm ()
     removeHabitGroupComponent->setColour(juce::GroupComponent::textColourId, juce::Colours::black);
 
     removeHabitGroupComponent->setBounds(2, 360, 190, 150);
+
+    //------------- Goals Area ----------------------------------------------------------------
+    // Goals Text, text's itself comes from printGoals function
+    goals.reset(new juce::TextEditor(""));
+    addAndMakeVisible(goals.get());
+    goals->setReadOnly(true);    // Initially,it is read-only until edit mode opens
+    goals->setBounds(220, 50, 520, 150);
+
+    goalsEditButton.reset(new juce::TextButton("Edit Button", TRANS("Edit Goals")));
+    addAndMakeVisible(goalsEditButton.get());
+    goalsEditButton->addListener(this);
+    goalsEditButton->setBounds(620, 202, 120, 30);
+    goalsEditButton->setToggleable(true);
+    goalsEditButton->setToggleState(false, false);
+    
+
+
 
     //[/Constructor]
 }
@@ -207,28 +215,42 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Sets other buttons off if they are on
         if (juce__textButton7->getToggleState())
         {
-            juce__textButton7->triggerClick();
+            juce__textButton7->setToggleState(false, false);
         }
         if (juce__textButton8->getToggleState())
         {
-            juce__textButton8->triggerClick();
+            juce__textButton8->setToggleState(false, false);
         }
+
+        // Reset editButton first
+        goalsEditButton->setToggleState(false, false);
+        goals->setReadOnly(true);
+        goalsEditButton->setButtonText("Edit Button");
+
+        printGoals();
 
         //[/UserButtonCode_juce__textButton6]
     }
     else if (buttonThatWasClicked == juce__textButton7.get())
     {
-        //[UserButtonCode_juce__textButton7] -- add your button handler code here..
+        //[UserButtonCode_juce__textButton7] -- add your button handler code here..;
 
         // Sets other buttons off if they are on
         if (juce__textButton6->getToggleState())
         {
-            juce__textButton6->triggerClick();
+            juce__textButton6->setToggleState(false, false);
         }
         if (juce__textButton8->getToggleState())
         {
-            juce__textButton8->triggerClick(); 
+            juce__textButton8->setToggleState(false, false);
         }
+
+        // Reset editButton first
+        goalsEditButton->setToggleState(false, false);
+        goals->setReadOnly(true);
+        goalsEditButton->setButtonText("Edit Button");
+
+        printGoals();
 
         //[/UserButtonCode_juce__textButton7]
     }
@@ -239,50 +261,226 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Sets other buttons off if they are on
         if (juce__textButton7->getToggleState())
         {
-            juce__textButton7->triggerClick();
+            juce__textButton7->setToggleState(false, false);
         }
         if (juce__textButton6->getToggleState())
         {
-            juce__textButton6->triggerClick();
+            juce__textButton6->setToggleState(false, false);
         }
+
+        // Reset editButton first
+        goalsEditButton->setToggleState(false, false);
+        goals->setReadOnly(true);
+        goalsEditButton->setButtonText("Edit Button");
+
+        printGoals();
 
         //[/UserButtonCode_juce__textButton8]
     }
 
 
-    // ADD HABIT BUTTON
+    // Add Habit Button
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         
-        //Checking the number of habits. If there are less than 3, then proceeds for adding operations
-        DBG(habitManager.habitsVector.size());
-        if (habitManager.habitsVector.size() < 3)
-        {
-            juce::String nameInput = addHabitNameInput.get()->getText();
-            habitManager.addHabit(nameInput.toStdString());
-        }
-        DBG(habitManager.habitsVector.size());
-
+        addNewHabit();
 
         //[/UserButtonCode_juce__textButton2]
     }
+
+    // Remove Habit Button
     else if (buttonThatWasClicked == juce__textButton3.get())
     {
         //[UserButtonCode_juce__textButton3] -- add your button handler code here..
 
-        habitManager.removeHabit(1);
+        removeHabit();
+        
+        // Fixes a bug with staying at the deleted goals
+        printGoals();
 
         //[/UserButtonCode_juce__textButton3]
     }
 
+
     //[UserbuttonClicked_Post]
+    
+    else if (buttonThatWasClicked == goalsEditButton.get())
+    {
+        int habitId = returnButtonHabitId();
+
+        // If no habits is selected, return without doing anything but only reset edit button.
+        if (habitId == -1)
+        {
+            goalsEditButton->setToggleState(false, false);
+            goals->setReadOnly(true);
+            goalsEditButton->setButtonText("Edit Button");
+            return;
+
+        }
+
+        if (!goalsEditButton->getToggleState())
+        {
+            goalsEditButton->setToggleState(true, false);
+            goals->setReadOnly(false);
+            goalsEditButton->setButtonText("Save Changes");
+        }
+
+        else if (goalsEditButton->getToggleState())
+        {
+            goalsEditButton->setToggleState(false, false);
+            goals->setReadOnly(true);
+            goalsEditButton->setButtonText("Edit Goals");
+
+            juce::String goalsJuceStr = goals->getText();
+            std::string goalsStdStr = goalsJuceStr.toStdString();
+
+
+
+            CSVOperator::updateGoals(habitId, goalsStdStr);
+        }
+    }
+
     //[/UserbuttonClicked_Post]
 }
 
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+
+void HabitForm::addNewHabit()
+{
+    //Checking the number of habits. If there are less than 3, then proceeds for adding operations
+    if (habitManager.habitsVector.size() < 3)
+    {
+        juce::String nameInput = addHabitNameInput.get()->getText();
+        habitManager.addHabit(nameInput.toStdString());
+    }
+
+    resetHabitButtons();
+}
+
+void HabitForm::removeHabit()
+{
+    // Check toggle states and if toggled (selected), delete the habit
+    if (juce__textButton6->getToggleState())
+    {
+        habitManager.removeHabit(firstHabitButtonId);
+    }
+    else if (juce__textButton7->getToggleState())
+    {
+        habitManager.removeHabit(secondHabitButtonId);
+    }
+    else if (juce__textButton8->getToggleState())
+    {
+        habitManager.removeHabit(thirdHabitButtonId);
+    }
+
+    resetHabitButtons();
+}
+
+
+//Responsible for showing the habit buttons and assigning ids and names to them
+void HabitForm::showHabitButtons()
+{
+    //Will be used to position buttons
+    int rowCounter = 0;
+
+    //------Adding and making visible the buttons according to the habitsVector in habitManager object-------
+
+    //If there are no habits, just return without doing anything
+    if (habitManager.habitsVector.size() == 0)
+    {
+        return;
+    }
+
+    // According to the number of habits, add buttons. Also assigns ids to habitButtons.
+    if (habitManager.habitsVector.size() == 1)
+    {
+        addAndMakeVisible(juce__textButton6.get());
+        juce__textButton6->setButtonText(TRANS(habitManager.habitsVector[0].name));
+        firstHabitButtonId = habitManager.habitsVector[0].id;
+    }
+    else if (habitManager.habitsVector.size() == 2)
+    {
+        addAndMakeVisible(juce__textButton6.get());
+        juce__textButton6->setButtonText(TRANS(habitManager.habitsVector[0].name));
+        firstHabitButtonId = habitManager.habitsVector[0].id;
+
+        addAndMakeVisible(juce__textButton7.get());
+        juce__textButton7->setButtonText(TRANS(habitManager.habitsVector[1].name));
+        secondHabitButtonId = habitManager.habitsVector[1].id;
+    }
+    else if (habitManager.habitsVector.size() == 3)
+    {
+        addAndMakeVisible(juce__textButton6.get());
+        juce__textButton6->setButtonText(TRANS(habitManager.habitsVector[0].name));
+        firstHabitButtonId = habitManager.habitsVector[0].id;
+
+        addAndMakeVisible(juce__textButton7.get());
+        juce__textButton7->setButtonText(TRANS(habitManager.habitsVector[1].name));
+        secondHabitButtonId = habitManager.habitsVector[1].id;
+
+        addAndMakeVisible(juce__textButton8.get());
+        juce__textButton8->setButtonText(TRANS(habitManager.habitsVector[2].name));
+        thirdHabitButtonId = habitManager.habitsVector[2].id;
+    }
+
+}
+
+void HabitForm::resetHabitButtons()
+{
+    removeChildComponent(juce__textButton6.get());
+    removeChildComponent(juce__textButton7.get());
+    removeChildComponent(juce__textButton8.get());
+    showHabitButtons();
+}
+
+void HabitForm::printGoals()
+{
+
+    int habitId = returnButtonHabitId();
+
+    // If no habits is selected, return without doing anything.
+    if (habitId == -1)
+    {
+        return;
+    }
+
+    // Reads the goals file
+    juce::String goalsString = habitManager.readAndReturnGoals(habitId);
+
+    // Show the text
+    goals->setText(goalsString, false);
+
+
+
+}
+
+int HabitForm::returnButtonHabitId()
+{
+    int habitId = -1;
+
+
+    if (juce__textButton6->getToggleState())
+    {
+        habitId = firstHabitButtonId;
+    }
+    else if (juce__textButton7->getToggleState())
+    {
+        habitId = secondHabitButtonId;
+    }
+    else if (juce__textButton8->getToggleState())
+    {
+        habitId = thirdHabitButtonId;
+    }
+
+    return habitId;
+
+
+}
+
+
 //[/MiscUserCode]
 
 

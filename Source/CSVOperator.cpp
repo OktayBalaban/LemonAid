@@ -40,7 +40,7 @@ std::vector<HabitEntry> CSVOperator::readHabitsCSV()
         {
             juce::String juceline = csvFile.readNextLine();
 
-            // readNextLÝne returns a juce string, so we need to convert it to std::string first
+            // readNextLine returns a juce string, so we need to convert it to std::string first
             std::string line = juceline.toStdString();
 
             try {
@@ -213,4 +213,57 @@ DailyTrackerEntry CSVOperator::vectorOfStringsToDailyTrackerEntry(std::vector<st
     }
     DailyTrackerEntry dailyTrackerEntry{ token[0], token[1]};
     return dailyTrackerEntry;
+}
+
+juce::String CSVOperator::readHabitGoals(int habitID)
+{
+    std::string strId = std::to_string(habitID);
+
+    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
+
+    juce::File goalsFile(filePath + "\\HabitsFiles\\Goals" + strId +".txt");
+    juce::FileInputStream txtFile(goalsFile);
+
+    juce::String jucetxt;
+
+    if (txtFile.openedOk())
+    {
+            jucetxt = goalsFile.loadFileAsString();
+
+    }
+
+    return jucetxt;
+}
+
+void CSVOperator::updateGoals(int habitID, std::string text)
+{
+    std::string idAsStr = std::to_string(habitID);
+    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
+
+    //juce::File goalsFile(filePath + "\\HabitsFiles\\Goals" + idAsStr + ".txt");
+    //juce::FileOutputStream txtFile(goalsFile);
+
+
+    //if (txtFile.openedOk())
+    //{
+    //    txtFile.writeString(text);
+    //}
+
+    // Builds the new entry to add into habits file
+    std::string entry = text;
+
+    std::ofstream txtFile;
+    txtFile.open(".\\HabitsFiles\\Goals" + idAsStr + ".txt");
+    if (txtFile.is_open())
+    {
+        DBG("Opened");
+    }
+
+    txtFile << entry;
+
+    txtFile.close();
+
+
 }

@@ -43,6 +43,9 @@ class HabitManager
         // It is very important to clear selections while hovering between the pages, as otherwise bugs may happen
         void clearHabitSelection();
 
+        //========================= Goals Functions ==================================
+
+        juce::String readAndReturnGoals(int habitID);
 
 
         std::string selectedHabitId;
