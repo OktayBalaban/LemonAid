@@ -33,8 +33,10 @@ class CSVOperator
         static void addNewHabit(std::string id, std::string name);        
 
         // ==================== DailyTracker Functions =================================
-        static std::vector<DailyTrackerEntry> readDailyTrackerCSV(std::string filepath); //Reads dailyTracker file
+        static std::vector<DailyTrackerEntry> readDailyTrackerCSV(int habitId); //Reads dailyTracker file
         static DailyTrackerEntry vectorOfStringsToDailyTrackerEntry(std::vector<std::string> token); // Converts a vector of strings to dailyTrackerEntry
+        static std::vector<std::string> CSVOperator::returnDailyStatusVector(std::vector<DailyTrackerEntry> vector); // Returns only daily Statuses
+        static void updateDailyTrackerFile(int habitId, std::vector<int> lines, std::string YesOrNO); // Change given lines to "Yes" or "No" for selected habit
 
         //===================== Goals File Functions ===========================================
         static juce::String readHabitGoals(int habitID);

@@ -177,9 +177,16 @@ void CSVOperator::addNewHabit(std::string id, std::string name)
 }
 
 //Getting the lines from DailyTracker file
-std::vector<DailyTrackerEntry> CSVOperator::readDailyTrackerCSV(std::string filepath)
+std::vector<DailyTrackerEntry> CSVOperator::readDailyTrackerCSV(int habitId)
 {
     std::vector<DailyTrackerEntry> entries;
+    
+    std::string idAsStr = std::to_string(habitId);
+
+    juce::String directoryPath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    std::string drcPathAsStdStr = directoryPath.toStdString();
+
+    std::string filepath = drcPathAsStdStr + "\\HabitsFiles\\DailyTrack" + idAsStr + ".csv";
 
     std::ifstream csvFile(filepath);
     std::string line;
@@ -203,6 +210,17 @@ std::vector<DailyTrackerEntry> CSVOperator::readDailyTrackerCSV(std::string file
 
 }
 
+std::vector<std::string> CSVOperator::returnDailyStatusVector(std::vector<DailyTrackerEntry> vector)
+{
+    std::vector<std::string> statusVector;
+    for (DailyTrackerEntry d : vector)
+    {
+        statusVector.push_back(d.dailyStatus);
+    }
+
+    return statusVector;
+}
+
 // Converts vector of strings to DailyTrackerEntries
 DailyTrackerEntry CSVOperator::vectorOfStringsToDailyTrackerEntry(std::vector<std::string> token)
 {
@@ -211,7 +229,10 @@ DailyTrackerEntry CSVOperator::vectorOfStringsToDailyTrackerEntry(std::vector<st
         std::cout << "Bad line " << std::endl;
         throw std::exception{};
     }
-    DailyTrackerEntry dailyTrackerEntry{ token[0], token[1]};
+
+    int dayAsInt = std::stoi(token[0]);
+
+    DailyTrackerEntry dailyTrackerEntry{ dayAsInt, token[1]};
     return dailyTrackerEntry;
 }
 
@@ -239,31 +260,69 @@ juce::String CSVOperator::readHabitGoals(int habitID)
 void CSVOperator::updateGoals(int habitID, std::string text)
 {
     std::string idAsStr = std::to_string(habitID);
-    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
-    filePath.toStdString();
-
-    //juce::File goalsFile(filePath + "\\HabitsFiles\\Goals" + idAsStr + ".txt");
-    //juce::FileOutputStream txtFile(goalsFile);
-
-
-    //if (txtFile.openedOk())
-    //{
-    //    txtFile.writeString(text);
-    //}
 
     // Builds the new entry to add into habits file
     std::string entry = text;
 
     std::ofstream txtFile;
     txtFile.open(".\\HabitsFiles\\Goals" + idAsStr + ".txt");
-    if (txtFile.is_open())
-    {
-        DBG("Opened");
-    }
+
 
     txtFile << entry;
 
     txtFile.close();
 
+}
 
+void CSVOperator::updateDailyTrackerFile(int habitId, std::vector<int> lines, std::string YesOrNO)
+{
+    std::string idAsStr = std::to_string(habitId);
+
+    juce::String directoryPath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    std::string drcPathAsStdStr = directoryPath.toStdString();
+
+    std::string filepath = drcPathAsStdStr + "\\HabitsFiles\\DailyTrack" + idAsStr + ".csv";
+
+    std::ifstream csvFile(filepath);
+    std::string line;
+
+    int lineCounter = 1;
+    std::string lineAsStr = "";
+    std::vector<std::string> entries;
+    std::string updatedLine;
+
+    // Populate new vector for overwriting
+    if (csvFile.is_open())
+    {
+        while (std::getline(csvFile, line))
+        {
+            if (std::count(lines.begin(), lines.end(), lineCounter))
+            {
+                lineAsStr = std::to_string(lineCounter);
+                updatedLine = lineAsStr + "," + YesOrNO;
+                entries.push_back(updatedLine);
+                lineCounter++;
+            }
+            else
+            {
+                entries.push_back(line);
+                lineCounter++;
+            }
+        }
+    }
+
+    csvFile.close();
+
+    // Update the file by overwriting
+    std::ofstream csvFileUpdated(filepath);
+    if (csvFileUpdated.is_open())
+    {
+        for (std::string& s : entries)
+        {
+            updatedLine = s + "\n";
+            csvFileUpdated << updatedLine;
+        }
+    }
+
+    csvFile.close();
 }

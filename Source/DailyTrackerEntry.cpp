@@ -1,6 +1,6 @@
 #include "DailyTrackerEntry.h"
 
-DailyTrackerEntry::DailyTrackerEntry(std::string _date, std::string _dailyStatus) : date(_date), dailyStatus(_dailyStatus)
+DailyTrackerEntry::DailyTrackerEntry(int _day, std::string _dailyStatus) : day(_day), dailyStatus(_dailyStatus)
 {
 
 }

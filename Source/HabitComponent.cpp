@@ -29,11 +29,22 @@ HabitComponent::HabitComponent(int _habitId, std::string _habitName)
     if (dailyTrackerFile.is_open())
     {
         //Get dailyTrackerEntries 
-        trackerVector = CSVOperator::readDailyTrackerCSV(".\\HabitsFiles\\" + dailyTrackerFileName + ".csv");
+        trackerVector = CSVOperator::readDailyTrackerCSV(_habitId);
     }
     else
     {
         std::ofstream dailyTrackerFile(".\\HabitsFiles\\" + dailyTrackerFileName + ".csv");
+        std::string trackerLine;
+        std::string iAsStr;
+
+        // Popualtes the daily tracker file with 28 days of -1
+        // -1 means the day result is not decided yet
+        for (int i = 0; i < 28; ++i)
+        {
+            iAsStr = std::to_string(i + 1);
+            trackerLine = iAsStr + ",Unmarked\n";
+            dailyTrackerFile << trackerLine;
+        }
     }
     dailyTrackerFile.close();
 
@@ -42,7 +53,10 @@ HabitComponent::HabitComponent(int _habitId, std::string _habitName)
     if (!goalsFile.is_open())
     {
         std::ofstream goalsFile(".\\HabitsFiles\\" + goalsFileName + ".txt");
+
     }
+
+
     goalsFile.close();
 
     isSelected = false; // Setting the isSelected false initially.

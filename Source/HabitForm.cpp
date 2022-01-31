@@ -44,10 +44,10 @@ HabitForm::HabitForm ()
 
     juce__label->setBounds (16, 8, 150, 32);
 
-    juce__label2.reset (new juce::Label ("new label", TRANS("GOALS")));
-    addAndMakeVisible (juce__label2.get());
-    juce__label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
-    juce__label2->setJustificationType (juce::Justification::topLeft);
+    juce__label2.reset (new juce::Label ("new label", TRANS("SELECT HABIT")));
+    addAndMakeVisible(juce__label2.get());
+    juce__label2->setFont (juce::Font (60.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    juce__label2->setJustificationType (juce::Justification::centred);
     juce__label2->setEditable (false, false, false);
     juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
@@ -147,19 +147,57 @@ HabitForm::HabitForm ()
     //------------- Goals Area ----------------------------------------------------------------
     // Goals Text, text's itself comes from printGoals function
     goals.reset(new juce::TextEditor(""));
-    addAndMakeVisible(goals.get());
     goals->setReadOnly(true);    // Initially,it is read-only until edit mode opens
     goals->setBounds(220, 50, 520, 150);
 
     goalsEditButton.reset(new juce::TextButton("Edit Button", TRANS("Edit Goals")));
-    addAndMakeVisible(goalsEditButton.get());
     goalsEditButton->addListener(this);
     goalsEditButton->setBounds(620, 202, 120, 30);
     goalsEditButton->setToggleable(true);
     goalsEditButton->setToggleState(false, false);
-    
+    goalsEditButton->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
 
+    // Daily Tracker Buttons Declaration
+    dailyBtn0.reset(new juce::TextButton(""));
+    dailyBtn1.reset(new juce::TextButton(""));
+    dailyBtn2.reset(new juce::TextButton(""));
+    dailyBtn3.reset(new juce::TextButton(""));
+    dailyBtn4.reset(new juce::TextButton(""));
+    dailyBtn5.reset(new juce::TextButton(""));
+    dailyBtn6.reset(new juce::TextButton(""));
+    dailyBtn7.reset(new juce::TextButton(""));
+    dailyBtn8.reset(new juce::TextButton(""));
+    dailyBtn9.reset(new juce::TextButton(""));
+    dailyBtn10.reset(new juce::TextButton(""));
+    dailyBtn11.reset(new juce::TextButton(""));
+    dailyBtn12.reset(new juce::TextButton(""));
+    dailyBtn13.reset(new juce::TextButton(""));
+    dailyBtn14.reset(new juce::TextButton(""));
+    dailyBtn15.reset(new juce::TextButton(""));
+    dailyBtn16.reset(new juce::TextButton(""));
+    dailyBtn17.reset(new juce::TextButton(""));
+    dailyBtn18.reset(new juce::TextButton(""));
+    dailyBtn19.reset(new juce::TextButton(""));
+    dailyBtn20.reset(new juce::TextButton(""));
+    dailyBtn21.reset(new juce::TextButton(""));
+    dailyBtn22.reset(new juce::TextButton(""));
+    dailyBtn23.reset(new juce::TextButton(""));
+    dailyBtn24.reset(new juce::TextButton(""));
+    dailyBtn25.reset(new juce::TextButton(""));
+    dailyBtn26.reset(new juce::TextButton(""));
+    dailyBtn27.reset(new juce::TextButton(""));
 
+    didBtn.reset(new juce::TextButton(""));
+    didBtn->addListener(this);
+    didBtn->setBounds(620, 300, 120, 30);
+    didBtn->setButtonText("I DID!");
+    didBtn->setColour(juce::TextButton::buttonColourId, juce::Colours::green);
+
+    didNotBtn.reset(new juce::TextButton(""));
+    didNotBtn->addListener(this);
+    didNotBtn->setBounds(620, 360, 120, 30);
+    didNotBtn->setButtonText("I could not");
+    didNotBtn->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
 
     //[/Constructor]
 }
@@ -227,6 +265,12 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         goals->setReadOnly(true);
         goalsEditButton->setButtonText("Edit Button");
 
+        // Clear goals components
+        removeChildComponent(goals.get());
+        removeChildComponent(goalsEditButton.get());
+
+        readFileAndMakeDailyBtns();
+
         printGoals();
 
         //[/UserButtonCode_juce__textButton6]
@@ -250,13 +294,21 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         goals->setReadOnly(true);
         goalsEditButton->setButtonText("Edit Button");
 
+        // Clear goals components
+        removeChildComponent(goals.get());
+        removeChildComponent(goalsEditButton.get());
+
+        readFileAndMakeDailyBtns();
+
         printGoals();
 
         //[/UserButtonCode_juce__textButton7]
     }
     else if (buttonThatWasClicked == juce__textButton8.get())
     {
-        //[UserButtonCode_juce__textButton8] -- add your button handler code here..
+        //[UserButtonCode_juce__textButton8] -- add your button handler code here.
+
+
 
         // Sets other buttons off if they are on
         if (juce__textButton7->getToggleState())
@@ -272,6 +324,12 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         goalsEditButton->setToggleState(false, false);
         goals->setReadOnly(true);
         goalsEditButton->setButtonText("Edit Button");
+
+        // Clear goals components
+        removeChildComponent(goals.get());
+        removeChildComponent(goalsEditButton.get());
+
+        readFileAndMakeDailyBtns();
 
         printGoals();
 
@@ -335,10 +393,18 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
             juce::String goalsJuceStr = goals->getText();
             std::string goalsStdStr = goalsJuceStr.toStdString();
 
-
-
             CSVOperator::updateGoals(habitId, goalsStdStr);
         }
+    }
+
+    else if (buttonThatWasClicked == didBtn.get())
+    {
+        updateWithDids();
+    }
+
+    else if (buttonThatWasClicked == didNotBtn.get())
+    {
+        updateWithDidNots();
     }
 
     //[/UserbuttonClicked_Post]
@@ -441,11 +507,22 @@ void HabitForm::printGoals()
 
     int habitId = returnButtonHabitId();
 
+    // Write Select Habit first. Will disappear if a habit is selected, will stay if no habit is selected.
+    juce__label2->setText(TRANS("SELECT HABIT"), juce::NotificationType::dontSendNotification);
+
     // If no habits is selected, return without doing anything.
     if (habitId == -1)
     {
         return;
     }
+
+    // Make goals components appear again
+    addAndMakeVisible(goals.get());
+    addAndMakeVisible(goalsEditButton.get());
+
+    // Clear Select Habit Text
+    juce__label2->setText(TRANS(""), juce::NotificationType::dontSendNotification);
+
 
     // Reads the goals file
     juce::String goalsString = habitManager.readAndReturnGoals(habitId);
@@ -478,6 +555,382 @@ int HabitForm::returnButtonHabitId()
     return habitId;
 
 
+}
+
+
+void HabitForm::readFileAndMakeDailyBtns()
+{
+
+    // Remove existing buttons first
+    clearDailyButtons();
+
+    //Take the id of the habit from selected button
+    int habitId = returnButtonHabitId();
+    
+    if (habitId == -1)
+    {
+        //return without doing anything if no habit is selected
+        return;
+    }
+    trackerEntriesVector = CSVOperator::readDailyTrackerCSV(habitId);
+    std::vector<std::string> statusVector = CSVOperator::returnDailyStatusVector(trackerEntriesVector);
+
+    int widthCounter = 0;
+
+    int trackButtonCounter = 0;
+
+    std::string cont = statusVector[0];
+
+    // Add did and did not buttons
+    makeDidAndDidNotButtons();
+    
+    setDailyBtn(dailyBtn0.get(), statusVector[0], 230, 230, 40, 60, juce::String(1));
+    setDailyBtn(dailyBtn1.get(), statusVector[1], 280, 230, 40, 60, juce::String(2));
+    setDailyBtn(dailyBtn2.get(), statusVector[2], 330, 230, 40, 60, juce::String(3));
+    setDailyBtn(dailyBtn3.get(), statusVector[3], 380, 230, 40, 60, juce::String(4));
+    setDailyBtn(dailyBtn4.get(), statusVector[4], 430, 230, 40, 60, juce::String(5));
+    setDailyBtn(dailyBtn5.get(), statusVector[5], 480, 230, 40, 60, juce::String(6));
+    setDailyBtn(dailyBtn6.get(), statusVector[6], 530, 230, 40, 60, juce::String(7));
+    setDailyBtn(dailyBtn7.get(), statusVector[7], 230, 300, 40, 60, juce::String(8));
+    setDailyBtn(dailyBtn8.get(), statusVector[8], 280, 300, 40, 60, juce::String(9));
+    setDailyBtn(dailyBtn9.get(), statusVector[9], 330, 300, 40, 60, juce::String(10));
+    setDailyBtn(dailyBtn10.get(), statusVector[10], 380, 300, 40, 60, juce::String(11));
+    setDailyBtn(dailyBtn11.get(), statusVector[11], 430, 300, 40, 60, juce::String(12));
+    setDailyBtn(dailyBtn12.get(), statusVector[12], 480, 300, 40, 60, juce::String(13));
+    setDailyBtn(dailyBtn13.get(), statusVector[13], 530, 300, 40, 60, juce::String(14));
+    setDailyBtn(dailyBtn14.get(), statusVector[14], 230, 370, 40, 60, juce::String(15));
+    setDailyBtn(dailyBtn15.get(), statusVector[15], 280, 370, 40, 60, juce::String(16));
+    setDailyBtn(dailyBtn16.get(), statusVector[16], 330, 370, 40, 60, juce::String(17));
+    setDailyBtn(dailyBtn17.get(), statusVector[17], 380, 370, 40, 60, juce::String(18));
+    setDailyBtn(dailyBtn18.get(), statusVector[18], 430, 370, 40, 60, juce::String(19));
+    setDailyBtn(dailyBtn19.get(), statusVector[19], 480, 370, 40, 60, juce::String(20));
+    setDailyBtn(dailyBtn20.get(), statusVector[20], 530, 370, 40, 60, juce::String(21));
+    setDailyBtn(dailyBtn21.get(), statusVector[21], 230, 440, 40, 60, juce::String(22));
+    setDailyBtn(dailyBtn22.get(), statusVector[22], 280, 440, 40, 60, juce::String(23));
+    setDailyBtn(dailyBtn23.get(), statusVector[23], 330, 440, 40, 60, juce::String(24));
+    setDailyBtn(dailyBtn24.get(), statusVector[24], 380, 440, 40, 60, juce::String(25));
+    setDailyBtn(dailyBtn25.get(), statusVector[25], 430, 440, 40, 60, juce::String(26));
+    setDailyBtn(dailyBtn26.get(), statusVector[26], 480, 440, 40, 60, juce::String(27));
+    setDailyBtn(dailyBtn27.get(), statusVector[27], 530, 440, 40, 60, juce::String(28));
+
+
+}
+
+void HabitForm::setDailyBtn(juce::TextButton* btn, std::string dailyStatus, int bnd1, int bnd2, int bnd3, int bnd4, juce::String name)
+{
+    addAndMakeVisible(btn);
+    if (dailyStatus == "Yes")
+    {
+        btn->setColour(juce::TextButton::buttonColourId, juce::Colours::green);
+    }
+    else if (dailyStatus == "No")
+    {
+        btn->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
+    }
+    else if (dailyStatus == "Unmarked")
+    {
+        btn->setColour(juce::TextButton::buttonColourId, juce::Colours::grey);
+    }
+
+    btn->setBounds(bnd1, bnd2, bnd3, bnd4);
+    btn->setButtonText(name);
+    btn->setClickingTogglesState(true);
+}
+
+// Removes dailyTracker Buttons
+void HabitForm::clearDailyButtons()
+{
+
+    removeChildComponent(didBtn.get());
+    removeChildComponent(didNotBtn.get());
+
+    removeChildComponent(dailyBtn0.get());
+    removeChildComponent(dailyBtn1.get());
+    removeChildComponent(dailyBtn2.get());
+    removeChildComponent(dailyBtn3.get());
+    removeChildComponent(dailyBtn4.get());
+    removeChildComponent(dailyBtn5.get());
+    removeChildComponent(dailyBtn6.get());
+    removeChildComponent(dailyBtn7.get());
+    removeChildComponent(dailyBtn8.get());
+    removeChildComponent(dailyBtn9.get());
+    removeChildComponent(dailyBtn10.get());
+    removeChildComponent(dailyBtn11.get());
+    removeChildComponent(dailyBtn12.get());
+    removeChildComponent(dailyBtn13.get());
+    removeChildComponent(dailyBtn14.get());
+    removeChildComponent(dailyBtn15.get());
+    removeChildComponent(dailyBtn16.get());
+    removeChildComponent(dailyBtn17.get());
+    removeChildComponent(dailyBtn18.get());
+    removeChildComponent(dailyBtn19.get());
+    removeChildComponent(dailyBtn20.get());
+    removeChildComponent(dailyBtn21.get());
+    removeChildComponent(dailyBtn22.get());
+    removeChildComponent(dailyBtn23.get());
+    removeChildComponent(dailyBtn24.get());
+    removeChildComponent(dailyBtn25.get());
+    removeChildComponent(dailyBtn26.get());
+    removeChildComponent(dailyBtn27.get());
+}
+
+void HabitForm::makeDidAndDidNotButtons()
+{
+    addAndMakeVisible(didBtn.get());
+    addAndMakeVisible(didNotBtn.get());
+}
+
+// Select "Did" for selected days
+void HabitForm::updateWithDids()
+{
+    std::vector<int> daysVector;
+
+    if (dailyBtn0->getToggleState())
+    {
+        daysVector.push_back(1);
+    }
+    if (dailyBtn1->getToggleState())
+    {
+        daysVector.push_back(2);
+    }
+    if (dailyBtn2->getToggleState())
+    {
+        daysVector.push_back(3);
+    }
+    if (dailyBtn3->getToggleState())
+    {
+        daysVector.push_back(4);
+    }
+    if (dailyBtn4->getToggleState())
+    {
+        daysVector.push_back(5);
+    }
+    if (dailyBtn5->getToggleState())
+    {
+        daysVector.push_back(6);
+    }
+    if (dailyBtn6->getToggleState())
+    {
+        daysVector.push_back(7);
+    }
+    if (dailyBtn7->getToggleState())
+    {
+        daysVector.push_back(8);
+    }
+    if (dailyBtn8->getToggleState())
+    {
+        daysVector.push_back(9);
+    }
+    if (dailyBtn9->getToggleState())
+    {
+        daysVector.push_back(10);
+    }
+    if (dailyBtn10->getToggleState())
+    {
+        daysVector.push_back(11);
+    }
+    if (dailyBtn11->getToggleState())
+    {
+        daysVector.push_back(12);
+    }
+    if (dailyBtn12->getToggleState())
+    {
+        daysVector.push_back(13);
+    }
+    if (dailyBtn13->getToggleState())
+    {
+        daysVector.push_back(14);
+    }
+    if (dailyBtn14->getToggleState())
+    {
+        daysVector.push_back(15);
+    }
+    if (dailyBtn15->getToggleState())
+    {
+        daysVector.push_back(16);
+    }
+    if (dailyBtn16->getToggleState())
+    {
+        daysVector.push_back(17);
+    }
+    if (dailyBtn17->getToggleState())
+    {
+        daysVector.push_back(18);
+    }
+    if (dailyBtn18->getToggleState())
+    {
+        daysVector.push_back(19);
+    }
+    if (dailyBtn19->getToggleState())
+    {
+        daysVector.push_back(20);
+    }
+    if (dailyBtn20->getToggleState())
+    {
+        daysVector.push_back(21);
+    }
+    if (dailyBtn21->getToggleState())
+    {
+        daysVector.push_back(22);
+    }
+    if (dailyBtn22->getToggleState())
+    {
+        daysVector.push_back(23);
+    }
+    if (dailyBtn23->getToggleState())
+    {
+        daysVector.push_back(24);
+    }
+    if (dailyBtn24->getToggleState())
+    {
+        daysVector.push_back(25);
+    }
+    if (dailyBtn25->getToggleState())
+    {
+        daysVector.push_back(26);
+    }
+    if (dailyBtn26->getToggleState())
+    {
+        daysVector.push_back(27);
+    }
+    if (dailyBtn27->getToggleState())
+    {
+        daysVector.push_back(28);
+    }
+
+    int habitId = returnButtonHabitId();
+
+    CSVOperator::updateDailyTrackerFile(habitId, daysVector, "Yes");
+
+    // Update Button Colours
+    readFileAndMakeDailyBtns();
+}
+
+
+// Select "Did not" for selected days
+void HabitForm::updateWithDidNots()
+{
+    std::vector<int> daysVector;
+
+    if (dailyBtn0->getToggleState())
+    {
+        daysVector.push_back(1);
+    }
+    if (dailyBtn1->getToggleState())
+    {
+        daysVector.push_back(2);
+    }
+    if (dailyBtn2->getToggleState())
+    {
+        daysVector.push_back(3);
+    }
+    if (dailyBtn3->getToggleState())
+    {
+        daysVector.push_back(4);
+    }
+    if (dailyBtn4->getToggleState())
+    {
+        daysVector.push_back(5);
+    }
+    if (dailyBtn5->getToggleState())
+    {
+        daysVector.push_back(6);
+    }
+    if (dailyBtn6->getToggleState())
+    {
+        daysVector.push_back(7);
+    }
+    if (dailyBtn7->getToggleState())
+    {
+        daysVector.push_back(8);
+    }
+    if (dailyBtn8->getToggleState())
+    {
+        daysVector.push_back(9);
+    }
+    if (dailyBtn9->getToggleState())
+    {
+        daysVector.push_back(10);
+    }
+    if (dailyBtn10->getToggleState())
+    {
+        daysVector.push_back(11);
+    }
+    if (dailyBtn11->getToggleState())
+    {
+        daysVector.push_back(12);
+    }
+    if (dailyBtn12->getToggleState())
+    {
+        daysVector.push_back(13);
+    }
+    if (dailyBtn13->getToggleState())
+    {
+        daysVector.push_back(14);
+    }
+    if (dailyBtn14->getToggleState())
+    {
+        daysVector.push_back(15);
+    }
+    if (dailyBtn15->getToggleState())
+    {
+        daysVector.push_back(16);
+    }
+    if (dailyBtn16->getToggleState())
+    {
+        daysVector.push_back(17);
+    }
+    if (dailyBtn17->getToggleState())
+    {
+        daysVector.push_back(18);
+    }
+    if (dailyBtn18->getToggleState())
+    {
+        daysVector.push_back(19);
+    }
+    if (dailyBtn19->getToggleState())
+    {
+        daysVector.push_back(20);
+    }
+    if (dailyBtn20->getToggleState())
+    {
+        daysVector.push_back(21);
+    }
+    if (dailyBtn21->getToggleState())
+    {
+        daysVector.push_back(22);
+    }
+    if (dailyBtn22->getToggleState())
+    {
+        daysVector.push_back(23);
+    }
+    if (dailyBtn23->getToggleState())
+    {
+        daysVector.push_back(24);
+    }
+    if (dailyBtn24->getToggleState())
+    {
+        daysVector.push_back(25);
+    }
+    if (dailyBtn25->getToggleState())
+    {
+        daysVector.push_back(26);
+    }
+    if (dailyBtn26->getToggleState())
+    {
+        daysVector.push_back(27);
+    }
+    if (dailyBtn27->getToggleState())
+    {
+        daysVector.push_back(28);
+    }
+
+    int habitId = returnButtonHabitId();
+
+    CSVOperator::updateDailyTrackerFile(habitId, daysVector, "No");
+
+    // Update Button Colours
+    readFileAndMakeDailyBtns();
 }
 
 
