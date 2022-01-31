@@ -16,10 +16,10 @@ class DailyTrackerEntry
     public:
 
 
-        DailyTrackerEntry(std::string date, std::string dailyStatus);
+        DailyTrackerEntry(int day, std::string dailyStatus);
 
-        std::string date;
-        std::string dailyStatus;  //Yes for 'I did it', no for 'I did not'
+        int day;
+        std::string dailyStatus;  // "Yes" for 'I did it', "No" for 'I did not'. "Unmarked" for not yet marked.
 
 };
 

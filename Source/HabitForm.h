@@ -88,6 +88,15 @@ private:
     // Returns the habitID assigned to the button which is toggled
     int returnButtonHabitId();
 
+    // ==================== DailyTracker Functions ================================
+    void readFileAndMakeDailyBtns();
+    void setDailyBtn(juce::TextButton* btn, std::string dailyStatus, int bnd1, int bnd2, int bnd3, int bnd4, juce::String name); // Adds and colours daily tracker buttons
+    void clearDailyButtons(); // Removes dailyTracker Buttons
+    void makeDidAndDidNotButtons();
+    void updateWithDids();    // Update dailyTracker file with "Yes" for selected days
+    void updateWithDidNots(); //Update dailyTracker file with "No" for selected days
+
+
     //[/UserVariables]
 
     //==============================================================================
@@ -105,9 +114,42 @@ private:
     int secondHabitButtonId = -1;
     int thirdHabitButtonId = -1;
 
+    // ============================ DailyTracker Buttons and Variable ==============================================================================
+    std::vector<DailyTrackerEntry> trackerEntriesVector; // Vector to keep dailyTracker entries
+    std::unique_ptr<juce::TextButton> didBtn;
+    std::unique_ptr<juce::TextButton> didNotBtn;
 
+    std::unique_ptr<juce::TextButton> dailyBtn0;
+    std::unique_ptr<juce::TextButton> dailyBtn1;
+    std::unique_ptr<juce::TextButton> dailyBtn2;
+    std::unique_ptr<juce::TextButton> dailyBtn3;
+    std::unique_ptr<juce::TextButton> dailyBtn4;
+    std::unique_ptr<juce::TextButton> dailyBtn5;
+    std::unique_ptr<juce::TextButton> dailyBtn6;
+    std::unique_ptr<juce::TextButton> dailyBtn7;
+    std::unique_ptr<juce::TextButton> dailyBtn8;
+    std::unique_ptr<juce::TextButton> dailyBtn9;
+    std::unique_ptr<juce::TextButton> dailyBtn10;
+    std::unique_ptr<juce::TextButton> dailyBtn11;
+    std::unique_ptr<juce::TextButton> dailyBtn12;
+    std::unique_ptr<juce::TextButton> dailyBtn13;
+    std::unique_ptr<juce::TextButton> dailyBtn14;
+    std::unique_ptr<juce::TextButton> dailyBtn15;
+    std::unique_ptr<juce::TextButton> dailyBtn16;
+    std::unique_ptr<juce::TextButton> dailyBtn17;
+    std::unique_ptr<juce::TextButton> dailyBtn18;
+    std::unique_ptr<juce::TextButton> dailyBtn19;
+    std::unique_ptr<juce::TextButton> dailyBtn20;
+    std::unique_ptr<juce::TextButton> dailyBtn21;
+    std::unique_ptr<juce::TextButton> dailyBtn22;
+    std::unique_ptr<juce::TextButton> dailyBtn23;
+    std::unique_ptr<juce::TextButton> dailyBtn24;
+    std::unique_ptr<juce::TextButton> dailyBtn25;
+    std::unique_ptr<juce::TextButton> dailyBtn26;
+    std::unique_ptr<juce::TextButton> dailyBtn27;
 
-
+    
+    
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HabitForm)
