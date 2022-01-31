@@ -269,8 +269,13 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         removeChildComponent(goals.get());
         removeChildComponent(goalsEditButton.get());
 
+        // Untoggle dailyButtons
+        untoggleDailyButtons();
+
+        // Get Buttons again
         readFileAndMakeDailyBtns();
 
+        // Print goals again
         printGoals();
 
         //[/UserButtonCode_juce__textButton6]
@@ -298,17 +303,21 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         removeChildComponent(goals.get());
         removeChildComponent(goalsEditButton.get());
 
+        // Untoggle dailyButtons
+        untoggleDailyButtons();
+
+        // Get Buttons again
         readFileAndMakeDailyBtns();
 
+        // Print goals again
         printGoals();
+
 
         //[/UserButtonCode_juce__textButton7]
     }
     else if (buttonThatWasClicked == juce__textButton8.get())
     {
         //[UserButtonCode_juce__textButton8] -- add your button handler code here.
-
-
 
         // Sets other buttons off if they are on
         if (juce__textButton7->getToggleState())
@@ -329,8 +338,13 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         removeChildComponent(goals.get());
         removeChildComponent(goalsEditButton.get());
 
+        // Untoggle dailyButtons
+        untoggleDailyButtons();
+
+        // Get Buttons again
         readFileAndMakeDailyBtns();
 
+        // Print goals again
         printGoals();
 
         //[/UserButtonCode_juce__textButton8]
@@ -804,6 +818,9 @@ void HabitForm::updateWithDids()
 
     // Update Button Colours
     readFileAndMakeDailyBtns();
+
+    // Untoggle Daily Buttons
+    untoggleDailyButtons();
 }
 
 
@@ -931,6 +948,41 @@ void HabitForm::updateWithDidNots()
 
     // Update Button Colours
     readFileAndMakeDailyBtns();
+
+    // Untoggle Daily Buttons
+    untoggleDailyButtons();
+}
+
+void HabitForm::untoggleDailyButtons()
+{
+    dailyBtn0->setToggleState(false, false);
+    dailyBtn1->setToggleState(false, false);
+    dailyBtn2->setToggleState(false, false);
+    dailyBtn3->setToggleState(false, false);
+    dailyBtn4->setToggleState(false, false);
+    dailyBtn5->setToggleState(false, false);
+    dailyBtn6->setToggleState(false, false);
+    dailyBtn7->setToggleState(false, false);
+    dailyBtn8->setToggleState(false, false);
+    dailyBtn9->setToggleState(false, false);
+    dailyBtn10->setToggleState(false, false);
+    dailyBtn11->setToggleState(false, false);
+    dailyBtn12->setToggleState(false, false);
+    dailyBtn13->setToggleState(false, false);
+    dailyBtn14->setToggleState(false, false);
+    dailyBtn15->setToggleState(false, false);
+    dailyBtn16->setToggleState(false, false);
+    dailyBtn17->setToggleState(false, false);
+    dailyBtn18->setToggleState(false, false);
+    dailyBtn19->setToggleState(false, false);
+    dailyBtn20->setToggleState(false, false);
+    dailyBtn21->setToggleState(false, false);
+    dailyBtn22->setToggleState(false, false);
+    dailyBtn23->setToggleState(false, false);
+    dailyBtn24->setToggleState(false, false);
+    dailyBtn25->setToggleState(false, false);
+    dailyBtn26->setToggleState(false, false);
+    dailyBtn27->setToggleState(false, false);
 }
 
 

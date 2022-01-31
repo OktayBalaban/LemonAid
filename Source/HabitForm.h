@@ -95,6 +95,7 @@ private:
     void makeDidAndDidNotButtons();
     void updateWithDids();    // Update dailyTracker file with "Yes" for selected days
     void updateWithDidNots(); //Update dailyTracker file with "No" for selected days
+    void untoggleDailyButtons(); // Untoggle all dailybuttons
 
 
     //[/UserVariables]
