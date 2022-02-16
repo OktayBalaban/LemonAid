@@ -263,7 +263,7 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Reset editButton first
         goalsEditButton->setToggleState(false, false);
         goals->setReadOnly(true);
-        goalsEditButton->setButtonText("Edit Button");
+        goalsEditButton->setButtonText("Edit Goals");
 
         // Clear goals components
         removeChildComponent(goals.get());
@@ -297,7 +297,7 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Reset editButton first
         goalsEditButton->setToggleState(false, false);
         goals->setReadOnly(true);
-        goalsEditButton->setButtonText("Edit Button");
+        goalsEditButton->setButtonText("Edit Goals");
 
         // Clear goals components
         removeChildComponent(goals.get());
@@ -332,7 +332,7 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Reset editButton first
         goalsEditButton->setToggleState(false, false);
         goals->setReadOnly(true);
-        goalsEditButton->setButtonText("Edit Button");
+        goalsEditButton->setButtonText("Edit Goals");
 
         // Clear goals components
         removeChildComponent(goals.get());
@@ -355,6 +355,8 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
+
+        
         
         addNewHabit();
 
@@ -365,9 +367,36 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == juce__textButton3.get())
     {
         //[UserButtonCode_juce__textButton3] -- add your button handler code here..
-
-        removeHabit();
-        
+        if (habitManager.habitsVector.size() == 3 && juce__textButton6->getToggleState() == false &&
+            juce__textButton7->getToggleState() == false && juce__textButton8->getToggleState() == false)
+        {
+            juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+                "Warning",
+                "Please select the habit you wish to remove!");
+        }
+        else if (habitManager.habitsVector.size() == 2 && juce__textButton6->getToggleState() == false &&
+            juce__textButton7->getToggleState() == false)
+        {
+            juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+                "Warning",
+                "Please select the habit you wish to remove!");
+        }
+        else if (habitManager.habitsVector.size() == 1 && juce__textButton6->getToggleState() == false)
+        {
+            juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+                "Warning",
+                "Please select the habit you wish to remove!");
+        }
+        else if (habitManager.habitsVector.size() == 0)
+        {
+            juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+                "Warning",
+                "Please select the habit you wish to remove!");
+        }
+        else
+        {
+            removeHabit();
+        }
         // Fixes a bug with staying at the deleted goals
         printGoals();
 
@@ -386,7 +415,7 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         {
             goalsEditButton->setToggleState(false, false);
             goals->setReadOnly(true);
-            goalsEditButton->setButtonText("Edit Button");
+            goalsEditButton->setButtonText("Edit Goals");
             return;
 
         }
@@ -430,12 +459,21 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
 
 void HabitForm::addNewHabit()
 {
+    //check if we have reached the max number of habits (3) and show alert message if we have
+    if (habitManager.habitsVector.size() == 3)
+    {
+        juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+            "Warning",
+            "You can only track 3 habits at a time!");
+    }
     //Checking the number of habits. If there are less than 3, then proceeds for adding operations
     if (habitManager.habitsVector.size() < 3)
     {
         juce::String nameInput = addHabitNameInput.get()->getText();
         habitManager.addHabit(nameInput.toStdString());
     }
+    
+    
 
     resetHabitButtons();
 }
@@ -443,6 +481,9 @@ void HabitForm::addNewHabit()
 void HabitForm::removeHabit()
 {
     // Check toggle states and if toggled (selected), delete the habit
+
+    
+    
     if (juce__textButton6->getToggleState())
     {
         habitManager.removeHabit(firstHabitButtonId);
