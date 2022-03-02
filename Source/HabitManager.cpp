@@ -132,7 +132,7 @@ void HabitManager::selectHabit(std::string habitID)
 
     for (HabitComponent& h : habitComponents)
     {
-        if (h.habitID = idAsInt)
+        if (h.habitID == idAsInt)
         {
             h.isSelected = true;
             selectedHabitId = std::to_string(h.habitID); 
@@ -157,7 +157,7 @@ void HabitManager::clearHabitSelection()
 
     for (HabitComponent& h : habitComponents)
     {
-        if (h.habitID = idAsInt)
+        if (h.habitID == idAsInt)
         {
             h.isSelected = false;
             selectedHabitId = "";
