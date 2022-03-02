@@ -52,7 +52,7 @@ ResourcesForm::ResourcesForm ()
 
     juce__textButton1->setBounds (40, 432, 168, 32);
 
-    juce__textButton2.reset (new juce::TextButton ("previousButton"));
+    juce__textButton2.reset (new juce::TextButton ("nextButton"));
     addAndMakeVisible (juce__textButton2.get());
     juce__textButton2->setButtonText (TRANS("NEXT"));
     juce__textButton2->addListener (this);
@@ -89,6 +89,12 @@ ResourcesForm::ResourcesForm ()
 
     //[Constructor] You can add your own custom stuff here..
     //[/Constructor]
+
+    juce__comboBox->addItem("Videos", 1);
+    juce__comboBox->addItem("Websites", 2);
+    juce__comboBox2->addItem("Researches", 1);
+    juce__comboBox2->addItem("Opinions", 2);
+    juce__comboBox2->addItem("Experiences", 3);
 }
 
 ResourcesForm::~ResourcesForm()
