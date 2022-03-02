@@ -35,7 +35,7 @@ ResourcesForm::ResourcesForm ()
     juce__label2.reset (new juce::Label ("new label",
                                          TRANS("Placeholder (Preview of Resource)")));
     addAndMakeVisible (juce__label2.get());
-    juce__label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    juce__label2->setFont (juce::Font (20.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::topLeft);
     juce__label2->setEditable (false, false, false);
     juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
@@ -95,6 +95,9 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox2->addItem("Researches", 1);
     juce__comboBox2->addItem("Opinions", 2);
     juce__comboBox2->addItem("Experiences", 3);
+
+    
+
 }
 
 ResourcesForm::~ResourcesForm()
@@ -121,6 +124,12 @@ void ResourcesForm::paint (juce::Graphics& g)
 
     g.fillAll (juce::Colours::burlywood);
 
+    juce::File image1{ "C:\\Users\\YL\\Desktop\\4_stages_of_habit.png" };
+    juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image1) };
+    g.drawImageWithin(imageLoaded, 40, 80,640, 352, 4,  false);
+    juce__label2->setVisible(false);
+    g.drawFittedText("Title",40,64,640,20,4,1);
+    //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
