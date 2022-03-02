@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.4
+  Created with Projucer version: 6.1.5
 
   ------------------------------------------------------------------------------
 
@@ -54,6 +54,8 @@ public:
     void setDailyLabels(juce::Label* lbl, std::string dailyStatus);
     void colorLabels(int numberOfHabits);
 
+    void MainForm::readRandomTips();
+
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -73,10 +75,13 @@ private:
     std::vector<DailyTrackerEntry> trackerEntriesVector2;
     std::vector<DailyTrackerEntry> trackerEntriesVector3;
 
+    std::vector<std::string> randomTips;
+
 
     //[/UserVariables]
 
     //==============================================================================
+    std::unique_ptr<juce::GroupComponent> juce__groupComponent2;
     std::unique_ptr<juce::TextButton> juce__textButton;
     std::unique_ptr<juce::TextButton> juce__textButton2;
     std::unique_ptr<juce::TextButton> juce__textButton3;

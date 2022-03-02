@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.4
+  Created with Projucer version: 6.1.5
 
   ------------------------------------------------------------------------------
 
@@ -32,6 +32,13 @@ MainForm::MainForm ()
 {
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
+
+    juce__groupComponent2.reset (new juce::GroupComponent ("new group",
+                                                           TRANS("Daily Tips")));
+    addAndMakeVisible (juce__groupComponent2.get());
+    juce__groupComponent2->setColour (juce::GroupComponent::textColourId, juce::Colours::black);
+
+    juce__groupComponent2->setBounds (200, 344, 808, 248);
 
     juce__textButton.reset (new juce::TextButton ("mainButton"));
     addAndMakeVisible (juce__textButton.get());
@@ -90,14 +97,14 @@ MainForm::MainForm ()
     juce__label2.reset (new juce::Label ("new label",
                                          TRANS("RANDOM TIPS")));
     addAndMakeVisible (juce__label2.get());
-    juce__label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
-    juce__label2->setJustificationType (juce::Justification::centred);
+    juce__label2->setFont (juce::Font ("Arial", 23.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    juce__label2->setJustificationType (juce::Justification::centredTop);
     juce__label2->setEditable (false, false, false);
-    juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
+    juce__label2->setColour (juce::Label::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    juce__label2->setBounds (208, 344, 800, 264);
+    juce__label2->setBounds (216, 368, 776, 208);
 
     juce__groupComponent.reset (new juce::GroupComponent ("new group",
                                                           TRANS("My Progress")));
@@ -1146,7 +1153,18 @@ MainForm::MainForm ()
 
 
     //[Constructor] You can add your own custom stuff here..
+    //get tips from CSV file
+    readRandomTips();
+    //so it won't crash if the loading of random tips was unsuccessfull
+    if (randomTips.size() > 0)
+    {
+        //get random tip from vector of strings
+        int tipslength = randomTips.size();
+        int tipID = rand() % tipslength;
+        //std::string newText = "Daily Tip: \n" + randomTips[tipID];
 
+        juce__label2->setText(randomTips[tipID], juce::NotificationType::dontSendNotification);
+    }
 
 
     habitManager.init(); //Initializing the habitManager object
@@ -1207,15 +1225,6 @@ MainForm::MainForm ()
         colorLabels(3);
     }
 
-    juce::String labelname = "";
-    //std::string goalsStdStr = goalsJuceStr.toStdString();
-    for (int i = 3; i < 31; i++)
-    {
-        //labelname = "juce__label" + i;
-        //->setColour(juce::Label::backgroundColourId, juce::Colours::grey);
-
-    }
-
     //colorLabels();
 
     //newHelpWindow
@@ -1227,6 +1236,7 @@ MainForm::~MainForm()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
+    juce__groupComponent2 = nullptr;
     juce__textButton = nullptr;
     juce__textButton2 = nullptr;
     juce__textButton3 = nullptr;
@@ -1419,6 +1429,16 @@ void MainForm::buttonClicked (juce::Button* buttonThatWasClicked)
 
             colorLabels(3);
 
+        }
+
+        //get new random tip
+        if (randomTips.size() > 0)
+        {
+            int tipslength = randomTips.size();
+            int tipID = rand() % tipslength;
+            //std::string newText = "Daily Tip: \n" + randomTips[tipID];
+
+            juce__label2->setText(randomTips[tipID], juce::NotificationType::dontSendNotification);
         }
 
 
@@ -1766,20 +1786,20 @@ void MainForm::colorLabels(int numberOfHabits)
         //std::string cont = statusVector[0];
 
 
-        setDailyLabels(juce__label31.get(), statusVector2[0]); setDailyLabels(juce__label45.get(), statusVector2[1]);
-        setDailyLabels(juce__label32.get(), statusVector2[2]); setDailyLabels(juce__label46.get(), statusVector2[3]);
-        setDailyLabels(juce__label33.get(), statusVector2[4]); setDailyLabels(juce__label47.get(), statusVector2[5]);
-        setDailyLabels(juce__label34.get(), statusVector2[6]); setDailyLabels(juce__label48.get(), statusVector2[7]);
-        setDailyLabels(juce__label35.get(), statusVector2[8]); setDailyLabels(juce__label49.get(), statusVector2[9]);
-        setDailyLabels(juce__label36.get(), statusVector2[10]); setDailyLabels(juce__label50.get(), statusVector2[11]);
-        setDailyLabels(juce__label37.get(), statusVector2[12]); setDailyLabels(juce__label51.get(), statusVector2[13]);
-        setDailyLabels(juce__label38.get(), statusVector2[14]); setDailyLabels(juce__label52.get(), statusVector2[15]);
-        setDailyLabels(juce__label39.get(), statusVector2[16]); setDailyLabels(juce__label53.get(), statusVector2[17]);
-        setDailyLabels(juce__label40.get(), statusVector2[18]); setDailyLabels(juce__label54.get(), statusVector2[19]);
-        setDailyLabels(juce__label41.get(), statusVector2[20]); setDailyLabels(juce__label55.get(), statusVector2[21]);
-        setDailyLabels(juce__label42.get(), statusVector2[22]); setDailyLabels(juce__label56.get(), statusVector2[23]);
-        setDailyLabels(juce__label43.get(), statusVector2[24]); setDailyLabels(juce__label57.get(), statusVector2[25]);
-        setDailyLabels(juce__label44.get(), statusVector2[26]); setDailyLabels(juce__label58.get(), statusVector2[27]);
+        setDailyLabels(juce__label31.get(), statusVector2[0]); setDailyLabels(juce__label45.get(), statusVector2[14]);
+        setDailyLabels(juce__label32.get(), statusVector2[1]); setDailyLabels(juce__label46.get(), statusVector2[15]);
+        setDailyLabels(juce__label33.get(), statusVector2[2]); setDailyLabels(juce__label47.get(), statusVector2[16]);
+        setDailyLabels(juce__label34.get(), statusVector2[3]); setDailyLabels(juce__label48.get(), statusVector2[17]);
+        setDailyLabels(juce__label35.get(), statusVector2[4]); setDailyLabels(juce__label49.get(), statusVector2[18]);
+        setDailyLabels(juce__label36.get(), statusVector2[5]); setDailyLabels(juce__label50.get(), statusVector2[19]);
+        setDailyLabels(juce__label37.get(), statusVector2[6]); setDailyLabels(juce__label51.get(), statusVector2[20]);
+        setDailyLabels(juce__label38.get(), statusVector2[7]); setDailyLabels(juce__label52.get(), statusVector2[21]);
+        setDailyLabels(juce__label39.get(), statusVector2[8]); setDailyLabels(juce__label53.get(), statusVector2[22]);
+        setDailyLabels(juce__label40.get(), statusVector2[9]); setDailyLabels(juce__label54.get(), statusVector2[23]);
+        setDailyLabels(juce__label41.get(), statusVector2[10]); setDailyLabels(juce__label55.get(), statusVector2[24]);
+        setDailyLabels(juce__label42.get(), statusVector2[11]); setDailyLabels(juce__label56.get(), statusVector2[25]);
+        setDailyLabels(juce__label43.get(), statusVector2[12]); setDailyLabels(juce__label57.get(), statusVector2[26]);
+        setDailyLabels(juce__label44.get(), statusVector2[13]); setDailyLabels(juce__label58.get(), statusVector2[27]);
 
 
 
@@ -1859,37 +1879,74 @@ void MainForm::colorLabels(int numberOfHabits)
         //std::string cont = statusVector[0];
 
 
-        setDailyLabels(juce__label31.get(), statusVector2[0]); setDailyLabels(juce__label45.get(), statusVector2[1]);
-        setDailyLabels(juce__label32.get(), statusVector2[2]); setDailyLabels(juce__label46.get(), statusVector2[3]);
-        setDailyLabels(juce__label33.get(), statusVector2[4]); setDailyLabels(juce__label47.get(), statusVector2[5]);
-        setDailyLabels(juce__label34.get(), statusVector2[6]); setDailyLabels(juce__label48.get(), statusVector2[7]);
-        setDailyLabels(juce__label35.get(), statusVector2[8]); setDailyLabels(juce__label49.get(), statusVector2[9]);
-        setDailyLabels(juce__label36.get(), statusVector2[10]); setDailyLabels(juce__label50.get(), statusVector2[11]);
-        setDailyLabels(juce__label37.get(), statusVector2[12]); setDailyLabels(juce__label51.get(), statusVector2[13]);
-        setDailyLabels(juce__label38.get(), statusVector2[14]); setDailyLabels(juce__label52.get(), statusVector2[15]);
-        setDailyLabels(juce__label39.get(), statusVector2[16]); setDailyLabels(juce__label53.get(), statusVector2[17]);
-        setDailyLabels(juce__label40.get(), statusVector2[18]); setDailyLabels(juce__label54.get(), statusVector2[19]);
-        setDailyLabels(juce__label41.get(), statusVector2[20]); setDailyLabels(juce__label55.get(), statusVector2[21]);
-        setDailyLabels(juce__label42.get(), statusVector2[22]); setDailyLabels(juce__label56.get(), statusVector2[23]);
-        setDailyLabels(juce__label43.get(), statusVector2[24]); setDailyLabels(juce__label57.get(), statusVector2[25]);
-        setDailyLabels(juce__label44.get(), statusVector2[26]); setDailyLabels(juce__label58.get(), statusVector2[27]);
+        setDailyLabels(juce__label31.get(), statusVector2[0]); setDailyLabels(juce__label45.get(), statusVector2[14]);
+        setDailyLabels(juce__label32.get(), statusVector2[1]); setDailyLabels(juce__label46.get(), statusVector2[15]);
+        setDailyLabels(juce__label33.get(), statusVector2[2]); setDailyLabels(juce__label47.get(), statusVector2[16]);
+        setDailyLabels(juce__label34.get(), statusVector2[3]); setDailyLabels(juce__label48.get(), statusVector2[17]);
+        setDailyLabels(juce__label35.get(), statusVector2[4]); setDailyLabels(juce__label49.get(), statusVector2[18]);
+        setDailyLabels(juce__label36.get(), statusVector2[5]); setDailyLabels(juce__label50.get(), statusVector2[19]);
+        setDailyLabels(juce__label37.get(), statusVector2[6]); setDailyLabels(juce__label51.get(), statusVector2[20]);
+        setDailyLabels(juce__label38.get(), statusVector2[7]); setDailyLabels(juce__label52.get(), statusVector2[21]);
+        setDailyLabels(juce__label39.get(), statusVector2[8]); setDailyLabels(juce__label53.get(), statusVector2[22]);
+        setDailyLabels(juce__label40.get(), statusVector2[9]); setDailyLabels(juce__label54.get(), statusVector2[23]);
+        setDailyLabels(juce__label41.get(), statusVector2[10]); setDailyLabels(juce__label55.get(), statusVector2[24]);
+        setDailyLabels(juce__label42.get(), statusVector2[11]); setDailyLabels(juce__label56.get(), statusVector2[25]);
+        setDailyLabels(juce__label43.get(), statusVector2[12]); setDailyLabels(juce__label57.get(), statusVector2[26]);
+        setDailyLabels(juce__label44.get(), statusVector2[13]); setDailyLabels(juce__label58.get(), statusVector2[27]);
 
 
-        setDailyLabels(juce__label58.get(), statusVector3[0]); setDailyLabels(juce__label73.get(), statusVector3[1]);
-        setDailyLabels(juce__label60.get(), statusVector3[2]); setDailyLabels(juce__label74.get(), statusVector3[3]);
-        setDailyLabels(juce__label61.get(), statusVector3[4]); setDailyLabels(juce__label75.get(), statusVector3[5]);
-        setDailyLabels(juce__label62.get(), statusVector3[6]); setDailyLabels(juce__label76.get(), statusVector3[7]);
-        setDailyLabels(juce__label63.get(), statusVector3[8]); setDailyLabels(juce__label77.get(), statusVector3[9]);
-        setDailyLabels(juce__label64.get(), statusVector3[10]); setDailyLabels(juce__label78.get(), statusVector3[11]);
-        setDailyLabels(juce__label65.get(), statusVector3[12]); setDailyLabels(juce__label79.get(), statusVector3[13]);
-        setDailyLabels(juce__label66.get(), statusVector3[14]); setDailyLabels(juce__label80.get(), statusVector3[15]);
-        setDailyLabels(juce__label67.get(), statusVector3[16]); setDailyLabels(juce__label81.get(), statusVector3[17]);
-        setDailyLabels(juce__label68.get(), statusVector3[18]); setDailyLabels(juce__label82.get(), statusVector3[19]);
-        setDailyLabels(juce__label69.get(), statusVector3[20]); setDailyLabels(juce__label83.get(), statusVector3[21]);
-        setDailyLabels(juce__label70.get(), statusVector3[22]); setDailyLabels(juce__label84.get(), statusVector3[23]);
-        setDailyLabels(juce__label71.get(), statusVector3[24]); setDailyLabels(juce__label85.get(), statusVector3[25]);
+        setDailyLabels(juce__label59.get(), statusVector3[0]); setDailyLabels(juce__label73.get(), statusVector3[13]);
+        setDailyLabels(juce__label60.get(), statusVector3[1]); setDailyLabels(juce__label74.get(), statusVector3[14]);
+        setDailyLabels(juce__label61.get(), statusVector3[2]); setDailyLabels(juce__label75.get(), statusVector3[15]);
+        setDailyLabels(juce__label62.get(), statusVector3[3]); setDailyLabels(juce__label76.get(), statusVector3[16]);
+        setDailyLabels(juce__label63.get(), statusVector3[4]); setDailyLabels(juce__label77.get(), statusVector3[17]);
+        setDailyLabels(juce__label64.get(), statusVector3[5]); setDailyLabels(juce__label78.get(), statusVector3[18]);
+        setDailyLabels(juce__label65.get(), statusVector3[6]); setDailyLabels(juce__label79.get(), statusVector3[19]);
+        setDailyLabels(juce__label66.get(), statusVector3[7]); setDailyLabels(juce__label80.get(), statusVector3[20]);
+        setDailyLabels(juce__label67.get(), statusVector3[8]); setDailyLabels(juce__label81.get(), statusVector3[21]);
+        setDailyLabels(juce__label68.get(), statusVector3[9]); setDailyLabels(juce__label82.get(), statusVector3[22]);
+        setDailyLabels(juce__label69.get(), statusVector3[10]); setDailyLabels(juce__label83.get(), statusVector3[23]);
+        setDailyLabels(juce__label70.get(), statusVector3[11]); setDailyLabels(juce__label84.get(), statusVector3[24]);
+        setDailyLabels(juce__label71.get(), statusVector3[12]); setDailyLabels(juce__label85.get(), statusVector3[25]);
 
     }
+}
+
+void MainForm::readRandomTips()
+{
+
+    juce::String directoryPath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    std::string drcPathAsStdStr = directoryPath.toStdString();
+
+    std::string filepath = drcPathAsStdStr + "\\HabitsFiles\\randomtips.csv";
+
+    std::ifstream csvFile(filepath);
+    std::string line;
+
+    if (csvFile.is_open())
+    {
+        while (std::getline(csvFile, line))
+        {
+            randomTips.push_back(line);
+        }
+    }
+
+    //juce::String fileNameWithoutExtension{ file.getFileNameWithoutExtension() };
+    //MusicFile newMusicFile{ file };
+    //juce::URL audioURL{ file };
+
+    //player->loadURL(audioURL);
+    //double lengthInSeconds{ player->getlength() };
+
+    //juce::String calcMinutes{ std::to_string(int(std::round(lengthInSeconds)) / 60) };
+    //juce::String calcSeconds{ std::to_string(int(std::round(lengthInSeconds)) % 60) };
+
+    //newMusicFile.length = juce::String{ calcMinutes + ":" + calcSeconds };
+    ////use this URL on deck to load music
+    //newMusicFile.fileURL = audioURL;
+    ////juce::String musiclink = juce::String{ newMusicFile.fileURL };
+    //songsInLibrary.push_back(newMusicFile);
+    //trackTitles.push_back(newMusicFile.title.toStdString());
 }
 
 //[/MiscUserCode]
@@ -1909,6 +1966,9 @@ BEGIN_JUCER_METADATA
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="600" initialHeight="400">
   <BACKGROUND backgroundColour="ffdeb887"/>
+  <GROUPCOMPONENT name="new group" id="3ca1d68f09255a95" memberName="juce__groupComponent2"
+                  virtualName="" explicitFocusOrder="0" pos="200 344 808 248" textcol="ff000000"
+                  title="Daily Tips"/>
   <TEXTBUTTON name="mainButton" id="b4928c7fe436c93a" memberName="juce__textButton"
               virtualName="" explicitFocusOrder="0" pos="0 0 176 40" bgColOff="ffa52a2a"
               buttonText="MAIN PAGE" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
@@ -1932,10 +1992,10 @@ BEGIN_JUCER_METADATA
          fontname="Default font" fontsize="15.0" kerning="0.0" bold="0"
          italic="0" justification="33"/>
   <LABEL name="new label" id="f55f427d84137a4f" memberName="juce__label2"
-         virtualName="" explicitFocusOrder="0" pos="208 344 800 264" bkgCol="ff808080"
+         virtualName="" explicitFocusOrder="0" pos="216 368 776 208" textCol="ff000000"
          edTextCol="ff000000" edBkgCol="0" labelText="RANDOM TIPS" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
-         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Arial"
+         fontsize="23.0" kerning="0.0" bold="0" italic="0" justification="12"/>
   <GROUPCOMPONENT name="new group" id="c79ae34d045a566a" memberName="juce__groupComponent"
                   virtualName="" explicitFocusOrder="0" pos="200 88 808 248" textcol="ff000000"
                   title="My Progress"/>
