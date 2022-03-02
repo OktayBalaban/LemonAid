@@ -10,21 +10,24 @@
 
 #include "CSVOperator.h"
 #include "HabitEntry.h"
+#include "filesystem"
 
 CSVOperator::CSVOperator()
 {
-
+    
 }
 
 // Function to get lines from habits CSV, first creates the file
 std::vector<HabitEntry> CSVOperator::readHabitsCSV()
 {
     std::vector<HabitEntry> entries;
+    auto cwd = std::filesystem::current_path().string();
+    DBG(cwd);
+    //juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    //filePath.toStdString();
 
-    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
-    filePath.toStdString();
-
-    juce::File habitsFile(filePath + "\\HabitsFiles\\Habits.csv");
+    juce::File habitsFile(cwd + "\\HabitsFiles\\Habits.csv");
+    DBG(habitsFile.getFullPathName());
 
     if (!habitsFile.exists())
     {
