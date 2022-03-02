@@ -50,6 +50,7 @@ public:
     void resized() override;
     void buttonClicked (juce::Button* buttonThatWasClicked) override;
     void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
+    
 
 
 
@@ -63,7 +64,6 @@ private:
     std::unique_ptr<juce::TextButton> juce__textButton2;
     std::unique_ptr<juce::ComboBox> juce__comboBox;
     std::unique_ptr<juce::ComboBox> juce__comboBox2;
-
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ResourcesForm)
