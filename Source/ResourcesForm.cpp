@@ -35,10 +35,10 @@ ResourcesForm::ResourcesForm ()
     juce__label2.reset (new juce::Label ("new label",
                                          TRANS("Placeholder (Preview of Resource)")));
     addAndMakeVisible (juce__label2.get());
-    juce__label2->setFont (juce::Font (20.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    juce__label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::topLeft);
     juce__label2->setEditable (false, false, false);
-    juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
+    //juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
@@ -52,7 +52,7 @@ ResourcesForm::ResourcesForm ()
 
     juce__textButton1->setBounds (40, 432, 168, 32);
 
-    juce__textButton2.reset (new juce::TextButton ("nextButton"));
+    juce__textButton2.reset (new juce::TextButton ("previousButton"));
     addAndMakeVisible (juce__textButton2.get());
     juce__textButton2->setButtonText (TRANS("NEXT"));
     juce__textButton2->addListener (this);
@@ -89,15 +89,6 @@ ResourcesForm::ResourcesForm ()
 
     //[Constructor] You can add your own custom stuff here..
     //[/Constructor]
-
-    juce__comboBox->addItem("Videos", 1);
-    juce__comboBox->addItem("Websites", 2);
-    juce__comboBox2->addItem("Researches", 1);
-    juce__comboBox2->addItem("Opinions", 2);
-    juce__comboBox2->addItem("Experiences", 3);
-
-    
-
 }
 
 ResourcesForm::~ResourcesForm()
@@ -126,9 +117,10 @@ void ResourcesForm::paint (juce::Graphics& g)
 
     juce::File image1{ "C:\\Users\\YL\\Desktop\\4_stages_of_habit.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image1) };
-    g.drawImageWithin(imageLoaded, 40, 80,640, 352, 4,  false);
-    juce__label2->setVisible(false);
-    g.drawFittedText("Title",40,64,640,20,4,1);
+    g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4,  false);
+    juce__label2->setBounds(40, 64, 640, 352);
+    juce__label2->setText("We have resources for you. Have a look!", juce::dontSendNotification);
+    juce__label2->setBounds( 40, 60, 640, 20);
     //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
