@@ -38,11 +38,14 @@ ResourcesForm::ResourcesForm ()
     juce__label2->setFont (juce::Font (20.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::topLeft);
     juce__label2->setEditable (false, false, false);
-    juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
+    juce__label2->setColour (juce::Label::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    juce__label2->setBounds (40, 64, 640, 352);
+    //juce__label2->setBounds (40, 64, 640, 352);
+
+    juce__label2->setText("We have resources for you. Have a look!", juce::dontSendNotification);
+    juce__label2->setBounds(40, 60, 640, 20);
 
     juce__textButton1.reset (new juce::TextButton ("previousButton"));
     addAndMakeVisible (juce__textButton1.get());
@@ -127,8 +130,7 @@ void ResourcesForm::paint (juce::Graphics& g)
     juce::File image1{ "C:\\Users\\YL\\Desktop\\4_stages_of_habit.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image1) };
     g.drawImageWithin(imageLoaded, 40, 80,640, 352, 4,  false);
-    juce__label2->setVisible(false);
-    g.drawFittedText("Title",40,64,640,20,4,1);
+
     //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
