@@ -41,10 +41,10 @@ class CSVOperator
         //===================== Goals File Functions ===========================================
         static juce::String readHabitGoals(int habitID);
         static void updateGoals(int habitID, std::string text);
-
+        // Tokeniser Function
+        static std::vector<std::string> tokeniser(std::string csvLine, char separator);
 
     private:
 
-        // Tokeniser Function
-        static std::vector<std::string> tokeniser(std::string csvLine, char separator);
+        
 };

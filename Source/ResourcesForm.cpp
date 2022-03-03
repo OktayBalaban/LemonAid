@@ -21,6 +21,7 @@
 //[/Headers]
 
 #include "ResourcesForm.h"
+#include "CSVOperator.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -100,13 +101,36 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox2->addItem("Experiences", 3);
 
     
-    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    /*juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
     filePath.toStdString();
     juce::File ResourcesFile(filePath + "\\Resources\\Resources.csv");
 
     if (!ResourcesFile.exists())
     {
         ResourcesFile.create();
+    }*/
+
+    
+    juce::File resourcesFile{ filePath + "\\Resources\\Resources.csv" };  
+    juce::FileInputStream csvFile(resourcesFile);
+    if (csvFile.openedOk())
+    {
+        while (!csvFile.isExhausted())
+        {
+            juce::String juceline = csvFile.readNextLine();
+
+            // readNextLine returns a juce string, so we need to convert it to std::string first
+            std::string line = juceline.toStdString();
+
+            try {
+                std::vector resource = CSVOperator::tokeniser(line, ';');
+                resources.push_back(resource);
+            }
+            catch (const std::exception& e)
+            {
+                std::cout << "CSVOperator::readCSV bad data" << std::endl;
+            }
+        }
     }
 }
 
@@ -133,13 +157,18 @@ void ResourcesForm::paint (juce::Graphics& g)
     //[/UserPrePaint]
 
     g.fillAll (juce::Colours::burlywood);
+    //imageLoaded();
+    juce__label2->setText(resources[i][1], juce::dontSendNotification);
+    if (resources[i][2] == "image")
+    {
+        juce::File image{ filePath + "\\Resources" + resources[i][3] };
+        juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
+        g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
+    }
 
-
-    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
-    filePath.toStdString();
-    juce::File image1{ filePath + "\\Resources\\4_stages_of_habit.png" };
-    juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image1) };
-    g.drawImageWithin(imageLoaded, 40, 80,640, 352, 4,  false);
+    
+    
+   
 
     //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
@@ -162,11 +191,14 @@ void ResourcesForm::buttonClicked (juce::Button* buttonThatWasClicked)
 
     if (buttonThatWasClicked == juce__textButton1.get())
     {
+        if (i != 0) { i--; repaint(); }
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
+        DBG(resources.size());
+        if (i < resources.size() - 1) { i++; repaint(); }
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton2]
     }
