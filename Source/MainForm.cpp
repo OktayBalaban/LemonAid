@@ -1345,8 +1345,11 @@ void MainForm::paint (juce::Graphics& g)
     //[/UserPrePaint]
 
     g.fillAll (juce::Colours::burlywood);
+
     //draw LOGO
-    juce::File banner{ "C:\\Users\\YL\\Desktop\\Banner.png" };
+    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
+    juce::File banner{ filePath + "\\Banner.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(banner) };
     g.drawImageWithin(imageLoaded, 208, 8, 360, 72, 4, false);
     juce__label->setVisible(false);

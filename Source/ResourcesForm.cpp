@@ -100,7 +100,14 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox2->addItem("Experiences", 3);
 
     
+    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
+    juce::File ResourcesFile(filePath + "\\Resources\\Resources.csv");
 
+    if (!ResourcesFile.exists())
+    {
+        ResourcesFile.create();
+    }
 }
 
 ResourcesForm::~ResourcesForm()
@@ -127,7 +134,10 @@ void ResourcesForm::paint (juce::Graphics& g)
 
     g.fillAll (juce::Colours::burlywood);
 
-    juce::File image1{ "C:\\Users\\YL\\Desktop\\4_stages_of_habit.png" };
+
+    juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
+    juce::File image1{ filePath + "\\Resources\\4_stages_of_habit.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image1) };
     g.drawImageWithin(imageLoaded, 40, 80,640, 352, 4,  false);
 
