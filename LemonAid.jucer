@@ -35,16 +35,16 @@
       <FILE id="bH4PY9" name="MainForm.cpp" compile="1" resource="0" file="Source/MainForm.cpp"/>
       <FILE id="yFBCUy" name="MainForm.h" compile="0" resource="0" file="Source/MainForm.h"/>
       <FILE id="jzyUvI" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="azud3l" name="Logo.png" compile="0" resource="1" file="../../../../Desktop/Logo.png"/>
+      <FILE id="HBAxbb" name="Banner.png" compile="0" resource="1" file="../../../../Desktop/Banner.png"/>
       <FILE id="KPxfj4" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
-      <FILE id="yl3OGH" name="Logo.png" compile="0" resource="1" file="Source/Logo.png"/>
-      <FILE id="u8i4iA" name="Banner.png" compile="0" resource="1" file="Source/Banner.png"/>
       <FILE id="lf28Sv" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
-    <VS2022 targetFolder="Builds/VisualStudio2022" bigIcon="yl3OGH" smallIcon="yl3OGH">
+    <VS2022 targetFolder="Builds/VisualStudio2022" bigIcon="azud3l" smallIcon="azud3l">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug"/>
         <CONFIGURATION isDebug="0" name="Release"/>
