@@ -1345,6 +1345,11 @@ void MainForm::paint (juce::Graphics& g)
     //[/UserPrePaint]
 
     g.fillAll (juce::Colours::burlywood);
+    //draw LOGO
+    juce::File banner{ "C:\\Users\\YL\\Desktop\\Banner.png" };
+    juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(banner) };
+    g.drawImageWithin(imageLoaded, 208, 8, 360, 72, 4, false);
+    juce__label->setVisible(false);
 
     //[UserPaint] Add your own custom painting code here..
     // g.fillAll (juce::Colours::darkgrey);
