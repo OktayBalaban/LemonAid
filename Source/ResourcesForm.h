@@ -68,8 +68,9 @@ private:
     std::vector<std::vector<std::string>> resources;
     std::string filePath = juce::File::getCurrentWorkingDirectory().getFullPathName().toStdString();
     juce::Image imageLoaded();
-    int i = 0;//for traversing resources
+    int index = 0;//for traversing resources
 
+    std::vector<std::vector<std::string>> comboBoxContents;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ResourcesForm)
 };
