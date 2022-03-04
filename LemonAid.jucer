@@ -5,6 +5,16 @@
               cppLanguageStandard="17">
   <MAINGROUP id="dVbf8P" name="LemonAid">
     <GROUP id="{EBD676B6-2409-5A14-683B-AF790E5F0CD4}" name="Source">
+      <GROUP id="{876131D4-DB49-F475-1FEA-0AE050DD9E6D}" name="Resources">
+        <FILE id="gAY7bm" name="4_stages_of_a_habit.png" compile="0" resource="1"
+              file="Source/Resources/4_stages_of_a_habit.png"/>
+        <FILE id="M7TuYf" name="form_a_habit.PNG" compile="0" resource="1"
+              file="Source/Resources/form_a_habit.PNG"/>
+        <FILE id="HhsFOy" name="habit_loop.png" compile="0" resource="1" file="Source/Resources/habit_loop.png"/>
+        <FILE id="CliG0S" name="Resources.csv" compile="0" resource="1" file="Source/Resources/Resources.csv"/>
+        <FILE id="za8nRF" name="what_is_a_habit.png" compile="0" resource="1"
+              file="Source/Resources/what_is_a_habit.png"/>
+      </GROUP>
       <GROUP id="{EAB43091-1004-A493-E478-3CE8B8C28C0D}" name="HabitsFiles">
         <FILE id="UJyuYi" name="Habits.csv" compile="0" resource="1" file="Source/HabitsFiles/Habits.csv"/>
       </GROUP>
