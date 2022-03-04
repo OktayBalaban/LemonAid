@@ -165,6 +165,9 @@ void ResourcesForm::paint (juce::Graphics& g)
         juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
         g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
     }
+    else {
+        g.drawText(resources[i][3], 40, 80, 640, 352, 1, true);
+    }
 
     
     

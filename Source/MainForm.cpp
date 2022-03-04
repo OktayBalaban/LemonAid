@@ -1351,7 +1351,7 @@ void MainForm::paint (juce::Graphics& g)
     filePath.toStdString();
     juce::File banner{ filePath + "\\Banner.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(banner) };
-    g.drawImageWithin(imageLoaded, 208, 8, 360, 72, 4, false);
+    g.drawImageWithin(imageLoaded, 208, 8, 200, 80, 1 , false);
     juce__label->setVisible(false);
 
     //[UserPaint] Add your own custom painting code here..
