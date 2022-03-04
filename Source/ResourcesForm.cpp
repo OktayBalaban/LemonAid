@@ -157,21 +157,40 @@ void ResourcesForm::paint (juce::Graphics& g)
     //[/UserPrePaint]
 
     g.fillAll (juce::Colours::burlywood);
-    //imageLoaded();
-    juce__label2->setText(resources[i][1], juce::dontSendNotification);
-    if (resources[i][2] == "image")
+    if (comboBoxContents.empty())
     {
-        juce::File image{ filePath + "\\Resources" + resources[i][3] };
-        juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
-        g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
+        juce__label2->setFont(20.0f);
+        juce__label2->setText(resources[index][1], juce::dontSendNotification);
+        if (resources[index][2] == "image")
+        {
+            juce::File image{ filePath + "\\Resources" + resources[index][3] };
+            juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
+            g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
+        }
+        else {
+            g.setFont(18.0f);
+            g.drawText("\t\t- " + resources[index][3], 40, 80, 640, 352, 9, true);
+        }
+    }
+    else if(comboBoxContents[0][0] == "We will include soon.")
+    {
+        juce__label2->setFont(20.0f);
+        juce__label2->setText("We will include soon.", juce::dontSendNotification);
     }
     else {
-        g.drawText(resources[i][3], 40, 80, 640, 352, 1, true);
+        juce__label2->setFont(20.0f);
+        juce__label2->setText("", juce::dontSendNotification);
+        for (int i = 0; i < comboBoxContents.size()-1; ++i)
+        {
+            
+            g.setFont(19.0f);
+            g.drawText(comboBoxContents[i][1], 40, 80+40*i, 640, 40, 9, true);
+            g.setFont(18.0f);
+            g.drawText("\t\t- " + comboBoxContents[i][3], 40, 100+40*i, 640, 40, 9, true);
+        }
     }
+    
 
-    
-    
-   
 
     //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
@@ -191,17 +210,17 @@ void ResourcesForm::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
-
+    comboBoxContents.clear();
     if (buttonThatWasClicked == juce__textButton1.get())
     {
-        if (i != 0) { i--; repaint(); }
+        if (index > 0) { index--; repaint(); }
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
         DBG(resources.size());
-        if (i < resources.size() - 1) { i++; repaint(); }
+        if (index < resources.size() - 1) { index++; repaint(); }
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton2]
     }
@@ -214,18 +233,74 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
     //[/UsercomboBoxChanged_Pre]
-
+    comboBoxContents.clear();
     if (comboBoxThatHasChanged == juce__comboBox.get())
     {
         //[UserComboBoxCode_juce__comboBox] -- add your combo box handling code here..
         //[/UserComboBoxCode_juce__comboBox]
+        if (juce__comboBox->getSelectedId() == 1)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Videos")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
+        else if (juce__comboBox->getSelectedId() == 2)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][2] == "web")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
     }
     else if (comboBoxThatHasChanged == juce__comboBox2.get())
     {
         //[UserComboBoxCode_juce__comboBox2] -- add your combo box handling code here..
         //[/UserComboBoxCode_juce__comboBox2]
+        if (juce__comboBox2->getSelectedId() == 1)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Researches")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
+        else if (juce__comboBox2->getSelectedId() == 2)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Opinions")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
+        else if (juce__comboBox2->getSelectedId() == 3)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Experiences")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }  
     }
-
+    if (comboBoxContents.empty())
+    {
+        std::vector < std::string> Notice{ "We will include soon." };
+        comboBoxContents.push_back(Notice);
+    }
+    repaint();
+    
     //[UsercomboBoxChanged_Post]
     //[/UsercomboBoxChanged_Post]
 }
