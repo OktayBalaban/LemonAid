@@ -1903,19 +1903,21 @@ void MainForm::colorLabels(int numberOfHabits)
         setDailyLabels(juce__label44.get(), statusVector2[13]); setDailyLabels(juce__label58.get(), statusVector2[27]);
 
 
-        setDailyLabels(juce__label59.get(), statusVector3[0]); setDailyLabels(juce__label73.get(), statusVector3[13]);
-        setDailyLabels(juce__label60.get(), statusVector3[1]); setDailyLabels(juce__label74.get(), statusVector3[14]);
-        setDailyLabels(juce__label61.get(), statusVector3[2]); setDailyLabels(juce__label75.get(), statusVector3[15]);
-        setDailyLabels(juce__label62.get(), statusVector3[3]); setDailyLabels(juce__label76.get(), statusVector3[16]);
-        setDailyLabels(juce__label63.get(), statusVector3[4]); setDailyLabels(juce__label77.get(), statusVector3[17]);
-        setDailyLabels(juce__label64.get(), statusVector3[5]); setDailyLabels(juce__label78.get(), statusVector3[18]);
-        setDailyLabels(juce__label65.get(), statusVector3[6]); setDailyLabels(juce__label79.get(), statusVector3[19]);
-        setDailyLabels(juce__label66.get(), statusVector3[7]); setDailyLabels(juce__label80.get(), statusVector3[20]);
-        setDailyLabels(juce__label67.get(), statusVector3[8]); setDailyLabels(juce__label81.get(), statusVector3[21]);
-        setDailyLabels(juce__label68.get(), statusVector3[9]); setDailyLabels(juce__label82.get(), statusVector3[22]);
-        setDailyLabels(juce__label69.get(), statusVector3[10]); setDailyLabels(juce__label83.get(), statusVector3[23]);
-        setDailyLabels(juce__label70.get(), statusVector3[11]); setDailyLabels(juce__label84.get(), statusVector3[24]);
-        setDailyLabels(juce__label71.get(), statusVector3[12]); setDailyLabels(juce__label85.get(), statusVector3[25]);
+        setDailyLabels(juce__label59.get(), statusVector3[0]); setDailyLabels(juce__label73.get(), statusVector3[14]);
+        setDailyLabels(juce__label60.get(), statusVector3[1]); setDailyLabels(juce__label74.get(), statusVector3[15]);
+        setDailyLabels(juce__label61.get(), statusVector3[2]); setDailyLabels(juce__label75.get(), statusVector3[16]);
+        setDailyLabels(juce__label62.get(), statusVector3[3]); setDailyLabels(juce__label76.get(), statusVector3[17]);
+        setDailyLabels(juce__label63.get(), statusVector3[4]); setDailyLabels(juce__label77.get(), statusVector3[18]);
+        setDailyLabels(juce__label64.get(), statusVector3[5]); setDailyLabels(juce__label78.get(), statusVector3[19]);
+        setDailyLabels(juce__label65.get(), statusVector3[6]); setDailyLabels(juce__label79.get(), statusVector3[20]);
+        setDailyLabels(juce__label66.get(), statusVector3[7]); setDailyLabels(juce__label80.get(), statusVector3[21]);
+        setDailyLabels(juce__label67.get(), statusVector3[8]); setDailyLabels(juce__label81.get(), statusVector3[22]);
+        setDailyLabels(juce__label68.get(), statusVector3[9]); setDailyLabels(juce__label82.get(), statusVector3[23]);
+        setDailyLabels(juce__label69.get(), statusVector3[10]); setDailyLabels(juce__label83.get(), statusVector3[24]);
+        setDailyLabels(juce__label70.get(), statusVector3[11]); setDailyLabels(juce__label84.get(), statusVector3[25]);
+        setDailyLabels(juce__label71.get(), statusVector3[12]); setDailyLabels(juce__label85.get(), statusVector3[26]);
+        setDailyLabels(juce__label72.get(), statusVector3[13]); setDailyLabels(juce__label86.get(), statusVector3[27]);
+
 
     }
 }
