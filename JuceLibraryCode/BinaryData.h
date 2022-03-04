@@ -11,14 +11,17 @@ namespace BinaryData
     extern const char*   Habits_csv;
     const int            Habits_csvSize = 88;
 
-    extern const char*   Logo_png;
-    const int            Logo_pngSize = 98453;
+    extern const char*   logo_png;
+    const int            logo_pngSize = 134918;
+
+    extern const char*   icon_png;
+    const int            icon_pngSize = 98453;
 
     extern const char*   Banner_png;
     const int            Banner_pngSize = 675350;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 3;
+    const int namedResourceListSize = 4;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

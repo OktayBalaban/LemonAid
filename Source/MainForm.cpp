@@ -1349,7 +1349,7 @@ void MainForm::paint (juce::Graphics& g)
     //draw LOGO
     juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
     filePath.toStdString();
-    juce::File banner{ filePath + "\\Banner.png" };
+    juce::File banner{ filePath + "\\logo.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(banner) };
     g.drawImageWithin(imageLoaded, 208, 8, 200, 80, 1 , false);
     juce__label->setVisible(false);
