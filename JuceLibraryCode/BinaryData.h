@@ -23,6 +23,12 @@ namespace BinaryData
     extern const char*   what_is_a_habit_png;
     const int            what_is_a_habit_pngSize = 2393732;
 
+    extern const char*   DiaryEntries_txt;
+    const int            DiaryEntries_txtSize = 0;
+
+    extern const char*   randomtips_csv;
+    const int            randomtips_csvSize = 6315;
+
     extern const char*   Habits_csv;
     const int            Habits_csvSize = 88;
 
@@ -36,7 +42,7 @@ namespace BinaryData
     const int            Banner_pngSize = 675350;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 9;
+    const int namedResourceListSize = 11;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

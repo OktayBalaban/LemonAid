@@ -15,7 +15,10 @@
         <FILE id="za8nRF" name="what_is_a_habit.png" compile="0" resource="1"
               file="Source/Resources/what_is_a_habit.png"/>
       </GROUP>
-      <GROUP id="{EAB43091-1004-A493-E478-3CE8B8C28C0D}" name="HabitsFiles">
+      <GROUP id="{80017E77-D825-C85A-7EF0-B8E0ECCFAA2D}" name="HabitsFiles">
+        <FILE id="ngvksp" name="DiaryEntries.txt" compile="0" resource="1"
+              file="Source/HabitsFiles/DiaryEntries.txt"/>
+        <FILE id="VGstPz" name="randomtips.csv" compile="0" resource="1" file="Source/HabitsFiles/randomtips.csv"/>
         <FILE id="UJyuYi" name="Habits.csv" compile="0" resource="1" file="Source/HabitsFiles/Habits.csv"/>
       </GROUP>
       <FILE id="qzFnBK" name="CSVOperator.cpp" compile="1" resource="0" file="Source/CSVOperator.cpp"/>

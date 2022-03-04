@@ -7,17 +7,67 @@
 namespace BinaryData
 {
 
-//================== Habits.csv ==================
+//================== DiaryEntries.txt ==================
 static const unsigned char temp_binary_data_5[] =
+"";
+
+const char* DiaryEntries_txt = (const char*) temp_binary_data_5;
+
+//================== randomtips.csv ==================
+static const unsigned char temp_binary_data_6[] =
+"If you have stairs at your home or office, take them every chance you get. Do not stop there, though. For a strong cardio workout, walk up and down the stairs repeatedly. Start with a limited number of repetitions and then increase them as you feel s"
+"tronger.\xa0\r\n"
+"Drink 1 extra glass of water a day. Since 50 to 75% of your weight is water, drinking some plain old H2O is imperative in keeping your body working the best it can and staying hydrated. If plain water is not your favorite, you can add flavor to your "
+"water to help up your intake.\r\n"
+"Replace diet soda with carbonated water. Ingesting diet soda frequently can increase your desire for high-calorie foods and put you at risk for weight gain. If you drink diet soda each day, use carbonated mineral water to help wean yourself off of it"
+".\r\n"
+"Take a 10 minute walk. If you are at work, walk to the furthest bathroom and take the stairs. While running errands, try to find the farthest parking spot and walk from there. Remember, even the smallest amount of steps still add up.\xa0\r\n"
+"Correct your posture! While teaching yourself to have better posture is not something that can be fixed right away, reminding yourself to sit up straight has a positive effect on your overall health. You can try to leave yourself a note to sit up str"
+"aight until it becomes an unconscious habit. Walking with your shoulders back and head held high can also make you feel good about yourself.\r\n"
+"Try to head to bed half an hour earlier than your usual time. Turn off your phone - we promise you will not miss anything - and wind down with a book.\r\n"
+"To keep your weight from creeping up on you, set a weekly maintenance or loss goal for yourself, write it down and check yourself against that goal. Weigh yourself each week on the same day and at the same time, and wearing the same amount of clothin"
+"g for consistency. It is important to be mindful of clothes fitting and scale measure.\r\n"
+"Team up with your doctor or dietitian to create meal plans so you can reach your weight loss goals faster and in the healthiest way possible.\r\n"
+"Start off your day with a healthy breakfast. Eat something high in fiber that includes protein to keep you full and energized. If you start the day out right, you tend to eat better overall and it helps lower your risk of diabetes and improves heart "
+"health.\r\n"
+"Incorporate lettuce into your meals to add nutrients and water to your diet. The fiber in lettuce helps to fill you up and it does so at just 20 calories per serving. Lettuces that are dark green and reddish in color are the most nutritious and the m"
+"ost flavorful. But even the popular, pale iceberg lettuce provides water, fiber and folate.\r\n"
+"Work to eliminate foods and snacks that you buy regularly that are high in calories but low on their health benefit. Eat them less often as an occasional treat. Try using low-fat dairy, whole grains, healthy oils like avocado and olive oil and natura"
+"l sweeteners like fruit instead of high fat or sugary alternatives.\r\n"
+"Remember that building new healthy habits can take some time. Stay focused on your goal, and if you slip along the way, just start again.\r\n"
+"Studies have confirmed that people who smile a genuine smile are happier in life. This is one of the best habits for allowing you to find emotional, mental and spiritual peace-of-mind over time - simply by placing a smile on your face.\r\n"
+"Breakfast is an important part of life. Yet, 31 million Americans skip breakfast every single day. And that saying you have heard your entire life about breakfast being the most important meal of the day? It is 100 percent true. If you are serious ab"
+"out success, eat a healthy breakfast every single morning.\r\n"
+"One habit that has monumental health benefits is to drink a large glass of water with lemon every single day. Lemons are a natural source of Vitamin C, but also possess other health benefits -- such as helping with your digestion, boosting your immun"
+"e system, along with cleansing and rehydrating your body.\r\n"
+"One of the absolute best habits to have in life is to exercise every single day without fail. This is not about heavy weightlifting or running a marathon. This is about doing lightly strenuous activity to oxygenate your blood and boost the endorphins"
+" in your body. \r\n"
+"Focus on what you have. Gratitude is the surest pathway to health, happiness and success. It shifts our attention towards what we have rather than what we do not have. It is the natural abundance of simple pleasures and opportunities that we have bee"
+"n afforded with and blessed with that we often take for granted.\r\n"
+"Find a good set of vitamins and minerals that you can take every day. It is easy to ignore this healthy habit, but the feeling after weeks and months of doing this on a regular basis, is tremendous. That impact can help us to improve other areas of o"
+"ur lives by providing mental, emotional and physical clarity.\r\n"
+"Focus on your daily goals. Long-term goals can seem overwhelming even in the best of times. But by implementing a daily goal-setting strategy, you can overcome some of the enormity associated with achieving big things in life by focusing on the one-d"
+"ay-at-time, short-term scenarios.\r\n"
+"It is often difficult to stay motivated for any considerable amount of time. We get discouraged and dissuaded from our goals when things arise in life that send us on tangents and veer us off track. But one of the absolute best ways you can stay moti"
+"vated in life is to inspire yourself daily. Read, watch inspirational videos and get inspired by stories of others who have achieved their dreams.\r\n"
+"Educate yourself, and learn something new every single day. Commit to learning and improving your life, whether it is by acquiring new skills or enhancing the existing skills you already have. From foreign languages to software programs and apps, you"
+" should carve out a small amount of time every single day to dedicate to this habit.\r\n"
+"Smoking tobacco causes NCDs such as lung disease, heart disease and stroke. Tobacco kills not only the direct smokers but even non-smokers through second-hand exposure. Currently, there are around 15.9 million Filipino adults who smoke tobacco but 7 "
+"in 10 smokers are interested or plan to quit. If you are currently a smoker, it\x92s not too late to quit. Once you do, you will experience immediate and long-term health benefits\r\n";
+
+const char* randomtips_csv = (const char*) temp_binary_data_6;
+
+//================== Habits.csv ==================
+static const unsigned char temp_binary_data_7[] =
 "0,  I even test more\r\n"
 "1,  I even test more\r\n"
 "2,  I even test more\r\n"
 "4,  I even test more\r\n";
 
-const char* Habits_csv = (const char*) temp_binary_data_5;
+const char* Habits_csv = (const char*) temp_binary_data_7;
 
 //================== logo.png ==================
-static const unsigned char temp_binary_data_6[] =
+static const unsigned char temp_binary_data_8[] =
 { 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,3,235,0,0,1,147,8,6,0,0,0,80,238,131,204,0,0,0,1,115,82,71,66,0,174,206,28,233,0,0,0,4,103,65,77,65,0,0,177,143,11,252,97,5,0,0,0,9,112,72,89,115,0,0,14,195,0,0,14,195,1,199,111,168,100,0,0,255,165,73,
 68,65,84,120,94,236,189,7,160,37,217,90,150,253,85,216,123,159,212,113,122,66,79,142,55,95,46,241,114,65,252,69,65,16,35,89,37,9,38,20,179,152,48,97,194,128,8,230,156,81,130,1,197,4,42,40,160,146,68,65,229,230,59,121,166,103,122,58,119,159,180,247,174,
 170,253,191,207,183,86,157,115,186,167,103,166,167,123,159,238,211,221,223,187,123,237,170,90,181,114,213,57,125,158,245,173,80,204,36,11,133,66,161,80,40,20,10,133,66,161,80,40,180,103,84,230,99,40,20,10,133,66,161,80,40,20,10,133,66,161,61,162,128,
@@ -1952,10 +2002,10 @@ static const unsigned char temp_binary_data_6[] =
 169,212,37,83,194,122,42,149,74,165,82,169,84,42,149,74,165,82,151,76,9,235,169,84,42,149,74,165,82,169,84,42,149,74,93,50,37,172,167,82,169,84,42,149,74,165,82,169,84,42,117,201,148,176,158,74,165,82,169,84,42,149,74,165,82,169,212,37,83,194,122,42,
 149,74,165,82,169,84,42,149,74,165,82,151,76,9,235,169,84,42,149,74,165,82,169,84,42,149,74,93,42,153,253,255,103,53,99,233,14,152,20,16,0,0,0,0,73,69,78,68,174,66,96,130,0,0 };
 
-const char* logo_png = (const char*) temp_binary_data_6;
+const char* logo_png = (const char*) temp_binary_data_8;
 
 //================== icon.png ==================
-static const unsigned char temp_binary_data_7[] =
+static const unsigned char temp_binary_data_9[] =
 { 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,1,46,0,0,1,36,8,6,0,0,0,145,219,220,37,0,0,0,1,115,82,71,66,0,174,206,28,233,0,0,0,4,103,65,77,65,0,0,177,143,11,252,97,5,0,0,0,9,112,72,89,115,0,0,25,214,0,0,25,214,1,24,209,202,237,0,0,255,165,73,68,
 65,84,120,94,236,253,119,180,102,215,121,222,9,238,91,55,223,202,40,100,130,8,4,192,156,65,72,204,164,130,21,172,104,89,89,84,206,18,91,182,165,30,183,167,87,207,90,248,171,123,150,87,123,188,90,51,221,109,187,221,94,246,140,108,89,86,75,150,68,5,42,
 145,18,51,9,230,28,64,128,4,65,196,66,229,155,211,60,191,231,221,207,119,206,189,40,138,106,163,32,210,110,190,183,118,157,115,118,120,243,126,119,56,225,155,186,231,3,127,180,59,53,53,213,166,167,167,219,220,220,92,155,153,153,105,91,91,59,109,109,117,
@@ -3351,10 +3401,10 @@ static const unsigned char temp_binary_data_7[] =
 119,47,225,133,250,78,244,161,118,156,251,166,8,178,210,53,50,143,110,199,105,117,34,160,173,73,49,79,58,129,69,100,166,246,208,78,187,216,80,121,73,63,240,235,134,74,230,27,30,201,23,14,240,210,135,245,204,50,73,25,9,90,170,26,27,157,181,95,174,183,
 178,125,106,123,195,136,205,184,199,54,130,251,120,31,158,32,249,180,61,99,179,210,18,157,55,191,58,118,197,82,92,0,124,88,143,196,19,85,143,201,214,99,10,110,112,61,187,252,255,68,109,111,208,15,126,135,120,0,0,0,0,73,69,78,68,174,66,96,130,0,0 };
 
-const char* icon_png = (const char*) temp_binary_data_7;
+const char* icon_png = (const char*) temp_binary_data_9;
 
 //================== Banner.png ==================
-static const unsigned char temp_binary_data_8[] =
+static const unsigned char temp_binary_data_10[] =
 { 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,6,240,0,0,1,41,8,6,0,0,0,69,166,101,130,0,0,0,1,115,82,71,66,0,174,206,28,233,0,0,0,4,103,65,77,65,0,0,177,143,11,252,97,5,0,0,0,9,112,72,89,115,0,0,25,214,0,0,25,214,1,24,209,202,237,0,0,255,165,73,68,
 65,84,120,94,116,253,201,210,53,89,178,30,230,253,149,89,217,87,101,157,115,192,123,19,205,40,64,160,25,41,35,209,144,0,5,147,105,88,23,165,145,46,66,35,13,53,210,72,144,241,160,186,236,179,50,83,254,188,190,222,29,235,255,170,224,95,122,70,196,90,222,
 187,175,38,34,246,222,255,175,254,63,255,175,255,199,47,191,250,213,175,222,129,159,127,254,229,221,95,255,250,227,28,127,126,247,193,7,31,164,237,251,239,191,15,254,244,211,79,239,62,255,252,243,224,199,31,127,60,116,127,125,247,227,143,75,251,209,71,
@@ -13143,5 +13193,5 @@ static const unsigned char temp_binary_data_8[] =
 53,115,142,198,151,173,240,233,47,71,254,248,195,119,63,252,240,125,159,231,248,210,214,241,249,212,131,92,95,230,242,92,72,251,100,239,65,221,231,151,189,216,129,134,253,158,141,121,200,215,255,101,238,97,100,206,231,27,223,218,251,121,219,61,75,195,
 15,208,71,161,99,208,138,191,103,89,244,255,99,159,65,177,11,144,239,249,154,231,81,158,177,249,63,128,127,254,243,159,191,251,255,3,58,178,220,136,174,164,252,31,0,0,0,0,73,69,78,68,174,66,96,130,0,0 };
 
-const char* Banner_png = (const char*) temp_binary_data_8;
+const char* Banner_png = (const char*) temp_binary_data_10;
 }
