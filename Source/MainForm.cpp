@@ -1346,15 +1346,14 @@ void MainForm::paint (juce::Graphics& g)
 
     g.fillAll (juce::Colours::burlywood);
 
+    //[UserPaint] Add your own custom painting code here..
     //draw LOGO
     juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
     filePath.toStdString();
     juce::File banner{ filePath + "\\logo.png" };
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(banner) };
-    g.drawImageWithin(imageLoaded, 208, 8, 200, 80, 1 , false);
+    g.drawImageWithin(imageLoaded, 208, 8, 200, 80, 1, false);
     juce__label->setVisible(false);
-
-    //[UserPaint] Add your own custom painting code here..
     // g.fillAll (juce::Colours::darkgrey);
     /*g.setColour(juce::Colours::orange);
 
