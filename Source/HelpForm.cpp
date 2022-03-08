@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.4
+  Created with Projucer version: 6.1.6
 
   ------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ void HelpForm::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colours::burlywood);
+    g.fillAll (juce::Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -107,7 +107,7 @@ BEGIN_JUCER_METADATA
                  parentClasses="public juce::Component" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="600" initialHeight="400">
-  <BACKGROUND backgroundColour="ffdeb887"/>
+  <BACKGROUND backgroundColour="ffffffff"/>
   <LABEL name="new label" id="1a7bf12d8335aa53" memberName="juce__label"
          virtualName="" explicitFocusOrder="0" pos="16 16 600 456" bkgCol="ff808080"
          edTextCol="ff000000" edBkgCol="0" labelText="This is the placeholder for the instructions of the HELP page."

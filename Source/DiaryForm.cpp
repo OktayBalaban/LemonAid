@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.5
+  Created with Projucer version: 6.1.6
 
   ------------------------------------------------------------------------------
 
@@ -36,7 +36,8 @@ DiaryForm::DiaryForm ()
     addAndMakeVisible (juce__textButton1.get());
     juce__textButton1->setButtonText (TRANS("ADD ENTRY"));
     juce__textButton1->addListener (this);
-    juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colours::goldenrod);
+    juce__textButton1->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
 
     juce__textButton1->setBounds (512, 56, 216, 32);
 
@@ -92,7 +93,8 @@ DiaryForm::DiaryForm ()
     addAndMakeVisible (juce__textButton2.get());
     juce__textButton2->setButtonText (TRANS("EDIT ENTRIES"));
     juce__textButton2->addListener (this);
-    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colours::grey);
+    juce__textButton2->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
 
     juce__textButton2->setBounds (512, 96, 216, 32);
 
@@ -155,7 +157,7 @@ void DiaryForm::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colours::burlywood);
+    g.fillAll (juce::Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -175,24 +177,9 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    //if ADD ENTRY button is clicked
     if (buttonThatWasClicked == juce__textButton1.get())
     {
-        //save existing texts to variable
-        juce::String oldEntry = juce__textEditor3->getText();
-
-        juce::String newEntry = juce__textEditor2->getText();
-        juce::String dateOfEntry = juce__textEditor->getText();
-        juce::String newLine = "\n";
-
-        //create new diary
-        std::string fullText = (oldEntry + "\n" + newLine + dateOfEntry + "\n" + newEntry).toStdString();
-        juce__textEditor3->setText(fullText, juce::NotificationType::dontSendNotification);
-
-        updateDiary(fullText);
-
-        //juce__textEditor2->clear();
-
+        //[UserButtonCode_juce__textButton1] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
@@ -208,6 +195,7 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
             juce__textEditor3->setCaretVisible(true);
             juce__textEditor3->setColour(juce::TextEditor::backgroundColourId, juce::Colours::white);
             juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colours::brown);
+            juce__textButton2->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
 
             juce__textButton2->setButtonText("SAVE ENTRIES");
         }
@@ -217,7 +205,7 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
             juce__textEditor3->setReadOnly(true);
             juce__textEditor3->setCaretVisible(false);
             juce__textEditor3->setColour(juce::TextEditor::backgroundColourId, juce::Colour(0xffc9c9c9));
-            juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+            juce__textButton2->setColour(juce::TextButton::buttonColourId, juce::Colours::grey);
             isEditing = false;
             juce__textButton2->setButtonText("EDIT ENTRIES");
 
@@ -292,7 +280,7 @@ BEGIN_JUCER_METADATA
                  parentClasses="public juce::Component" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="600" initialHeight="400">
-  <BACKGROUND backgroundColour="ffdeb887"/>
+  <BACKGROUND backgroundColour="ffffffff"/>
   <TEXTBUTTON name="newEntryButton" id="f1dc085719bb76aa" memberName="juce__textButton1"
               virtualName="" explicitFocusOrder="0" pos="512 56 216 32" bgColOff="ff156f1a"
               buttonText="ADD ENTRY" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
