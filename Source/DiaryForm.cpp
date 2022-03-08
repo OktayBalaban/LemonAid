@@ -180,6 +180,7 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     if (buttonThatWasClicked == juce__textButton1.get())
     {
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
+
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
