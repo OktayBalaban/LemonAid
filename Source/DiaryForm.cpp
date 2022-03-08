@@ -179,7 +179,10 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     {
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of cd94240 (Merge pull request #10 from OktayBalaban/fred-lemonaid)
         juce::String oldEntry = juce__textEditor3->getText();
 
         juce::String newEntry = juce__textEditor2->getText();
@@ -192,6 +195,9 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
         juce__textEditor3->setText(fullText, juce::NotificationType::dontSendNotification);
 
         updateDiary(fullText);
+<<<<<<< HEAD
+>>>>>>> parent of cd94240 (Merge pull request #10 from OktayBalaban/fred-lemonaid)
+=======
 >>>>>>> parent of cd94240 (Merge pull request #10 from OktayBalaban/fred-lemonaid)
         //[/UserButtonCode_juce__textButton1]
     }
