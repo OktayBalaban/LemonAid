@@ -178,27 +178,20 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     if (buttonThatWasClicked == juce__textButton1.get())
     {
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of cd94240 (Merge pull request #10 from OktayBalaban/fred-lemonaid)
         juce::String oldEntry = juce__textEditor3->getText();
 
         juce::String newEntry = juce__textEditor2->getText();
         juce::String dateOfEntry = juce__textEditor->getText();
         juce::String newLine = "\n";
 
-        std::string fullText = (oldEntry + "\n" + dateOfEntry + "\n" + newEntry + "\n").toStdString();
+        std::string fullText = (oldEntry + "\n" + newLine + dateOfEntry + "\n" + newEntry).toStdString();
 
         // Show the text
         juce__textEditor3->setText(fullText, juce::NotificationType::dontSendNotification);
 
         updateDiary(fullText);
-<<<<<<< HEAD
->>>>>>> parent of cd94240 (Merge pull request #10 from OktayBalaban/fred-lemonaid)
-=======
->>>>>>> parent of cd94240 (Merge pull request #10 from OktayBalaban/fred-lemonaid)
+
+        juce__textEditor2->clear();
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
