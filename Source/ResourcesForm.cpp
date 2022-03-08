@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.6
+  Created with Projucer version: 6.1.4
 
   ------------------------------------------------------------------------------
 
@@ -21,6 +21,7 @@
 //[/Headers]
 
 #include "ResourcesForm.h"
+#include "CSVOperator.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -35,30 +36,31 @@ ResourcesForm::ResourcesForm ()
     juce__label2.reset (new juce::Label ("new label",
                                          TRANS("Placeholder (Preview of Resource)")));
     addAndMakeVisible (juce__label2.get());
-    juce__label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    juce__label2->setFont (juce::Font (20.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::topLeft);
     juce__label2->setEditable (false, false, false);
-    juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
+    juce__label2->setColour (juce::Label::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    juce__label2->setBounds (40, 64, 640, 352);
+    //juce__label2->setBounds (40, 64, 640, 352);
+
+    juce__label2->setText("We have resources for you. Have a look!", juce::dontSendNotification);
+    juce__label2->setBounds(40, 60, 640, 20);
 
     juce__textButton1.reset (new juce::TextButton ("previousButton"));
     addAndMakeVisible (juce__textButton1.get());
     juce__textButton1->setButtonText (TRANS("PREVIOUS"));
     juce__textButton1->addListener (this);
-    juce__textButton1->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
-    juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colours::goldenrod);
+    juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
 
     juce__textButton1->setBounds (40, 432, 168, 32);
 
-    juce__textButton2.reset (new juce::TextButton ("previousButton"));
+    juce__textButton2.reset (new juce::TextButton ("nextButton"));
     addAndMakeVisible (juce__textButton2.get());
     juce__textButton2->setButtonText (TRANS("NEXT"));
     juce__textButton2->addListener (this);
-    juce__textButton2->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
-    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colours::goldenrod);
+    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
 
     juce__textButton2->setBounds (512, 432, 168, 32);
 
@@ -91,6 +93,48 @@ ResourcesForm::ResourcesForm ()
 
     //[Constructor] You can add your own custom stuff here..
     //[/Constructor]
+
+    juce__comboBox->addItem("Videos", 1);
+    juce__comboBox->addItem("Websites", 2);
+    juce__comboBox2->addItem("Researches", 1);
+    juce__comboBox2->addItem("Opinions", 2);
+    juce__comboBox2->addItem("Experiences", 3);
+
+    
+    /*juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
+    filePath.toStdString();
+    juce::File ResourcesFile(filePath + "\\Resources\\Resources.csv");
+
+    if (!ResourcesFile.exists())
+    {
+        ResourcesFile.create();
+    }*/
+
+    
+    juce::File resourcesFile{ filePath + "\\Resources\\Resources.csv" };  
+    juce::FileInputStream csvFile(resourcesFile);
+    if (csvFile.openedOk())
+    {
+        while (!csvFile.isExhausted())
+        {
+            juce::String juceline = csvFile.readNextLine();
+
+            // readNextLine returns a juce string, so we need to convert it to std::string first
+            std::string line = juceline.toStdString();
+
+            try {
+                //std::vector resource = CSVOperator::tokeniser(line, ';');
+                std::vector<std::string> resource = CSVOperator::tokeniser(line, ';');
+                resources.push_back(resource);
+
+                //std::vector<std::vector<std::string>> resources;
+            }
+            catch (const std::exception& e)
+            {
+                std::cout << "CSVOperator::readCSV bad data" << std::endl;
+            }
+        }
+    }
 }
 
 ResourcesForm::~ResourcesForm()
@@ -115,8 +159,43 @@ void ResourcesForm::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colours::white);
+    g.fillAll (juce::Colours::burlywood);
+    if (comboBoxContents.empty())
+    {
+        juce__label2->setFont(20.0f);
+        juce__label2->setText(resources[index][1], juce::dontSendNotification);
+        if (resources[index][2] == "image")
+        {
+            juce::File image{ filePath + "\\Resources" + resources[index][3] };
+            juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
+            g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
+        }
+        else {
+            g.setFont(18.0f);
+            g.drawText("\t\t- " + resources[index][3], 40, 80, 640, 352, 9, true);
+        }
+    }
+    else if(comboBoxContents[0][0] == "Coming soon.")
+    {
+        juce__label2->setFont(20.0f);
+        juce__label2->setText("Coming soon.", juce::dontSendNotification);
+    }
+    else {
+        juce__label2->setFont(20.0f);
+        juce__label2->setText("", juce::dontSendNotification);
+        for (int i = 0; i < comboBoxContents.size()-1; ++i)
+        {
+            
+            g.setFont(19.0f);
+            g.drawText(comboBoxContents[i][1], 40, 80+40*i, 640, 40, 9, true);
+            g.setFont(18.0f);
+            g.drawText("\t\t- " + comboBoxContents[i][3], 40, 100+40*i, 640, 40, 9, true);
+        }
+    }
+    
 
+
+    //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
@@ -134,14 +213,17 @@ void ResourcesForm::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
-
+    comboBoxContents.clear();
     if (buttonThatWasClicked == juce__textButton1.get())
     {
+        if (index > 0) { index--; repaint(); }
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
+        DBG(resources.size());
+        if (index < resources.size() - 1) { index++; repaint(); }
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         //[/UserButtonCode_juce__textButton2]
     }
@@ -154,18 +236,74 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
     //[/UsercomboBoxChanged_Pre]
-
+    comboBoxContents.clear();
     if (comboBoxThatHasChanged == juce__comboBox.get())
     {
         //[UserComboBoxCode_juce__comboBox] -- add your combo box handling code here..
         //[/UserComboBoxCode_juce__comboBox]
+        if (juce__comboBox->getSelectedId() == 1)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Videos")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
+        else if (juce__comboBox->getSelectedId() == 2)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][2] == "web")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
     }
     else if (comboBoxThatHasChanged == juce__comboBox2.get())
     {
         //[UserComboBoxCode_juce__comboBox2] -- add your combo box handling code here..
         //[/UserComboBoxCode_juce__comboBox2]
+        if (juce__comboBox2->getSelectedId() == 1)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Researches")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
+        else if (juce__comboBox2->getSelectedId() == 2)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Opinions")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }
+        else if (juce__comboBox2->getSelectedId() == 3)
+        {
+            for (int i = 0; i < resources.size() - 1; ++i)
+            {
+                if (resources[i][0] == "Experiences")
+                {
+                    comboBoxContents.push_back(resources[i]);
+                }
+            }
+        }  
     }
-
+    if (comboBoxContents.empty())
+    {
+        std::vector < std::string> Notice{ "Coming soon." };
+        comboBoxContents.push_back(Notice);
+    }
+    repaint();
+    
     //[UsercomboBoxChanged_Post]
     //[/UsercomboBoxChanged_Post]
 }
