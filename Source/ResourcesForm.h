@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.6
+  Created with Projucer version: 6.1.4
 
   ------------------------------------------------------------------------------
 
@@ -50,8 +50,9 @@ public:
     void resized() override;
     void buttonClicked (juce::Button* buttonThatWasClicked) override;
     void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
-
-
+    void mouseUp(const juce::MouseEvent& mouseEvent);
+    void mouseMove(const juce::MouseEvent& mouseEvent);
+    void mouseExit(const juce::MouseEvent& mouseEvent);
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
@@ -64,7 +65,17 @@ private:
     std::unique_ptr<juce::ComboBox> juce__comboBox;
     std::unique_ptr<juce::ComboBox> juce__comboBox2;
 
+    //std::vector<std::vector<std::string>> resources;
+    std::vector<std::vector<std::string>> resources;
+    std::string filePath = juce::File::getCurrentWorkingDirectory().getFullPathName().toStdString();
+    juce::Image imageLoaded();
+    int index = 0;//for traversing resources
 
+    bool urlToOpen = false;
+
+    std::vector<std::vector<std::string>> comboBoxContents;
+
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ResourcesForm)
 };
