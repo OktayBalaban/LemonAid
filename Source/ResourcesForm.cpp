@@ -118,8 +118,11 @@ ResourcesForm::ResourcesForm ()
             std::string line = juceline.toStdString();
 
             try {
-                std::vector resource = CSVOperator::tokeniser(line, ';');
+                //std::vector resource = CSVOperator::tokeniser(line, ';');
+                std::vector<std::string> resource = CSVOperator::tokeniser(line, ';');
                 resources.push_back(resource);
+
+                //std::vector<std::vector<std::string>> resources;
             }
             catch (const std::exception& e)
             {
@@ -169,10 +172,10 @@ void ResourcesForm::paint (juce::Graphics& g)
             g.drawText("\t\t- " + resources[index][3], 40, 80, 640, 352, 9, true);
         }
     }
-    else if(comboBoxContents[0][0] == "We will include soon.")
+    else if(comboBoxContents[0][0] == "Coming soon.")
     {
         juce__label2->setFont(20.0f);
-        juce__label2->setText("We will include soon.", juce::dontSendNotification);
+        juce__label2->setText("Coming soon.", juce::dontSendNotification);
     }
     else {
         juce__label2->setFont(20.0f);

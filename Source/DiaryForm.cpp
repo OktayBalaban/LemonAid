@@ -175,24 +175,23 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    //if ADD ENTRY button is clicked
     if (buttonThatWasClicked == juce__textButton1.get())
     {
-        //save existing texts to variable
+        //[UserButtonCode_juce__textButton1] -- add your button handler code here..
         juce::String oldEntry = juce__textEditor3->getText();
 
         juce::String newEntry = juce__textEditor2->getText();
         juce::String dateOfEntry = juce__textEditor->getText();
         juce::String newLine = "\n";
 
-        //create new diary
         std::string fullText = (oldEntry + "\n" + newLine + dateOfEntry + "\n" + newEntry).toStdString();
+
+        // Show the text
         juce__textEditor3->setText(fullText, juce::NotificationType::dontSendNotification);
 
         updateDiary(fullText);
 
-        //juce__textEditor2->clear();
-
+        juce__textEditor2->clear();
         //[/UserButtonCode_juce__textButton1]
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
