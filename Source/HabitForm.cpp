@@ -49,35 +49,46 @@ HabitForm::HabitForm ()
     juce__label2->setFont (juce::Font (60.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::centred);
     juce__label2->setEditable (false, false, false);
-    juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
-    juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    juce__label2->setColour (juce::Label::backgroundColourId, juce::Colours::lightgrey); //the background of the habit date selector!!!
+    juce__label2->setColour (juce::Label::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
     juce__label2->setBounds (208, 24, 552, 488);
-
+    //FACING ISSUES WITH BUTTON TOGGLING WHEN SELECTING OTHER BUTTONS!!//
     juce__textButton6.reset (new juce::TextButton ("habit1button"));
     juce__textButton6->setClickingTogglesState(true);
     juce__textButton6->setButtonText (TRANS("Habit 1"));
     juce__textButton6->addListener (this);
-    juce__textButton6->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton6->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton6->setColour(juce::TextButton::textColourOnId, juce::Colours::white);
+    juce__textButton6->setColour (juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
+    juce__textButton6->setColour(juce::TextButton::buttonOnColourId, juce::Colours::darkgoldenrod);
     juce__textButton6->setBounds (8, 56, 168, 40);
 
     juce__textButton7.reset (new juce::TextButton ("habbit2button"));
     juce__textButton7->setClickingTogglesState(true);
     juce__textButton7->addListener (this);
-    juce__textButton7->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton7->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton7->setColour(juce::TextButton::textColourOnId, juce::Colours::white);
+    juce__textButton7->setColour (juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
+    juce__textButton7->setColour(juce::TextButton::buttonOnColourId, juce::Colours::darkgoldenrod);
     juce__textButton7->setBounds (8, 104, 168, 40);
 
     juce__textButton8.reset (new juce::TextButton ("habit3button"));
     juce__textButton8->setClickingTogglesState(true);
     juce__textButton8->addListener (this);
-    juce__textButton8->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton8->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton8->setColour(juce::TextButton::textColourOnId, juce::Colours::white);
+    juce__textButton8->setColour (juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
+    juce__textButton8->setColour(juce::TextButton::buttonOnColourId, juce::Colours::darkgoldenrod);
     juce__textButton8->setBounds (8, 152, 168, 40);
 
     juce__textButton2.reset (new juce::TextButton ("habit1button"));
     addAndMakeVisible (juce__textButton2.get());
     juce__textButton2->setButtonText (TRANS("ADD HABIT"));
     juce__textButton2->addListener (this);
-    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton2->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton2->setColour(juce::TextButton::textColourOnId, juce::Colours::black);
+    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colours::goldenrod);
 
     juce__textButton2->setBounds (11, 300, 168, 40);
 
@@ -85,7 +96,9 @@ HabitForm::HabitForm ()
     addAndMakeVisible (juce__textButton3.get());
     juce__textButton3->setButtonText (TRANS("REMOVE HABIT"));
     juce__textButton3->addListener (this);
-    juce__textButton3->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
+    juce__textButton3->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton3->setColour(juce::TextButton::textColourOnId, juce::Colours::black);
+    juce__textButton3->setColour (juce::TextButton::buttonColourId, juce::Colours::goldenrod);
 
     juce__textButton3->setBounds (11, 463, 168, 40);
 
@@ -150,12 +163,15 @@ HabitForm::HabitForm ()
     goals->setReadOnly(true);    // Initially,it is read-only until edit mode opens
     goals->setBounds(220, 50, 520, 150);
 
-    goalsEditButton.reset(new juce::TextButton("Edit Button", TRANS("Edit Goals")));
+    goalsEditButton.reset(new juce::TextButton("Edit Button", TRANS("Edit Goals"))); //WHERE DO I EDIT THE BACKGROUND OF THE EDITOR?
     goalsEditButton->addListener(this);
     goalsEditButton->setBounds(620, 202, 120, 30);
     goalsEditButton->setToggleable(true);
     goalsEditButton->setToggleState(false, false);
-    goalsEditButton->setColour(juce::TextButton::buttonColourId, juce::Colour(0xff156f1a));
+    goalsEditButton->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    goalsEditButton->setColour(juce::TextButton::textColourOnId, juce::Colours::black);
+    goalsEditButton->setColour(juce::TextButton::buttonColourId, juce::Colours::grey);
+    goalsEditButton->setColour(juce::TextButton::buttonOnColourId, juce::Colours::grey);
 
     // Daily Tracker Buttons Declaration
     dailyBtn0.reset(new juce::TextButton(""));
@@ -226,7 +242,7 @@ void HabitForm::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colours::burlywood);
+    g.fillAll (juce::Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -671,6 +687,7 @@ void HabitForm::readFileAndMakeDailyBtns()
 
 }
 
+//THIS EDITS THE SELECTIONS WITHIN THE CALENDAR COMPONENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void HabitForm::setDailyBtn(juce::TextButton* btn, std::string dailyStatus, int bnd1, int bnd2, int bnd3, int bnd4, juce::String name)
 {
     addAndMakeVisible(btn);
@@ -1049,7 +1066,10 @@ BEGIN_JUCER_METADATA
          textCol="ff000000" edTextCol="ff000000" edBkgCol="0" labelText="MY HABITS"
          editableSingleClick="0" editableDoubleClick="0" focusDiscardsChanges="0"
          fontname="Default font" fontsize="20.0" kerning="0.0" bold="1"
-         italic="0" justification="36" typefaceStyle="Bold"/>
+         italic="0" justification="36" 
+         
+         
+         ="Bold"/>
   <LABEL name="new label" id="f55f427d84137a4f" memberName="juce__label2"
          virtualName="" explicitFocusOrder="0" pos="208 24 552 488" bkgCol="ff808080"
          edTextCol="ff000000" edBkgCol="0" labelText="Habit placeholder"

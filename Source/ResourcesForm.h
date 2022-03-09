@@ -33,23 +33,23 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class ResourcesForm : public juce::Component,
-    public juce::Button::Listener,
-    public juce::ComboBox::Listener
+class ResourcesForm  : public juce::Component,
+                       public juce::Button::Listener,
+                       public juce::ComboBox::Listener
 {
 public:
     //==============================================================================
-    ResourcesForm();
+    ResourcesForm ();
     ~ResourcesForm() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     //[/UserMethods]
 
-    void paint(juce::Graphics& g) override;
+    void paint (juce::Graphics& g) override;
     void resized() override;
-    void buttonClicked(juce::Button* buttonThatWasClicked) override;
-    void comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
+    void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
     void mouseUp(const juce::MouseEvent& mouseEvent);
     void mouseMove(const juce::MouseEvent& mouseEvent);
     void mouseExit(const juce::MouseEvent& mouseEvent);
@@ -65,10 +65,21 @@ private:
     std::unique_ptr<juce::ComboBox> juce__comboBox;
     std::unique_ptr<juce::ComboBox> juce__comboBox2;
 
+    //std::vector<std::vector<std::string>> resources;
+    std::vector<std::vector<std::string>> resources;
+    std::string filePath = juce::File::getCurrentWorkingDirectory().getFullPathName().toStdString();
+    juce::Image imageLoaded();
+    int index = 0;//for traversing resources
 
+    bool urlToOpen = false;
+
+    std::vector<std::vector<std::string>> comboBoxContents;
+
+    
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ResourcesForm)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ResourcesForm)
 };
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
+
