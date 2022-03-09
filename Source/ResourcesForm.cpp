@@ -36,24 +36,22 @@ ResourcesForm::ResourcesForm ()
     juce__label2.reset (new juce::Label ("new label",
                                          TRANS("Placeholder (Preview of Resource)")));
     addAndMakeVisible (juce__label2.get());
+    juce__label2->addMouseListener(this, true);
+    juce__label2->setBounds(40, 60, 640, 20);
     juce__label2->setFont (juce::Font (20.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label2->setJustificationType (juce::Justification::topLeft);
     juce__label2->setEditable (false, false, false);
     juce__label2->setColour (juce::Label::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
-    //juce__label2->setBounds (40, 64, 640, 352);
-
+    juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));    
     juce__label2->setText("We have resources for you. Have a look!", juce::dontSendNotification);
-    juce__label2->setBounds(40, 60, 640, 20);
+    
 
     juce__textButton1.reset (new juce::TextButton ("previousButton"));
     addAndMakeVisible (juce__textButton1.get());
     juce__textButton1->setButtonText (TRANS("PREVIOUS"));
     juce__textButton1->addListener (this);
     juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
-
     juce__textButton1->setBounds (40, 432, 168, 32);
 
     juce__textButton2.reset (new juce::TextButton ("nextButton"));
@@ -61,7 +59,6 @@ ResourcesForm::ResourcesForm ()
     juce__textButton2->setButtonText (TRANS("NEXT"));
     juce__textButton2->addListener (this);
     juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
-
     juce__textButton2->setBounds (512, 432, 168, 32);
 
     juce__comboBox.reset (new juce::ComboBox ("resourceType"));
@@ -71,7 +68,6 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox->setTextWhenNothingSelected (TRANS("VIDEO or WEBSITES (dropdown menu)"));
     juce__comboBox->setTextWhenNoChoicesAvailable (TRANS("VIDEO or WEBSITES"));
     juce__comboBox->addListener (this);
-
     juce__comboBox->setBounds (40, 24, 312, 24);
 
     juce__comboBox2.reset (new juce::ComboBox ("resourceCategory"));
@@ -81,7 +77,6 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox2->setTextWhenNothingSelected (TRANS("CATEGORIES (dropdown menu)"));
     juce__comboBox2->setTextWhenNoChoicesAvailable (TRANS("CATEGORIES"));
     juce__comboBox2->addListener (this);
-
     juce__comboBox2->setBounds (368, 24, 312, 24);
 
 
@@ -165,6 +160,8 @@ void ResourcesForm::paint (juce::Graphics& g)
         {
             juce::File image{ filePath + "\\Resources" + resources[index][3] };
             juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
+            
+            
             g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
         }
         else {
@@ -211,6 +208,8 @@ void ResourcesForm::buttonClicked (juce::Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
     comboBoxContents.clear();
+    juce__comboBox->setSelectedId(0);
+    juce__comboBox2->setSelectedId(0);
     if (buttonThatWasClicked == juce__textButton1.get())
     {
         if (index > 0) { index--; repaint(); }
@@ -233,77 +232,114 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
     //[/UsercomboBoxChanged_Pre]
-    comboBoxContents.clear();
-    if (comboBoxThatHasChanged == juce__comboBox.get())
+    if (comboBoxThatHasChanged->getSelectedId()>0)
     {
-        //[UserComboBoxCode_juce__comboBox] -- add your combo box handling code here..
-        //[/UserComboBoxCode_juce__comboBox]
-        if (juce__comboBox->getSelectedId() == 1)
+        comboBoxContents.clear();
+        if (comboBoxThatHasChanged == juce__comboBox.get())
         {
-            for (int i = 0; i < resources.size() - 1; ++i)
+            //[UserComboBoxCode_juce__comboBox] -- add your combo box handling code here..
+            //[/UserComboBoxCode_juce__comboBox]
+            if (juce__comboBox->getSelectedId() == 1)
             {
-                if (resources[i][0] == "Videos")
+                for (int i = 0; i < resources.size() - 1; ++i)
                 {
-                    comboBoxContents.push_back(resources[i]);
+                    if (resources[i][0] == "Videos")
+                    {
+                        comboBoxContents.push_back(resources[i]);
+                    }
+                }
+            }
+            else if (juce__comboBox->getSelectedId() == 2)
+            {
+                for (int i = 0; i < resources.size() - 1; ++i)
+                {
+                    if (resources[i][2] == "web")
+                    {
+                        comboBoxContents.push_back(resources[i]);
+                    }
                 }
             }
         }
-        else if (juce__comboBox->getSelectedId() == 2)
+        if (comboBoxThatHasChanged == juce__comboBox2.get())
         {
-            for (int i = 0; i < resources.size() - 1; ++i)
+            //[UserComboBoxCode_juce__comboBox2] -- add your combo box handling code here..
+            //[/UserComboBoxCode_juce__comboBox2]
+            if (juce__comboBox2->getSelectedId() == 1)
             {
-                if (resources[i][2] == "web")
+                for (int i = 0; i < resources.size() - 1; ++i)
                 {
-                    comboBoxContents.push_back(resources[i]);
+                    if (resources[i][0] == "Researches")
+                    {
+                        comboBoxContents.push_back(resources[i]);
+                    }
+                }
+            }
+            else if (juce__comboBox2->getSelectedId() == 2)
+            {
+                for (int i = 0; i < resources.size() - 1; ++i)
+                {
+                    if (resources[i][0] == "Opinions")
+                    {
+                        comboBoxContents.push_back(resources[i]);
+                    }
+                }
+            }
+            else if (juce__comboBox2->getSelectedId() == 3)
+            {
+                for (int i = 0; i < resources.size() - 1; ++i)
+                {
+                    if (resources[i][0] == "Experiences")
+                    {
+                        comboBoxContents.push_back(resources[i]);
+                    }
                 }
             }
         }
+        if (comboBoxContents.empty())
+        {
+            std::vector < std::string> Notice{ "We will include soon." };
+            comboBoxContents.push_back(Notice);
+        }
+        repaint();
     }
-    else if (comboBoxThatHasChanged == juce__comboBox2.get())
-    {
-        //[UserComboBoxCode_juce__comboBox2] -- add your combo box handling code here..
-        //[/UserComboBoxCode_juce__comboBox2]
-        if (juce__comboBox2->getSelectedId() == 1)
-        {
-            for (int i = 0; i < resources.size() - 1; ++i)
-            {
-                if (resources[i][0] == "Researches")
-                {
-                    comboBoxContents.push_back(resources[i]);
-                }
-            }
-        }
-        else if (juce__comboBox2->getSelectedId() == 2)
-        {
-            for (int i = 0; i < resources.size() - 1; ++i)
-            {
-                if (resources[i][0] == "Opinions")
-                {
-                    comboBoxContents.push_back(resources[i]);
-                }
-            }
-        }
-        else if (juce__comboBox2->getSelectedId() == 3)
-        {
-            for (int i = 0; i < resources.size() - 1; ++i)
-            {
-                if (resources[i][0] == "Experiences")
-                {
-                    comboBoxContents.push_back(resources[i]);
-                }
-            }
-        }  
-    }
-    if (comboBoxContents.empty())
-    {
-        std::vector < std::string> Notice{ "We will include soon." };
-        comboBoxContents.push_back(Notice);
-    }
-    repaint();
+    
     
     //[UsercomboBoxChanged_Post]
     //[/UsercomboBoxChanged_Post]
 }
+
+void ResourcesForm::mouseUp(const juce::MouseEvent& mouseEvent)
+{
+    if (urlToOpen)
+    {
+        DBG("mouseUp");
+        juce::URL(resources[index][3]).launchInDefaultBrowser();
+    }
+}
+
+void ResourcesForm::mouseMove(const juce::MouseEvent& mouseEvent)
+{
+    if (!(juce__comboBox->getSelectedId()>0 || juce__comboBox2->getSelectedId()>0)
+        && resources[index][2] == "web" && mouseEvent.eventComponent == juce__label2.get())
+    {
+        juce__label2->setMouseCursor(juce::MouseCursor::PointingHandCursor);
+        repaint();
+        urlToOpen = true;
+    }
+    else {
+        urlToOpen = false;
+    }
+}
+
+void ResourcesForm::mouseExit(const juce::MouseEvent& mouseEvent)
+{
+    if (resources[index][2] == "web" && mouseEvent.eventComponent == juce__label2.get())
+    {
+        juce__label2->setMouseCursor(juce::MouseCursor::NormalCursor);
+        repaint();
+    }
+}
+
 
 
 
