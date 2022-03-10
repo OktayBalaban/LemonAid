@@ -154,7 +154,7 @@ void ResourcesForm::paint (juce::Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (juce::Colours::burlywood);
+    g.fillAll (juce::Colours::white);
     if (comboBoxContents.empty())
     {
         juce__label2->setFont(20.0f);

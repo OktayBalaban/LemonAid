@@ -33,7 +33,7 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class HelpForm  : public juce::Component
+class HelpForm  : public juce::Component, public juce::Button::Listener
 {
 public:
     //==============================================================================
@@ -47,7 +47,7 @@ public:
     void paint (juce::Graphics& g) override;
     void resized() override;
 
-
+    void buttonClicked(juce::Button* buttonThatWasClicked) override;
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
@@ -55,7 +55,10 @@ private:
 
     //==============================================================================
     std::unique_ptr<juce::Label> juce__label;
-
+    std::unique_ptr<juce::Button> tutorialButton;
+    std::unique_ptr<juce::Button> documentationButton{};
+    std::unique_ptr<juce::Button> aboutButton{};
+    std::unique_ptr<juce::TextEditor> juce__textEditor;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HelpForm)

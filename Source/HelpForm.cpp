@@ -34,16 +34,51 @@ HelpForm::HelpForm ()
 
     juce__label.reset (new juce::Label ("new label",
                                         TRANS("This is the placeholder for the instructions of the HELP page.")));
-    addAndMakeVisible (juce__label.get());
+    //addAndMakeVisible (juce__label.get());
     juce__label->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     juce__label->setJustificationType (juce::Justification::centredLeft);
     juce__label->setEditable (false, false, false);
     juce__label->setColour (juce::Label::backgroundColourId, juce::Colours::grey);
     juce__label->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+    juce__label->setBounds (200, 50, 550, 446);
 
-    juce__label->setBounds (16, 16, 600, 456);
+    aboutButton.reset(new juce::TextButton("About"));
+    addAndMakeVisible(aboutButton.get());
+    aboutButton->addListener(this);
+    aboutButton->setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+    aboutButton->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    aboutButton->setBounds(60, 130, 115, 30);
 
+    tutorialButton.reset(new juce::TextButton("Tutorial"));
+    addAndMakeVisible(tutorialButton.get());
+    tutorialButton->addListener(this);
+    tutorialButton->setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+    tutorialButton->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    tutorialButton->setBounds(60, 180, 115, 30);
+
+    documentationButton.reset(new juce::TextButton("Documentation"));
+    addAndMakeVisible(documentationButton.get());
+    documentationButton->addListener(this);
+    documentationButton->setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+    documentationButton->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    documentationButton->setBounds(60, 230, 115, 30);
+
+    juce__textEditor.reset(new juce::TextEditor("text editor"));
+    addAndMakeVisible(juce__textEditor.get());
+    juce__textEditor->setMultiLine(true);
+    juce__textEditor->setReturnKeyStartsNewLine(true);
+    juce__textEditor->setReadOnly(true);
+    juce__textEditor->setScrollbarsShown(true);
+    juce__textEditor->setCaretVisible(false);
+    juce__textEditor->setPopupMenuEnabled(true);
+    juce__textEditor->setColour(juce::TextEditor::textColourId, juce::Colours::black);
+    juce__textEditor->setColour(juce::TextEditor::backgroundColourId, juce::Colours::lightgrey);
+    juce__textEditor->setText(juce::String());
+    juce__textEditor->setBounds(210, 60, 540, 426);
+    juce__textEditor->setText("Hi! ", juce::NotificationType::dontSendNotification);
+
+    
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -74,7 +109,8 @@ void HelpForm::paint (juce::Graphics& g)
     //[/UserPrePaint]
 
     g.fillAll (juce::Colours::white);
-
+    g.setFont(20.0f);
+    g.drawText("Getting Started", 16, 16, 200, 20, 4);
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
@@ -86,6 +122,22 @@ void HelpForm::resized()
 
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
+}
+
+void HelpForm::buttonClicked(juce::Button* buttonThatWasClicked)
+{
+    if (buttonThatWasClicked == tutorialButton.get())
+    {
+        DBG("change label contents for tutorial");
+    }
+    if (buttonThatWasClicked == documentationButton.get())
+    {
+        DBG("change label contents for documentation");
+    }
+    if (buttonThatWasClicked == aboutButton.get())
+    {
+        DBG("change label contents for about");
+    }
 }
 
 
