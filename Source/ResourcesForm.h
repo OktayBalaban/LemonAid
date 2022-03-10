@@ -35,7 +35,7 @@
 */
 class ResourcesForm  : public juce::Component,
                        public juce::Button::Listener,
-                       public juce::ComboBox::Listener
+    public juce::ComboBox::Listener, public juce::TableListBoxModel
 {
 public:
     //==============================================================================
@@ -54,6 +54,12 @@ public:
     void mouseMove(const juce::MouseEvent& mouseEvent);
     void mouseExit(const juce::MouseEvent& mouseEvent);
 
+    int getNumRows() override;
+    void paintRowBackground(juce::Graphics&, int rowNumber, int width, int height, bool rowIsSelected) override;
+    void paintCell(juce::Graphics&, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
+    void cellClicked(int rowNumber, int columnId, const juce::MouseEvent&);
+    Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* exsitingComponentToUpdate) override;
+
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     //[/UserVariables]
@@ -68,13 +74,12 @@ private:
     //std::vector<std::vector<std::string>> resources;
     std::vector<std::vector<std::string>> resources;
     std::string filePath = juce::File::getCurrentWorkingDirectory().getFullPathName().toStdString();
-    juce::Image imageLoaded();
     int index = 0;//for traversing resources
 
     bool urlToOpen = false;
 
     std::vector<std::vector<std::string>> comboBoxContents;
-
+    juce::TableListBox tableComponent;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ResourcesForm)

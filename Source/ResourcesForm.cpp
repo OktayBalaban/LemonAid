@@ -129,6 +129,16 @@ ResourcesForm::ResourcesForm ()
                 std::cout << "CSVOperator::readCSV bad data" << std::endl;
             }
         }
+
+        //tableComponent
+        addAndMakeVisible(tableComponent);
+        tableComponent.setVisible(false);
+        tableComponent.getHeader().addColumn("Titles - Click to go to the website", 1, 640);
+        tableComponent.getHeader().setSortColumnId(0, true);
+        tableComponent.setModel(this);
+        tableComponent.setBounds(40, 60, 640, 350);
+        tableComponent.setColour(juce::ListBox::ColourIds::backgroundColourId, juce::Colours::white);
+     
     }
 }
 
@@ -172,12 +182,12 @@ void ResourcesForm::paint (juce::Graphics& g)
             g.drawText("\t\t- " + resources[index][3], 40, 80, 640, 352, 9, true);
         }
     }
-    else if(comboBoxContents[0][0] == "Coming soon.")
+    /*else if(comboBoxContents[0][0] == "Coming soon.")
     {
         juce__label2->setFont(20.0f);
         juce__label2->setText("Coming soon.", juce::dontSendNotification);
-    }
-    else {
+    }*/
+    /*else {
         juce__label2->setFont(20.0f);
         juce__label2->setText("", juce::dontSendNotification);
         for (int i = 0; i < comboBoxContents.size()-1; ++i)
@@ -188,7 +198,7 @@ void ResourcesForm::paint (juce::Graphics& g)
             g.setFont(18.0f);
             g.drawText("\t\t- " + comboBoxContents[i][3], 40, 100+40*i, 640, 40, 9, true);
         }
-    }
+    }*/
     
 
 
@@ -210,6 +220,7 @@ void ResourcesForm::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
+    tableComponent.setVisible(false);
     comboBoxContents.clear();
     juce__comboBox->setSelectedId(0);
     juce__comboBox2->setSelectedId(0);
@@ -262,8 +273,9 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
                     }
                 }
             }
+            juce__comboBox2->setSelectedId(0);
         }
-        if (comboBoxThatHasChanged == juce__comboBox2.get())
+        else if (comboBoxThatHasChanged == juce__comboBox2.get())
         {
             //[UserComboBoxCode_juce__comboBox2] -- add your combo box handling code here..
             //[/UserComboBoxCode_juce__comboBox2]
@@ -297,12 +309,16 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
                     }
                 }
             }
+            juce__comboBox->setSelectedId(0);
         }
         if (comboBoxContents.empty())
         {
-            std::vector < std::string> Notice{ "We will include soon." };
+            std::vector < std::string> Notice{ "Notice", "We will include soon.", "", "" };
             comboBoxContents.push_back(Notice);
+            DBG(comboBoxContents[0][1]);
         }
+        tableComponent.setVisible(true);
+        tableComponent.updateContent();
         repaint();
     }
     
@@ -342,6 +358,41 @@ void ResourcesForm::mouseExit(const juce::MouseEvent& mouseEvent)
         repaint();
     }
 }
+
+int ResourcesForm::getNumRows()
+{
+    return comboBoxContents.size();
+}
+
+void ResourcesForm::paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
+{
+    if (rowIsSelected)
+    {
+        g.fillAll(juce::Colours::burlywood);
+    }
+    else {
+        g.fillAll(juce::Colours::lightgrey);
+    }
+}
+
+void ResourcesForm::paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
+{
+    g.drawText(comboBoxContents[rowNumber][1], 5, 0, width - 4, height, juce::Justification::centredLeft, true);
+}
+
+void ResourcesForm::cellClicked(int rowNumber, int columnId, const juce::MouseEvent&)
+{
+    if (comboBoxContents[rowNumber][2]=="web")
+    {
+        juce::URL(comboBoxContents[rowNumber][3]).launchInDefaultBrowser();
+    }
+}
+
+juce::Component* ResourcesForm::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* exsitingComponentToUpdate)
+{
+    return nullptr;
+}
+
 
 
 
