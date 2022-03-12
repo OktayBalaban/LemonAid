@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.6
+  Created with Projucer version: 6.1.5
 
   ------------------------------------------------------------------------------
 
@@ -36,8 +36,7 @@ DiaryForm::DiaryForm ()
     addAndMakeVisible (juce__textButton1.get());
     juce__textButton1->setButtonText (TRANS("ADD ENTRY"));
     juce__textButton1->addListener (this);
-    juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colours::goldenrod);
-    juce__textButton1->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton1->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
 
     juce__textButton1->setBounds (512, 56, 216, 32);
 
@@ -93,8 +92,7 @@ DiaryForm::DiaryForm ()
     addAndMakeVisible (juce__textButton2.get());
     juce__textButton2->setButtonText (TRANS("EDIT ENTRIES"));
     juce__textButton2->addListener (this);
-    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colours::grey);
-    juce__textButton2->setColour(juce::TextButton::textColourOffId, juce::Colours::black);
+    juce__textButton2->setColour (juce::TextButton::buttonColourId, juce::Colour (0xff156f1a));
 
     juce__textButton2->setBounds (512, 96, 216, 32);
 
@@ -180,11 +178,12 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     if (buttonThatWasClicked == juce__textButton1.get())
     {
         //[UserButtonCode_juce__textButton1] -- add your button handler code here..
-        juce::String oldEntry = juce__textEditor3->getText();
-        juce::String newEntry = juce__textEditor2->getText();
-        juce::String dateOfEntry = juce__textEditor->getText();
+        juce::String oldEntry = juce__textEditor3->getText(); //save existing entries to variable
+        juce::String newEntry = juce__textEditor2->getText(); //get new entry string
+        juce::String dateOfEntry = juce__textEditor->getText(); //get new entry date
         juce::String newLine = "\n";
 
+        //new and old entries together
         std::string fullText = (oldEntry + "\n" + dateOfEntry + "\n" + newEntry + "\n").toStdString();
         // Show the text
         juce__textEditor3->setText(fullText, juce::NotificationType::dontSendNotification);
@@ -236,8 +235,6 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
 //function to load the saved diary entries from txt file
 juce::String DiaryForm::loadDiary()
 {
-    //std::string strId = std::to_string(habitID);
-
     juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
     filePath.toStdString();
 
@@ -259,8 +256,6 @@ juce::String DiaryForm::loadDiary()
 //function to write into txt file and save diary entries
 void DiaryForm::updateDiary(std::string text)
 {
-    //std::string idAsStr = std::to_string(habitID);
-
     // Builds the new entry to add into habits file
     std::string entry = text;
 

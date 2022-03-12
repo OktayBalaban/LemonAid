@@ -1250,7 +1250,6 @@ MainForm::MainForm()
         //get random tip from vector of strings
         int tipslength = randomTips.size();
         int tipID = rand() % tipslength;
-        //std::string newText = "Daily Tip: \n" + randomTips[tipID];
 
         juce__label2->setText(randomTips[tipID], juce::NotificationType::dontSendNotification);
     }
@@ -1465,7 +1464,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == juce__textButton.get())
+    if (buttonThatWasClicked == juce__textButton.get()) //if MAIN PAGE is clicked
     {
         //[UserButtonCode_juce__textButton] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1535,7 +1534,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
 
         //[/UserButtonCode_juce__textButton]
     }
-    else if (buttonThatWasClicked == juce__textButton2.get())
+    else if (buttonThatWasClicked == juce__textButton2.get()) //if MY HABITS is clicked
     {
         //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1552,7 +1551,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
 
         //[/UserButtonCode_juce__textButton2]
     }
-    else if (buttonThatWasClicked == juce__textButton3.get())
+    else if (buttonThatWasClicked == juce__textButton3.get())  //if RESOURCES is clicked
     {
         //[UserButtonCode_juce__textButton3] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1568,7 +1567,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         //[/UserButtonCode_juce__textButton3]
     }
-    else if (buttonThatWasClicked == juce__textButton4.get())
+    else if (buttonThatWasClicked == juce__textButton4.get())  //if MY DIARY is clicked
     {
         //[UserButtonCode_juce__textButton4] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1584,7 +1583,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         //[/UserButtonCode_juce__textButton4]
     }
-    else if (buttonThatWasClicked == juce__textButton5.get())
+    else if (buttonThatWasClicked == juce__textButton5.get()) //if HELP is clicked
     {
         //[UserButtonCode_juce__textButton5] -- add your button handler code here..
         newHabitForm->setVisible(false);
@@ -1601,7 +1600,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
 
         //[/UserButtonCode_juce__textButton5]
     }
-    else if (buttonThatWasClicked == juce__textButton6.get())
+    else if (buttonThatWasClicked == juce__textButton6.get()) //if 1st habit name is clicked
     {
         //[UserButtonCode_juce__textButton6] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1618,7 +1617,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
 
         //[/UserButtonCode_juce__textButton6]
     }
-    else if (buttonThatWasClicked == juce__textButton7.get())
+    else if (buttonThatWasClicked == juce__textButton7.get()) //if 2nd habit name is clicked
     {
         //[UserButtonCode_juce__textButton7] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1634,7 +1633,7 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         //[/UserButtonCode_juce__textButton7]
     }
-    else if (buttonThatWasClicked == juce__textButton8.get())
+    else if (buttonThatWasClicked == juce__textButton8.get()) //if 3rd habit name is clicked
     {
         //[UserButtonCode_juce__textButton8] -- add your button handler code here..
         newHelpWindow->setVisible(false);
@@ -1673,10 +1672,6 @@ void MainForm::setDailyLabels(juce::Label* lbl, std::string dailyStatus)
     {
         lbl->setColour(juce::Label::backgroundColourId, juce::Colours::lightgrey);
     }
-
-    //lbl->setBounds(bnd1, bnd2, bnd3, bnd4);
-    //lbl->setLabelText(name);
-    //btn->setClickingTogglesState(true);
 }
 
 void MainForm::colorLabels(int numberOfHabits)
@@ -1774,14 +1769,7 @@ void MainForm::colorLabels(int numberOfHabits)
 
     if (numberOfHabits == 1)
     {
-        //try {
-        //    // Block of code to try
-        //    throw exception; // Throw an exception when a problem arise
-        //}
-        //catch () {
-        //    // Block of code to handle errors
-        //}
-
+        
         juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
         filePath.toStdString();
 
@@ -1801,7 +1789,6 @@ void MainForm::colorLabels(int numberOfHabits)
         {
             trackerEntriesVector = CSVOperator::readDailyTrackerCSV(2);
         }
-        //trackerEntriesVector = CSVOperator::readDailyTrackerCSV(0);
         std::vector<std::string> statusVector = CSVOperator::returnDailyStatusVector(trackerEntriesVector);
 
         juce__label3->setVisible(true);
@@ -1833,7 +1820,6 @@ void MainForm::colorLabels(int numberOfHabits)
         juce__label30->setVisible(true);
         juce__label12->setVisible(true);
 
-        //std::string cont = statusVector[0];
 
         setDailyLabels(juce__label3.get(), statusVector[0]);
         setDailyLabels(juce__label4.get(), statusVector[1]);
@@ -2010,8 +1996,6 @@ void MainForm::colorLabels(int numberOfHabits)
         juce__label57->setVisible(true);
         juce__label58->setVisible(true);
 
-        //std::string cont = statusVector[0];
-
         setDailyLabels(juce__label3.get(), statusVector[0]);
         setDailyLabels(juce__label4.get(), statusVector[1]);
         setDailyLabels(juce__label5.get(), statusVector[2]);
@@ -2040,8 +2024,6 @@ void MainForm::colorLabels(int numberOfHabits)
         setDailyLabels(juce__label28.get(), statusVector[25]);
         setDailyLabels(juce__label29.get(), statusVector[26]);
         setDailyLabels(juce__label30.get(), statusVector[27]);
-
-        //std::string cont = statusVector[0];
 
         setDailyLabels(juce__label31.get(), statusVector2[0]);
         setDailyLabels(juce__label45.get(), statusVector2[14]);
@@ -2199,8 +2181,6 @@ void MainForm::colorLabels(int numberOfHabits)
         juce__label86->setVisible(true);
         juce__label68->setVisible(true);
 
-        //std::string cont = statusVector[0];
-
         setDailyLabels(juce__label3.get(), statusVector[0]);
         setDailyLabels(juce__label4.get(), statusVector[1]);
         setDailyLabels(juce__label5.get(), statusVector[2]);
@@ -2230,7 +2210,6 @@ void MainForm::colorLabels(int numberOfHabits)
         setDailyLabels(juce__label29.get(), statusVector[26]);
         setDailyLabels(juce__label30.get(), statusVector[27]);
 
-        //std::string cont = statusVector[0];
 
         setDailyLabels(juce__label31.get(), statusVector2[0]);
         setDailyLabels(juce__label45.get(), statusVector2[14]);
@@ -2310,23 +2289,6 @@ void MainForm::readRandomTips()
             randomTips.push_back(line);
         }
     }
-
-    //juce::String fileNameWithoutExtension{ file.getFileNameWithoutExtension() };
-    //MusicFile newMusicFile{ file };
-    //juce::URL audioURL{ file };
-
-    //player->loadURL(audioURL);
-    //double lengthInSeconds{ player->getlength() };
-
-    //juce::String calcMinutes{ std::to_string(int(std::round(lengthInSeconds)) / 60) };
-    //juce::String calcSeconds{ std::to_string(int(std::round(lengthInSeconds)) % 60) };
-
-    //newMusicFile.length = juce::String{ calcMinutes + ":" + calcSeconds };
-    ////use this URL on deck to load music
-    //newMusicFile.fileURL = audioURL;
-    ////juce::String musiclink = juce::String{ newMusicFile.fileURL };
-    //songsInLibrary.push_back(newMusicFile);
-    //trackTitles.push_back(newMusicFile.title.toStdString());
 }
 
 //[/MiscUserCode]

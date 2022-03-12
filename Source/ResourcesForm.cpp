@@ -44,7 +44,7 @@ ResourcesForm::ResourcesForm ()
     juce__label2->setColour (juce::Label::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     juce__label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));    
-    juce__label2->setText("We have resources for you. Have a look!", juce::dontSendNotification);
+    juce__label2->setText("We have some resources for you about habit-forming. Have a look!", juce::dontSendNotification);
     
 
     juce__textButton1.reset (new juce::TextButton ("previousButton"));
@@ -92,7 +92,7 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox->addItem("Videos", 1);
     juce__comboBox->addItem("Websites", 2);
     juce__comboBox2->addItem("Researches", 1);
-    juce__comboBox2->addItem("Opinions", 2);
+    //juce__comboBox2->addItem("Opinions", 2);
     juce__comboBox2->addItem("Experiences", 3);
 
     
@@ -289,7 +289,7 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
                     }
                 }
             }
-            else if (juce__comboBox2->getSelectedId() == 2)
+            /*else if (juce__comboBox2->getSelectedId() == 2)
             {
                 for (int i = 0; i < resources.size() - 1; ++i)
                 {
@@ -298,8 +298,8 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
                         comboBoxContents.push_back(resources[i]);
                     }
                 }
-            }
-            else if (juce__comboBox2->getSelectedId() == 3)
+            }*/
+            else if (juce__comboBox2->getSelectedId() == 2)
             {
                 for (int i = 0; i < resources.size() - 1; ++i)
                 {
@@ -313,7 +313,7 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
         }
         if (comboBoxContents.empty())
         {
-            std::vector < std::string> Notice{ "Notice", "We will include soon.", "", "" };
+            std::vector < std::string> Notice{ "Notice", "Coming soon.", "", "" };
             comboBoxContents.push_back(Notice);
             DBG(comboBoxContents[0][1]);
         }
