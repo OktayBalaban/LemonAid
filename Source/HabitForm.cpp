@@ -29,8 +29,6 @@
 //==============================================================================
 HabitForm::HabitForm ()
 {
-    //[Constructor_pre] You can add your own custom stuff here..
-    //[/Constructor_pre]
 
     juce__label.reset (new juce::Label ("new label", TRANS("MY HABITS")));
     addAndMakeVisible (juce__label.get());
@@ -102,14 +100,7 @@ HabitForm::HabitForm ()
 
     juce__textButton3->setBounds (11, 463, 168, 40);
 
-
-    //[UserPreSize]
-    //[/UserPreSize]
-
     setSize (600, 400);
-
-
-    //[Constructor] You can add your own custom stuff here..
     
     habitManager.init(); //Initializing the habitManager object
     showHabitButtons();
@@ -215,14 +206,10 @@ HabitForm::HabitForm ()
     didNotBtn->setButtonText("I could not");
     didNotBtn->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
 
-    //[/Constructor]
 }
 
 HabitForm::~HabitForm()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     juce__label = nullptr;
     juce__label2 = nullptr;
     juce__textButton6 = nullptr;
@@ -230,42 +217,23 @@ HabitForm::~HabitForm()
     juce__textButton8 = nullptr;
     juce__textButton2 = nullptr;
     juce__textButton3 = nullptr;
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
 //==============================================================================
 void HabitForm::paint (juce::Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
     g.fillAll (juce::Colours::white);
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void HabitForm::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
 {
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
 
     if (buttonThatWasClicked == juce__textButton6.get())
     {
-        //[UserButtonCode_juce__textButton6] -- add your button handler code here..
-
         // Sets other buttons off if they are on
         if (juce__textButton7->getToggleState())
         {
@@ -294,12 +262,9 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Print goals again
         printGoals();
 
-        //[/UserButtonCode_juce__textButton6]
     }
     else if (buttonThatWasClicked == juce__textButton7.get())
     {
-        //[UserButtonCode_juce__textButton7] -- add your button handler code here..;
-
         // Sets other buttons off if they are on
         if (juce__textButton6->getToggleState())
         {
@@ -328,13 +293,9 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Print goals again
         printGoals();
 
-
-        //[/UserButtonCode_juce__textButton7]
     }
     else if (buttonThatWasClicked == juce__textButton8.get())
     {
-        //[UserButtonCode_juce__textButton8] -- add your button handler code here.
-
         // Sets other buttons off if they are on
         if (juce__textButton7->getToggleState())
         {
@@ -363,26 +324,18 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Print goals again
         printGoals();
 
-        //[/UserButtonCode_juce__textButton8]
     }
 
 
     // Add Habit Button
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
-        //[UserButtonCode_juce__textButton2] -- add your button handler code here..
-
-        
-        
         addNewHabit();
-
-        //[/UserButtonCode_juce__textButton2]
     }
 
     // Remove Habit Button
     else if (buttonThatWasClicked == juce__textButton3.get())
     {
-        //[UserButtonCode_juce__textButton3] -- add your button handler code here..
         if (habitManager.habitsVector.size() == 3 && juce__textButton6->getToggleState() == false &&
             juce__textButton7->getToggleState() == false && juce__textButton8->getToggleState() == false)
         {
@@ -416,11 +369,9 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         // Fixes a bug with staying at the deleted goals
         printGoals();
 
-        //[/UserButtonCode_juce__textButton3]
     }
 
 
-    //[UserbuttonClicked_Post]
     
     else if (buttonThatWasClicked == goalsEditButton.get())
     {
@@ -466,7 +417,6 @@ void HabitForm::buttonClicked (juce::Button* buttonThatWasClicked)
         updateWithDidNots();
     }
 
-    //[/UserbuttonClicked_Post]
 }
 
 
@@ -488,8 +438,6 @@ void HabitForm::addNewHabit()
         juce::String nameInput = addHabitNameInput.get()->getText();
         habitManager.addHabit(nameInput.toStdString());
     }
-    
-    
 
     resetHabitButtons();
 }
@@ -497,8 +445,6 @@ void HabitForm::addNewHabit()
 void HabitForm::removeHabit()
 {
     // Check toggle states and if toggled (selected), delete the habit
-
-    
     
     if (juce__textButton6->getToggleState())
     {
@@ -522,8 +468,6 @@ void HabitForm::showHabitButtons()
 {
     //Will be used to position buttons
     int rowCounter = 0;
-
-    //------Adding and making visible the buttons according to the habitsVector in habitManager object-------
 
     //If there are no habits, just return without doing anything
     if (habitManager.habitsVector.size() == 0)

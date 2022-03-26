@@ -1427,12 +1427,8 @@ MainForm::~MainForm()
 //==============================================================================
 void MainForm::paint(juce::Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
     g.fillAll(juce::Colours::white);
 
-    //[UserPaint] Add your own custom painting code here..
     //draw LOGO
     juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
     filePath.toStdString();
@@ -1440,33 +1436,17 @@ void MainForm::paint(juce::Graphics& g)
     juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(banner) };
     g.drawImageWithin(imageLoaded, 208, 5, 200, 80, 1, false);
     juce__label->setVisible(false);
-    // g.fillAll (juce::Colours::darklightgrey);
-    /*g.setColour(juce::Colours::orange);
-
-    juce::Line<float> line(juce::Point<float>(10, 10),
-        juce::Point<float>(50, 50));
-
-    g.drawLine(line, 2.0f);*/
-    //[/UserPaint]
+    
 }
 
 void MainForm::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
 {
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
-
     if (buttonThatWasClicked == juce__textButton.get()) //if MAIN PAGE is clicked
     {
-        //[UserButtonCode_juce__textButton] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newHabitForm->setVisible(false);
         newResourcesForm->setVisible(false);
@@ -1532,11 +1512,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
             juce__label2->setText(randomTips[tipID], juce::NotificationType::dontSendNotification);
         }
 
-        //[/UserButtonCode_juce__textButton]
     }
     else if (buttonThatWasClicked == juce__textButton2.get()) //if MY HABITS is clicked
     {
-        //[UserButtonCode_juce__textButton2] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newResourcesForm->setVisible(false);
         newDiaryForm->setVisible(false);
@@ -1549,11 +1527,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
 
-        //[/UserButtonCode_juce__textButton2]
     }
     else if (buttonThatWasClicked == juce__textButton3.get())  //if RESOURCES is clicked
     {
-        //[UserButtonCode_juce__textButton3] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newHabitForm->setVisible(false);
         newDiaryForm->setVisible(false);
@@ -1565,11 +1541,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colours::goldenrod);
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
-        //[/UserButtonCode_juce__textButton3]
     }
     else if (buttonThatWasClicked == juce__textButton4.get())  //if MY DIARY is clicked
     {
-        //[UserButtonCode_juce__textButton4] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newHabitForm->setVisible(false);
         newResourcesForm->setVisible(false);
@@ -1581,11 +1555,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colours::goldenrod);
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
-        //[/UserButtonCode_juce__textButton4]
     }
     else if (buttonThatWasClicked == juce__textButton5.get()) //if HELP is clicked
     {
-        //[UserButtonCode_juce__textButton5] -- add your button handler code here..
         newHabitForm->setVisible(false);
         newResourcesForm->setVisible(false);
         newDiaryForm->setVisible(false);
@@ -1598,11 +1570,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colours::goldenrod);
 
-        //[/UserButtonCode_juce__textButton5]
     }
     else if (buttonThatWasClicked == juce__textButton6.get()) //if 1st habit name is clicked
     {
-        //[UserButtonCode_juce__textButton6] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newResourcesForm->setVisible(false);
         newDiaryForm->setVisible(false);
@@ -1615,11 +1585,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
 
-        //[/UserButtonCode_juce__textButton6]
     }
     else if (buttonThatWasClicked == juce__textButton7.get()) //if 2nd habit name is clicked
     {
-        //[UserButtonCode_juce__textButton7] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newResourcesForm->setVisible(false);
         newDiaryForm->setVisible(false);
@@ -1631,11 +1599,9 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
-        //[/UserButtonCode_juce__textButton7]
     }
     else if (buttonThatWasClicked == juce__textButton8.get()) //if 3rd habit name is clicked
     {
-        //[UserButtonCode_juce__textButton8] -- add your button handler code here..
         newHelpWindow->setVisible(false);
         newResourcesForm->setVisible(false);
         newDiaryForm->setVisible(false);
@@ -1647,11 +1613,8 @@ void MainForm::buttonClicked(juce::Button* buttonThatWasClicked)
         juce__textButton3->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton4->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
         juce__textButton5->setColour(juce::TextButton::buttonColourId, juce::Colour(0xfffdcb33));
-        //[/UserButtonCode_juce__textButton8]
     }
 
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...

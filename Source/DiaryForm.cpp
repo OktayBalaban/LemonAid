@@ -152,32 +152,17 @@ DiaryForm::~DiaryForm()
 //==============================================================================
 void DiaryForm::paint (juce::Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
     g.fillAll (juce::Colours::white);
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void DiaryForm::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
 {
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
-
     if (buttonThatWasClicked == juce__textButton1.get())
     {
-        //[UserButtonCode_juce__textButton1] -- add your button handler code here..
         juce::String oldEntry = juce__textEditor3->getText(); //save existing entries to variable
         juce::String newEntry = juce__textEditor2->getText(); //get new entry string
         juce::String dateOfEntry = juce__textEditor->getText(); //get new entry date
@@ -193,9 +178,6 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
-        //[UserButtonCode_juce__textButton2] -- add your button handler code here..
-        //juce__textEditor2->clear();
-
         //editing mode:
         if (isEditing == false)
         {
@@ -220,11 +202,7 @@ void DiaryForm::buttonClicked (juce::Button* buttonThatWasClicked)
 
 
         }
-        //[/UserButtonCode_juce__textButton2]
     }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
 

@@ -94,20 +94,8 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox2->addItem("Researches", 1);
     //juce__comboBox2->addItem("Opinions", 2);
     juce__comboBox2->addItem("Experiences", 3);
-
-    
-    /*juce::String filePath = juce::File::getCurrentWorkingDirectory().getFullPathName();
-    filePath.toStdString();
-    juce::File ResourcesFile(filePath + "\\Resources\\Resources.csv");
-
-    if (!ResourcesFile.exists())
-    {
-        ResourcesFile.create();
-    }*/
-
-    
-    juce::File resourcesFile{ filePath + "\\Resources\\Resources.csv" };  
-    juce::FileInputStream csvFile(resourcesFile);
+ 
+    juce::FileInputStream csvFile(juce::File{ filePath + "\\Resources\\Resources.csv" }) ;
     if (csvFile.openedOk())
     {
         while (!csvFile.isExhausted())
@@ -118,11 +106,8 @@ ResourcesForm::ResourcesForm ()
             std::string line = juceline.toStdString();
 
             try {
-                //std::vector resource = CSVOperator::tokeniser(line, ';');
                 std::vector<std::string> resource = CSVOperator::tokeniser(line, ';');
                 resources.push_back(resource);
-
-                //std::vector<std::vector<std::string>> resources;
             }
             catch (const std::exception& e)
             {
@@ -165,168 +150,133 @@ void ResourcesForm::paint (juce::Graphics& g)
     //[/UserPrePaint]
 
     g.fillAll (juce::Colours::white);
-    if (comboBoxContents.empty())
+    if (comboBoxContents.empty())//not display contents, but display preview on some content
     {
-        juce__label2->setFont(20.0f);
-        juce__label2->setText(resources[index][1], juce::dontSendNotification);
-        if (resources[index][2] == "image")
+        if (resources.size()>0)
         {
-            juce::File image{ filePath + "\\Resources" + resources[index][3] };
-            juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
-            
-            
-            g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
+            juce__label2->setFont(20.0f);
+            juce__label2->setText(resources[index][1], juce::dontSendNotification);
+            if (resources[index][2] == "image")
+            {
+                juce::File image{ filePath + "\\Resources" + resources[index][3] };//choose image to display
+                juce::Image imageLoaded{ juce::ImageFileFormat::loadFrom(image) };
+                g.drawImageWithin(imageLoaded, 40, 80, 640, 352, 4, false);
+            }
+            else {
+                g.setFont(18.0f);
+                g.drawText("\t\t- " + resources[index][3], 40, 80, 640, 352, 9, true);
+            }
         }
-        else {
-            g.setFont(18.0f);
-            g.drawText("\t\t- " + resources[index][3], 40, 80, 640, 352, 9, true);
-        }
+        
     }
-    /*else if(comboBoxContents[0][0] == "Coming soon.")
-    {
-        juce__label2->setFont(20.0f);
-        juce__label2->setText("Coming soon.", juce::dontSendNotification);
-    }*/
-    /*else {
-        juce__label2->setFont(20.0f);
-        juce__label2->setText("", juce::dontSendNotification);
-        for (int i = 0; i < comboBoxContents.size()-1; ++i)
-        {
-            
-            g.setFont(19.0f);
-            g.drawText(comboBoxContents[i][1], 40, 80+40*i, 640, 40, 9, true);
-            g.setFont(18.0f);
-            g.drawText("\t\t- " + comboBoxContents[i][3], 40, 100+40*i, 640, 40, 9, true);
-        }
-    }*/
-    
 
-
-    //g.drawRoundedRectangle;
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
 
 void ResourcesForm::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void ResourcesForm::buttonClicked (juce::Button* buttonThatWasClicked)
-{
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
+{    
+    //Firstly, clear combobox filter
     tableComponent.setVisible(false);
     comboBoxContents.clear();
     juce__comboBox->setSelectedId(0);
     juce__comboBox2->setSelectedId(0);
+
+    // previous button to display preview on the last resource
     if (buttonThatWasClicked == juce__textButton1.get())
     {
         if (index > 0) { index--; repaint(); }
-        //[UserButtonCode_juce__textButton1] -- add your button handler code here..
-        //[/UserButtonCode_juce__textButton1]
     }
+    //// next button to display preview on the next resource
     else if (buttonThatWasClicked == juce__textButton2.get())
     {
-        DBG(resources.size());
         if (index < resources.size() - 1) { index++; repaint(); }
-        //[UserButtonCode_juce__textButton2] -- add your button handler code here..
-        //[/UserButtonCode_juce__textButton2]
     }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
 void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
-    //[UsercomboBoxChanged_Pre]
-    //[/UsercomboBoxChanged_Pre]
-    if (comboBoxThatHasChanged->getSelectedId()>0)
+    if (resources.size()>0)
     {
-        comboBoxContents.clear();
-        if (comboBoxThatHasChanged == juce__comboBox.get())
+        if (comboBoxThatHasChanged->getSelectedId() > 0)
         {
-            //[UserComboBoxCode_juce__comboBox] -- add your combo box handling code here..
-            //[/UserComboBoxCode_juce__comboBox]
-            if (juce__comboBox->getSelectedId() == 1)
+            comboBoxContents.clear();
+            if (comboBoxThatHasChanged == juce__comboBox.get())
             {
-                for (int i = 0; i < resources.size() - 1; ++i)
+                if (juce__comboBox->getSelectedId() == 1)
                 {
-                    if (resources[i][0] == "Videos")
+                    for (int i = 0; i < resources.size() - 1; ++i)
                     {
-                        comboBoxContents.push_back(resources[i]);
+                        if (resources[i][0] == "Videos")
+                        {
+                            comboBoxContents.push_back(resources[i]);
+                        }
                     }
                 }
-            }
-            else if (juce__comboBox->getSelectedId() == 2)
-            {
-                for (int i = 0; i < resources.size() - 1; ++i)
+                else if (juce__comboBox->getSelectedId() == 2)
                 {
-                    if (resources[i][2] == "web")
+                    for (int i = 0; i < resources.size() - 1; ++i)
                     {
-                        comboBoxContents.push_back(resources[i]);
+                        if (resources[i][2] == "web")
+                        {
+                            comboBoxContents.push_back(resources[i]);
+                        }
                     }
                 }
+                juce__comboBox2->setSelectedId(0);
             }
-            juce__comboBox2->setSelectedId(0);
+            else if (comboBoxThatHasChanged == juce__comboBox2.get())
+            {
+                if (juce__comboBox2->getSelectedId() == 1)
+                {
+                    for (int i = 0; i < resources.size() - 1; ++i)
+                    {
+                        if (resources[i][0] == "Researches")
+                        {
+                            comboBoxContents.push_back(resources[i]);
+                        }
+                    }
+                }
+                /*else if (juce__comboBox2->getSelectedId() == 2)
+                {
+                    for (int i = 0; i < resources.size() - 1; ++i)
+                    {
+                        if (resources[i][0] == "Opinions")
+                        {
+                            comboBoxContents.push_back(resources[i]);
+                        }
+                    }
+                }*/
+                else if (juce__comboBox2->getSelectedId() == 3)
+                {
+                    for (int i = 0; i < resources.size() - 1; ++i)
+                    {
+                        if (resources[i][0] == "Experiences")
+                        {
+                            comboBoxContents.push_back(resources[i]);
+                        }
+                    }
+                }
+                juce__comboBox->setSelectedId(0);
+            }
+            if (comboBoxContents.empty())
+            {
+                std::vector < std::string> Notice{ "Notice", "Coming soon.", "", "" };
+                comboBoxContents.push_back(Notice);
+                DBG(comboBoxContents[0][1]);
+            }
+            tableComponent.setVisible(true);
+            tableComponent.updateContent();
+            repaint();
         }
-        else if (comboBoxThatHasChanged == juce__comboBox2.get())
-        {
-            //[UserComboBoxCode_juce__comboBox2] -- add your combo box handling code here..
-            //[/UserComboBoxCode_juce__comboBox2]
-            if (juce__comboBox2->getSelectedId() == 1)
-            {
-                for (int i = 0; i < resources.size() - 1; ++i)
-                {
-                    if (resources[i][0] == "Researches")
-                    {
-                        comboBoxContents.push_back(resources[i]);
-                    }
-                }
-            }
-            /*else if (juce__comboBox2->getSelectedId() == 2)
-            {
-                for (int i = 0; i < resources.size() - 1; ++i)
-                {
-                    if (resources[i][0] == "Opinions")
-                    {
-                        comboBoxContents.push_back(resources[i]);
-                    }
-                }
-            }*/
-            else if (juce__comboBox2->getSelectedId() == 2)
-            {
-                for (int i = 0; i < resources.size() - 1; ++i)
-                {
-                    if (resources[i][0] == "Experiences")
-                    {
-                        comboBoxContents.push_back(resources[i]);
-                    }
-                }
-            }
-            juce__comboBox->setSelectedId(0);
-        }
-        if (comboBoxContents.empty())
-        {
-            std::vector < std::string> Notice{ "Notice", "Coming soon.", "", "" };
-            comboBoxContents.push_back(Notice);
-            DBG(comboBoxContents[0][1]);
-        }
-        tableComponent.setVisible(true);
-        tableComponent.updateContent();
-        repaint();
     }
-    
-    
-    //[UsercomboBoxChanged_Post]
-    //[/UsercomboBoxChanged_Post]
 }
 
+// click on the label to open url on external browser
 void ResourcesForm::mouseUp(const juce::MouseEvent& mouseEvent)
 {
     if (urlToOpen)
@@ -336,27 +286,37 @@ void ResourcesForm::mouseUp(const juce::MouseEvent& mouseEvent)
     }
 }
 
+// move mouse. when mouse is moved on the label, mousePointer changes to PointingHandCursor, and url can be opened.
 void ResourcesForm::mouseMove(const juce::MouseEvent& mouseEvent)
 {
-    if (!(juce__comboBox->getSelectedId()>0 || juce__comboBox2->getSelectedId()>0)
-        && resources[index][2] == "web" && mouseEvent.eventComponent == juce__label2.get())
+    if (resources.size()>0)
     {
-        juce__label2->setMouseCursor(juce::MouseCursor::PointingHandCursor);
-        repaint();
-        urlToOpen = true;
+        if (!(juce__comboBox->getSelectedId() > 0 || juce__comboBox2->getSelectedId() > 0)
+            && resources[index][2] == "web" && mouseEvent.eventComponent == juce__label2.get())
+        {
+            juce__label2->setMouseCursor(juce::MouseCursor::PointingHandCursor);
+            repaint();
+            urlToOpen = true;
+        }
+        else {
+            urlToOpen = false;
+        }
     }
-    else {
-        urlToOpen = false;
-    }
+    
 }
 
+// when mouse is moved outside the label, it is Normal Cursor.
 void ResourcesForm::mouseExit(const juce::MouseEvent& mouseEvent)
 {
-    if (resources[index][2] == "web" && mouseEvent.eventComponent == juce__label2.get())
+    if (resources.size()>0)
     {
-        juce__label2->setMouseCursor(juce::MouseCursor::NormalCursor);
-        repaint();
+        if (resources[index][2] == "web" && mouseEvent.eventComponent == juce__label2.get())
+        {
+            juce__label2->setMouseCursor(juce::MouseCursor::NormalCursor);
+            repaint();
+        }
     }
+    
 }
 
 int ResourcesForm::getNumRows()

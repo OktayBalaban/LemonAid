@@ -25,9 +25,6 @@ public:
 
 private:
     //==============================================================================
-    // Your private member variables go here...
-
-    //Manager object to manage all habit objects
     HabitManager habitManager;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)

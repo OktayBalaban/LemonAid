@@ -31,13 +31,7 @@
 
 
 //==============================================================================
-/**
-                                                                    //[Comments]
-    An auto-generated component, created by the Projucer.
 
-    Describe your class and how it works here!
-                                                                    //[/Comments]
-*/
 class MainForm  : public juce::Component,
                   public juce::Button::Listener
 {
@@ -65,7 +59,6 @@ public:
 
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
     std::unique_ptr<HelpForm> newHelpWindow;
     std::unique_ptr<HabitForm> newHabitForm;
     std::unique_ptr<ResourcesForm> newResourcesForm;
@@ -77,10 +70,8 @@ private:
 
     std::vector<std::string> randomTips;
 
-
-    //[/UserVariables]
-
     //==============================================================================
+    // Form buttons
     std::unique_ptr<juce::GroupComponent> juce__groupComponent2;
     std::unique_ptr<juce::TextButton> juce__textButton;
     std::unique_ptr<juce::TextButton> juce__textButton2;
@@ -89,10 +80,14 @@ private:
     std::unique_ptr<juce::TextButton> juce__textButton5;
     std::unique_ptr<juce::Label> juce__label;
     std::unique_ptr<juce::Label> juce__label2;
+
+    //The 3 habits button on main page
     std::unique_ptr<juce::GroupComponent> juce__groupComponent;
     std::unique_ptr<juce::TextButton> juce__textButton6;
     std::unique_ptr<juce::TextButton> juce__textButton7;
     std::unique_ptr<juce::TextButton> juce__textButton8;
+
+    //here lables to track habits within 28 days, totally 84 labbels for 3 habits.
     std::unique_ptr<juce::Label> juce__label3;
     std::unique_ptr<juce::Label> juce__label4;
     std::unique_ptr<juce::Label> juce__label5;

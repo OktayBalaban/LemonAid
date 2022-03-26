@@ -78,50 +78,24 @@ HelpForm::HelpForm ()
     juce__textEditor->setBounds(210, 60, 540, 426);
     juce__textEditor->setText("Hi! ", juce::NotificationType::dontSendNotification);
 
-    
-
-    //[UserPreSize]
-    //[/UserPreSize]
-
     setSize (600, 400);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 HelpForm::~HelpForm()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     juce__label = nullptr;
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
 //==============================================================================
 void HelpForm::paint (juce::Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
     g.fillAll (juce::Colours::white);
     g.setFont(20.0f);
     g.drawText("Getting Started", 16, 16, 200, 20, 4);
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void HelpForm::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void HelpForm::buttonClicked(juce::Button* buttonThatWasClicked)

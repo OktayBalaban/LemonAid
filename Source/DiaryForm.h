@@ -44,11 +44,9 @@ public:
     ~DiaryForm() override;
 
     //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
-    //
+    
     juce::String DiaryForm::loadDiary();
     void DiaryForm::updateDiary(std::string text);
-    //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
     void resized() override;
@@ -57,9 +55,7 @@ public:
 
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
     bool isEditing;
-    //[/UserVariables]
 
     //==============================================================================
     std::unique_ptr<juce::TextButton> juce__textButton1;

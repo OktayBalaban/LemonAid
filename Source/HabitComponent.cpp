@@ -56,7 +56,6 @@ HabitComponent::HabitComponent(int _habitId, std::string _habitName)
 
     }
 
-
     goalsFile.close();
 
     isSelected = false; // Setting the isSelected false initially.
