@@ -15,11 +15,8 @@
         <FILE id="za8nRF" name="what_is_a_habit.png" compile="0" resource="1"
               file="Source/Resources/what_is_a_habit.png"/>
       </GROUP>
-      <GROUP id="{80017E77-D825-C85A-7EF0-B8E0ECCFAA2D}" name="HabitsFiles">
-        <FILE id="ngvksp" name="DiaryEntries.txt" compile="0" resource="1"
-              file="Source/HabitsFiles/DiaryEntries.txt"/>
-        <FILE id="VGstPz" name="randomtips.csv" compile="0" resource="1" file="Source/HabitsFiles/randomtips.csv"/>
-        <FILE id="UJyuYi" name="Habits.csv" compile="0" resource="1" file="Source/HabitsFiles/Habits.csv"/>
+      <GROUP id="{0CA8E1B2-5ABD-65EA-2BB0-A88F69907307}" name="Documentation">
+        <FILE id="KapcYp" name="randomtips.csv" compile="0" resource="1" file="Source/Documentation/randomtips.csv"/>
       </GROUP>
       <FILE id="qzFnBK" name="CSVOperator.cpp" compile="1" resource="0" file="Source/CSVOperator.cpp"/>
       <FILE id="XXoF6S" name="CSVOperator.h" compile="0" resource="0" file="Source/CSVOperator.h"/>
@@ -53,7 +50,6 @@
             file="Source/MainComponent.cpp"/>
       <FILE id="SYz2Tc" name="logo.png" compile="0" resource="1" file="Source/logo.png"/>
       <FILE id="qPSAnw" name="icon.png" compile="0" resource="1" file="Source/icon.png"/>
-      <FILE id="p7gQWC" name="Banner.png" compile="0" resource="1" file="Source/Banner.png"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
