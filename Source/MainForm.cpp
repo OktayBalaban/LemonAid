@@ -2240,7 +2240,7 @@ void MainForm::readRandomTips()
     juce::String directoryPath = juce::File::getCurrentWorkingDirectory().getFullPathName();
     std::string drcPathAsStdStr = directoryPath.toStdString();
 
-    std::string filepath = drcPathAsStdStr + "\\HabitsFiles\\randomtips.csv";
+    std::string filepath = drcPathAsStdStr + "\\Documentation\\randomtips.csv";
 
     std::ifstream csvFile(filepath);
     std::string line;

@@ -76,7 +76,7 @@ HelpForm::HelpForm ()
     juce__textEditor->setColour(juce::TextEditor::backgroundColourId, juce::Colours::lightgrey);
     juce__textEditor->setText(juce::String());
     juce__textEditor->setBounds(210, 60, 540, 426);
-    juce__textEditor->setText("Hi! ", juce::NotificationType::dontSendNotification);
+    juce__textEditor->setText("Documentation", juce::NotificationType::dontSendNotification);
 
     setSize (600, 400);
 }

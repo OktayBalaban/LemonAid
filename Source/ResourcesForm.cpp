@@ -92,7 +92,7 @@ ResourcesForm::ResourcesForm ()
     juce__comboBox->addItem("Videos", 1);
     juce__comboBox->addItem("Websites", 2);
     juce__comboBox2->addItem("Researches", 1);
-    //juce__comboBox2->addItem("Opinions", 2);
+    juce__comboBox2->addItem("Opinions", 2);
     juce__comboBox2->addItem("Experiences", 3);
  
     juce::FileInputStream csvFile(juce::File{ filePath + "\\Resources\\Resources.csv" }) ;
@@ -235,27 +235,27 @@ void ResourcesForm::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
                 {
                     for (int i = 0; i < resources.size() - 1; ++i)
                     {
-                        if (resources[i][0] == "Researches")
+                        if (resources[i][0] == "Researches" && resources[i][2] == "web")
                         {
                             comboBoxContents.push_back(resources[i]);
                         }
                     }
                 }
-                /*else if (juce__comboBox2->getSelectedId() == 2)
+                else if (juce__comboBox2->getSelectedId() == 2)
                 {
                     for (int i = 0; i < resources.size() - 1; ++i)
                     {
-                        if (resources[i][0] == "Opinions")
+                        if (resources[i][0] == "Opinions" && resources[i][2] == "web")
                         {
                             comboBoxContents.push_back(resources[i]);
                         }
                     }
-                }*/
+                }
                 else if (juce__comboBox2->getSelectedId() == 3)
                 {
                     for (int i = 0; i < resources.size() - 1; ++i)
                     {
-                        if (resources[i][0] == "Experiences")
+                        if (resources[i][0] == "Experiences" && resources[i][2] == "web")
                         {
                             comboBoxContents.push_back(resources[i]);
                         }
@@ -282,7 +282,7 @@ void ResourcesForm::mouseUp(const juce::MouseEvent& mouseEvent)
     if (urlToOpen)
     {
         DBG("mouseUp");
-        juce::URL(resources[index][3]).launchInDefaultBrowser();
+        juce::URL(filePath + "\\Resources" + resources[index][3]).launchInDefaultBrowser();
     }
 }
 
@@ -315,8 +315,7 @@ void ResourcesForm::mouseExit(const juce::MouseEvent& mouseEvent)
             juce__label2->setMouseCursor(juce::MouseCursor::NormalCursor);
             repaint();
         }
-    }
-    
+    } 
 }
 
 int ResourcesForm::getNumRows()
@@ -335,9 +334,13 @@ void ResourcesForm::paintRowBackground(juce::Graphics& g, int rowNumber, int wid
     }
 }
 
-void ResourcesForm::paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
+void ResourcesForm::paintCell(  juce::Graphics& g, 
+                                int rowNumber, int columnId, int width, int height, 
+                                bool rowIsSelected)
 {
-    g.drawText(comboBoxContents[rowNumber][1], 5, 0, width - 4, height, juce::Justification::centredLeft, true);
+    g.drawText( comboBoxContents[rowNumber][1], 
+                5, 0, width - 4, height, 
+                juce::Justification::centredLeft, true);
 }
 
 void ResourcesForm::cellClicked(int rowNumber, int columnId, const juce::MouseEvent&)
